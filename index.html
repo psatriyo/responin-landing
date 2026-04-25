@@ -194,18 +194,20 @@
       font-size: 1.125rem; color: var(--text-muted); max-width: 560px;
       margin-bottom: 40px; line-height: 1.7;
     }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: flex-start; }
+    .btn-primary, .btn-secondary {
+      padding: 14px 32px; border-radius: 10px; font-size: 1rem;
+      font-weight: 600; cursor: pointer; transition: all 0.25s; text-decoration: none;
+      min-width: 200px; text-align: center; display: inline-block;
+    }
     .btn-primary {
       background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
-      color: #fff; border: none; padding: 14px 32px; border-radius: 10px;
-      font-size: 1rem; font-weight: 600; cursor: pointer;
-      transition: all 0.25s; text-decoration: none;
+      color: #fff; border: none;
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
     .btn-secondary {
       background: transparent; color: var(--text); border: 1px solid var(--border);
-      padding: 14px 32px; border-radius: 10px; font-size: 1rem;
-      font-weight: 500; cursor: pointer; transition: all 0.25s; text-decoration: none;
+      font-weight: 500;
     }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent-light); }
 
