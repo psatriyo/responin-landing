@@ -679,6 +679,14 @@
     }
     .chat-topbar-info h4 { font-size: 0.9rem; font-weight: 600; color: var(--text); }
     .chat-topbar-info span { font-size: 0.75rem; color: var(--teal); }
+    .chat-theme-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.7rem; padding: 2px 8px; border-radius: 20px;
+      background: var(--bg-elevated); color: var(--text-muted);
+      margin-left: 8px; border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    [data-theme="light"] .chat-theme-badge { background: rgba(255,255,255,0.8); border-color: var(--border); }
     .chat-messages { padding: 24px 20px; display: flex; flex-direction: column; gap: 16px; min-height: 220px; }
     .chat-msg { display: flex; gap: 10px; max-width: 85%; animation: chatFadeIn 0.35s ease forwards; opacity: 0; }
     .chat-msg.user { align-self: flex-end; flex-direction: row-reverse; }
@@ -738,12 +746,71 @@
       .mobile-menu-overlay.open { pointer-events: auto; }
     }
 
-    /* --- Animations --- */
-    .fade-up {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    /* --- FAQ Section --- */
+    .faq-list { max-width: 720px; margin: 0 auto; margin-top: 56px; }
+    .faq-item {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      margin-bottom: 12px; overflow: hidden;
+      transition: border-color 0.3s;
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .faq-item:hover { border-color: var(--border-hover); }
+    .faq-item.open { border-color: var(--accent); }
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; cursor: pointer; font-weight: 600;
+      color: var(--text); background: transparent; border: none;
+      width: 100%; text-align: left; font-size: 1rem;
+      font-family: inherit; gap: 16px; transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--accent-light); }
+    .faq-question svg {
+      width: 20px; height: 20px; flex-shrink: 0;
+      transition: transform 0.3s ease; color: var(--text-muted);
+    }
+    .faq-item.open .faq-question svg { transform: rotate(180deg); color: var(--accent-light); }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px; padding: 0 24px 20px;
+    }
+    .faq-answer p {
+      color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;
+    }
+    [data-theme="light"] .faq-item { border-color: var(--border); }
+    [data-theme="light"] .faq-item.open { border-color: var(--accent); }
+    [data-theme="light"] .faq-question { color: var(--text); }
+    [data-theme="light"] .faq-question:hover { color: var(--accent); }
+    [data-theme="light"] .faq-answer p { color: var(--text-muted); }
+
+    /* --- Sticky Mobile CTA --- */
+    .mobile-cta-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      background: var(--bg-card); border-top: 1px solid var(--border);
+      padding: 12px 16px; display: none;
+      transform: translateY(100%); transition: transform 0.3s ease;
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    }
+    .mobile-cta-bar.visible { transform: translateY(0); }
+    .mobile-cta-bar a {
+      display: block; text-align: center; padding: 14px 24px;
+      background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+      color: #fff; border-radius: 10px; font-weight: 600;
+      font-size: 0.95rem; text-decoration: none; transition: opacity 0.2s;
+    }
+    .mobile-cta-bar a:hover { opacity: 0.9; }
+    [data-theme="light"] .mobile-cta-bar {
+      background: rgba(255,255,255,0.9); border-top-color: var(--border);
+    }
+    @media (max-width: 768px) {
+      .mobile-cta-bar { display: block; }
+    }
+    .fade-up {
+      opacity: 0; transform: translateY(28px) scale(0.97);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0) scale(1); }
 
 
   </style>
@@ -806,21 +873,21 @@
         <a href="mailto:hi@responin.com?subject=I'm%20Interested%20in%20Responin&body=Hi%20Responin%20Team%2C%0A%0AI'm%20interested%20in%20learning%20more%20about%20how%20Responin%20can%20help%20automate%20my%20business%20operations.%0A%0ACompany%3A%20%0AIndustry%3A%20%0AWhat%20processes%20I'd%20like%20to%20automate%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!" class="btn-primary" data-i18n="hero_cta_primary">Join the Waitlist</a>
         <a href="#how" class="btn-secondary" data-i18n="hero_cta_secondary">See How It Works</a>
       </div>
-      <div class="stats-bar fade-up">
+      <div class="stats-bar fade-up" id="statsBar">
         <div class="stat">
-          <div class="stat-value">45%</div>
+          <div class="stat-value" data-count="45" data-suffix="%">0%</div>
           <div class="stat-label" data-i18n="stat_1_label">Avg. support time reduced</div>
         </div>
         <div class="stat">
-          <div class="stat-value">60%</div>
+          <div class="stat-value" data-count="60" data-suffix="%">0%</div>
           <div class="stat-label" data-i18n="stat_2_label">Routine tasks automated</div>
         </div>
         <div class="stat">
-          <div class="stat-value">24/7</div>
+          <div class="stat-value" data-count="24" data-suffix="/7">0/7</div>
           <div class="stat-label" data-i18n="stat_3_label">Always-on operations</div>
         </div>
         <div class="stat">
-          <div class="stat-value">&lt;30s</div>
+          <div class="stat-value" data-count="30" data-prefix="&lt;" data-suffix="s">&lt;0s</div>
           <div class="stat-label" data-i18n="stat_4_label">From command to action</div>
         </div>
       </div>
@@ -900,7 +967,7 @@
           <div class="chat-topbar-avatar">R</div>
           <div class="chat-topbar-info">
             <h4 data-i18n="chat_bot_name">Responin Assistant</h4>
-            <span data-i18n="chat_bot_status">● Online — remembers your business</span>
+            <span><span data-i18n="chat_bot_status">● Online — remembers your business</span><span class="chat-theme-badge" id="chatThemeBadge">🌙 Dark</span></span>
           </div>
         </div>
         <div class="chat-messages" id="chatMessages"></div>
@@ -1210,6 +1277,72 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="fade-up">
+        <p class="section-label" data-i18n="faq_label">Frequently Asked Questions</p>
+        <h2 class="section-title" data-i18n="faq_title">Everything you want to know.</h2>
+      </div>
+      <div class="faq-list fade-up">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q1">Is my business data safe with Responin?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a1">Absolutely. Your data never leaves your environment. Responin runs within your own infrastructure — we don’t store, share, or train on your data. Think of it as hiring a private employee who signs an NDA and works only in your office.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q2">How long until I see results?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a2">Most businesses see measurable time savings within the first week of deployment. Full automation of your primary workflows typically takes 2–4 weeks. Your agent gets smarter with every interaction — so results compound over time.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q3">What if I already use [tool] for that?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a3">Responin doesn’t replace your tools — it connects them. Whether you use Salesforce, Xero, Gmail, or any other platform, your agent integrates into your existing stack and orchestrates across all of them. It’s the glue that makes your tools actually work together.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q4">Do I need technical skills to set it up?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a4">None at all. You talk to your agent in plain language — just like texting a colleague. We handle the architecture, integrations, and deployment. You focus on telling us what your business needs.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q5">What happens when the AI makes a mistake?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a5">Your agent runs with human-in-the-loop safeguards. High-confidence tasks happen automatically; uncertain ones get flagged for your review. You always have the final say — and your agent learns from every correction.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q6">How is this different from ChatGPT or other AI tools?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a6">Generic AI forgets you after every conversation. Responin builds a dedicated agent that remembers your business, people, and processes. It doesn’t just chat — it takes action: sending emails, checking invoices, updating your CRM, and escalating when needed. Scroll up to see the comparison 👆</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="section cta-section" id="cta">
     <div class="container fade-up">
@@ -1264,6 +1397,7 @@
         nav_how: "How It Works",
         nav_industries: "Industries",
         nav_compare: "Compare",
+        nav_faq: "FAQ",
         settings_language: "Language",
         settings_theme: "Theme",
         vs_label: "Why Not Just ChatGPT?",
@@ -1421,6 +1555,20 @@
         quote_author: "— The Responin Team",
         cta_title: "Ready to Automate?",
         cta_desc: "Join the waitlist for a personal AI agent consultation and take the first step toward autonomous operations.",
+        faq_label: "Frequently Asked Questions",
+        faq_title: "Everything you want to know.",
+        faq_q1: "Is my business data safe with Responin?",
+        faq_a1: "Absolutely. Your data never leaves your environment. Responin runs within your own infrastructure \u2014 we don\u2019t store, share, or train on your data. Think of it as hiring a private employee who signs an NDA and works only in your office.",
+        faq_q2: "How long until I see results?",
+        faq_a2: "Most businesses see measurable time savings within the first week of deployment. Full automation of your primary workflows typically takes 2\u20134 weeks. Your agent gets smarter with every interaction \u2014 so results compound over time.",
+        faq_q3: "What if I already use [tool] for that?",
+        faq_a3: "Responin doesn\u2019t replace your tools \u2014 it connects them. Whether you use Salesforce, Xero, Gmail, or any other platform, your agent integrates into your existing stack and orchestrates across all of them. It\u2019s the glue that makes your tools actually work together.",
+        faq_q4: "Do I need technical skills to set it up?",
+        faq_a4: "None at all. You talk to your agent in plain language \u2014 just like texting a colleague. We handle the architecture, integrations, and deployment. You focus on telling us what your business needs.",
+        faq_q5: "What happens when the AI makes a mistake?",
+        faq_a5: "Your agent runs with human-in-the-loop safeguards. High-confidence tasks happen automatically; uncertain ones get flagged for your review. You always have the final say \u2014 and your agent learns from every correction.",
+        faq_q6: "How is this different from ChatGPT or other AI tools?",
+        faq_a6: "Generic AI forgets you after every conversation. Responin builds a dedicated agent that remembers your business, people, and processes. It doesn\u2019t just chat \u2014 it takes action: sending emails, checking invoices, updating your CRM, and escalating when needed. Scroll up to see the comparison \ud83d\uddd\ufe0f",
         cta_btn: "Get Started Today",
         footer_desc: "AI-driven consultancy and automation agency. Transforming business operations through intelligent, autonomous workflows powered by OpenClaw.",
         footer_solutions: "Solutions",
@@ -1444,6 +1592,7 @@
         nav_how: "Cara Kerja",
         nav_industries: "Industri",
         nav_compare: "Perbandingan",
+        nav_faq: "FAQ",
         settings_language: "Bahasa",
         settings_theme: "Tema",
         vs_label: "Kenapa Bukan ChatGPT Saja?",
@@ -1601,6 +1750,20 @@
         quote_author: "— Tim Responin",
         cta_title: "Siap Mengotomasi?",
         cta_desc: "Bergabunglah dengan waitlist untuk konsultasi agen AI personal dan ambil langkah pertama menuju operasi otonom.",
+        faq_label: "Pertanyaan yang Sering Diajukan",
+        faq_title: "Semua yang ingin Anda ketahui.",
+        faq_q1: "Apakah data bisnis saya aman dengan Responin?",
+        faq_a1: "Tentu saja. Data Anda tidak pernah keluar dari lingkungan Anda. Responin berjalan di dalam infrastruktur Anda sendiri \u2014 kami tidak menyimpan, membagikan, atau melatih model pada data Anda. Anggap seperti mempekerjakan karyawan privat yang menandatangani NDA dan bekerja hanya di kantor Anda.",
+        faq_q2: "Berapa lama sampai saya melihat hasilnya?",
+        faq_a2: "Sebagian besar bisnis merasakan penghematan waktu yang terukur dalam minggu pertama. Otomasi penuh untuk alur kerja utama biasanya membutuhkan 2\u20134 minggu. Agen Anda makin cerdas dengan setiap interaksi \u2014 jadi hasilnya semakin meningkat seiring waktu.",
+        faq_q3: "Bagaimana kalau saya sudah pakai [tool] untuk itu?",
+        faq_a3: "Responin tidak mengganti alat Anda \u2014 ia menghubungkannya. Baik Anda pakai Salesforce, Xero, Gmail, atau platform lainnya, agen Anda terintegrasi ke dalam tumpukan yang sudah ada dan mengorkestasi semuanya. Ia adalah perekat yang membuat alat Anda benar-benar bekerja bersama.",
+        faq_q4: "Apakah saya butuh keahlian teknis untuk mengaturnya?",
+        faq_a4: "Sama sekali tidak. Anda berbicara dengan agen dalam bahasa sehari-hari \u2014 seperti mengirim pesan ke rekan kerja. Kami menangani arsitektur, integrasi, dan penerapan. Anda cukup memberitahu apa yang bisnis Anda butuhkan.",
+        faq_q5: "Apa yang terjadi kalau AI membuat kesalahan?",
+        faq_a5: "Agen Anda berjalan dengan pengaman human-in-the-loop. Tugas dengan keyakinan tinggi terjadi secara otomatis; yang tidak pasti ditandai untuk review Anda. Anda selalu memiliki kata akhir \u2014 dan agen Anda belajar dari setiap koreksi.",
+        faq_q6: "Apa bedanya dengan ChatGPT atau alat AI lainnya?",
+        faq_a6: "AI generik lupa kepada Anda setelah setiap percakapan. Responin membangun agen khusus yang mengingat bisnis, orang, dan proses Anda. Ia tidak sekadar mengobrol \u2014 ia bertindak: mengirim email, mengecek invoice, memperbarui CRM, dan mengeskalasi saat diperlukan. Scroll ke atas untuk melihat perbandingannya \ud83d\uddd\ufe0f",
         cta_btn: "Mulai Sekarang",
         footer_desc: "Konsultan dan agensi otomasi berbasis AI. Mengubah operasi bisnis melalui alur kerja cerdas dan otonom yang didukung OpenClaw.",
         footer_solutions: "Solusi",
@@ -1674,8 +1837,183 @@
       card.style.transitionDelay = `${(i % 4) * 0.08}s`;
     });
 
+    // === Chat Demo Scenarios ===
+    const chatScenarios = {
+      invoice: {
+        en: [
+          { role: 'user', text: 'Hi, has John paid invoice #1042 yet?' },
+          { role: 'agent', html: 'Yes \u2014 John paid invoice #1042 on <span class="highlight">April 18</span> via bank transfer. The payment of <span class="highlight">Rp 12,500,000</span> has been reconciled in your accounting system.' },
+          { role: 'user', text: "What's Mary's total orders with us this quarter?" },
+          { role: 'agent', html: 'Mary has placed <span class="highlight">7 orders</span> this quarter totaling <span class="highlight">Rp 48,200,000</span>. Her most recent order was on April 22. She also has one pending delivery scheduled for April 29.' },
+          { role: 'user', text: 'Send her a reminder about that delivery.' },
+          { role: 'agent', html: 'Done! I\'ve sent Mary a delivery reminder for <span class="highlight">April 29</span>. She\'ll receive it via email and WhatsApp. Want me to follow up if she doesn\'t confirm by tomorrow?' }
+        ],
+        id: [
+          { role: 'user', text: 'Hai, apakah John sudah membayar invoice #1042?' },
+          { role: 'agent', html: 'Ya \u2014 John membayar invoice #1042 pada <span class="highlight">18 April</span> melalui transfer bank. Pembayaran sebesar <span class="highlight">Rp 12.500.000</span> sudah direkonsiliasi di sistem akuntansi Anda.' },
+          { role: 'user', text: 'Berapa total pesanan Mary dengan kami kuartal ini?' },
+          { role: 'agent', html: 'Mary telah melakukan <span class="highlight">7 pesanan</span> kuartal ini dengan total <span class="highlight">Rp 48.200.000</span>. Pesanan terakhirnya pada 22 April. Dia juga memiliki satu pengiriman tertunda yang dijadwalkan pada 29 April.' },
+          { role: 'user', text: 'Kirimkan pengingat tentang pengiriman itu.' },
+          { role: 'agent', html: 'Selesai! Saya sudah mengirim pengingat pengiriman untuk <span class="highlight">29 April</span> ke Mary melalui email dan WhatsApp. Mau saya follow up kalau belum konfirmasi besok?' }
+        ]
+      },
+      delivery: {
+        en: [
+          { role: 'user', text: 'Where is order #8834 right now?' },
+          { role: 'agent', html: 'Order #8834 is currently <span class="highlight">in transit</span> \u2014 last scanned at the Jakarta sorting hub at <span class="highlight">2:45 PM</span>. Estimated delivery: tomorrow by 5 PM.' },
+          { role: 'user', text: 'Can you notify the customer?' },
+          { role: 'agent', html: 'Done! I\'ve sent a tracking update to <span class="highlight">Budi Santoso</span> via WhatsApp and email. He\'ll get a confirmation once it\'s delivered.' }
+        ],
+        id: [
+          { role: 'user', text: 'Di mana pesanan #8834 sekarang?' },
+          { role: 'agent', html: 'Pesanan #8834 saat ini <span class="highlight">dalam perjalanan</span> \u2014 terakhir dipindai di hub penyortiran Jakarta pukul <span class="highlight">14:45</span>. Estimasi pengiriman: besok pukul 17:00.' },
+          { role: 'user', text: 'Bisa beri tahu pelanggannya?' },
+          { role: 'agent', html: 'Selesai! Saya sudah mengirim pembaruan pelacakan ke <span class="highlight">Budi Santoso</span> melalui WhatsApp dan email. Dia akan menerima konfirmasi setelah pesanan diterima.' }
+        ]
+      },
+      sales: {
+        en: [
+          { role: 'user', text: 'Give me a sales summary for this month.' },
+          { role: 'agent', html: 'This month: <span class="highlight">Rp 2.4B</span> in revenue across <span class="highlight">342 transactions</span>. Top category is Electronics at 38%. Revenue is up <span class="highlight">12%</span> vs. last month. Top customer: PT Mitra Abadi at Rp 310M.' },
+          { role: 'user', text: 'How does that compare to the same period last year?' },
+          { role: 'agent', html: 'April last year was <span class="highlight">Rp 1.9B</span> \u2014 so you\'re up <span class="highlight">26% YoY</span>. The growth is mostly driven by Electronics (+34%) and Home & Living (+18%). Want a detailed breakdown by product line?' }
+        ],
+        id: [
+          { role: 'user', text: 'Kasih ringkasan penjualan bulan ini.' },
+          { role: 'agent', html: 'Bulan ini: pendapatan <span class="highlight">Rp 2,4 miliar</span> dari <span class="highlight">342 transaksi</span>. Kategori teratas adalah Elektronik sebesar 38%. Pendapatan naik <span class="highlight">12%</span> dibanding bulan lalu. Pelanggan teratas: PT Mitra Abadi sebesar Rp 310 juta.' },
+          { role: 'user', text: 'Bagaimana perbandingannya dengan periode yang sama tahun lalu?' },
+          { role: 'agent', html: 'April tahun lalu <span class="highlight">Rp 1,9 miliar</span> \u2014 jadi naik <span class="highlight">26% YoY</span>. Pertumbuhan terutama didorong oleh Elektronik (+34%) dan Rumah & Hunian (+18%). Mau rincian lengkap per lini produk?' }
+        ]
+      },
+      email: {
+        en: [
+          { role: 'user', text: 'Draft a follow-up email to PT Sentosa about the pending proposal.' },
+          { role: 'agent', html: 'Here\'s the draft:<br><br>Subject: <span class="highlight">Following Up: Responin Partnership Proposal</span><br><br>Hi Pak Hendri,<br><br>I wanted to follow up on the proposal we sent last week regarding the Responin partnership. We\'d love to discuss any questions or adjustments. Would this Thursday work for a quick call?<br><br>Best regards' },
+          { role: 'user', text: 'Send it, and CC the sales team.' },
+          { role: 'agent', html: 'Sent! The email has been delivered to <span class="highlight">hendri@sentsa.co.id</span> with the sales team CC\'d. I\'ll flag it if there\'s no reply within <span class="highlight">48 hours</span>.' }
+        ],
+        id: [
+          { role: 'user', text: 'Buat email tindak lanjut ke PT Sentosa tentang proposal yang tertunda.' },
+          { role: 'agent', html: 'Ini draft-nya:<br><br>Subjek: <span class="highlight">Tindak Lanjut: Proposal Kemitraan Responin</span><br><br>Halo Pak Hendri,<br><br>Saya ingin menindaklanjuti proposal yang kami kirim minggu lalu terkait kemitraan Responin. Kami senang bisa mendiskusikan pertanyaan atau penyesuaian. Apakah Kamis ini bisa untuk telepon singkat?<br><br>Salam hormat' },
+          { role: 'user', text: 'Kirim, dan CC tim sales.' },
+          { role: 'agent', html: 'Terkirim! Email telah dikirim ke <span class="highlight">hendri@sentsa.co.id</span> dengan CC ke tim sales. Saya akan menandai jika tidak ada balasan dalam <span class="highlight">48 jam</span>.' }
+        ]
+      },
+      customer: {
+        en: [
+          { role: 'user', text: 'Pull up the full profile for PT Karya Mandiri.' },
+          { role: 'agent', html: 'PT Karya Mandiri \u2014 active since <span class="highlight">March 2023</span>. Lifetime value: <span class="highlight">Rp 1.2B</span>. 42 orders total, last order on April 15. Primary contact: Ibu Rina (Procurement). Payment terms: Net 30. No overdue invoices.' },
+          { role: 'user', text: 'Any issues or complaints from them recently?' },
+          { role: 'agent', html: 'One ticket from <span class="highlight">April 10</span> about a delayed shipment \u2014 resolved within 24 hours. They gave <span class="highlight">4.8/5</span> on the last satisfaction survey. Overall, a healthy account with no red flags.' }
+        ],
+        id: [
+          { role: 'user', text: 'Tampilkan profil lengkap PT Karya Mandiri.' },
+          { role: 'agent', html: 'PT Karya Mandiri \u2014 aktif sejak <span class="highlight">Maret 2023</span>. Nilai seumur hidup: <span class="highlight">Rp 1,2 miliar</span>. Total 42 pesanan, pesanan terakhir pada 15 April. Kontak utama: Ibu Rina (Pengadaan). Syarat pembayaran: Net 30. Tidak ada invoice yang tertunggak.' },
+          { role: 'user', text: 'Ada masalah atau keluhan dari mereka belakangan ini?' },
+          { role: 'agent', html: 'Satu tiket dari <span class="highlight">10 April</span> tentang pengiriman yang tertunda \u2014 diselesaikan dalam 24 jam. Mereka memberi skor <span class="highlight">4,8/5</span> pada survei kepuasan terakhir. Secara keseluruhan, akun sehat tanpa tanda bahaya.' }
+        ]
+      }
+    };
+
+    let currentScenario = 'invoice';
+
+    function switchScenario(key) {
+      currentScenario = key;
+      const lang = currentLang;
+      const msgs = chatScenarios[key][lang] || chatScenarios[key]['en'];
+      const container = document.getElementById('chatMessages');
+      container.innerHTML = '';
+      msgs.forEach((m, i) => {
+        const div = document.createElement('div');
+        div.className = 'chat-msg ' + m.role;
+        div.style.animationDelay = (i * 0.3) + 's';
+        const avatar = document.createElement('div');
+        avatar.className = 'chat-msg-avatar';
+        avatar.textContent = m.role === 'user' ? 'Y' : 'R';
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-msg-bubble';
+        if (m.html) bubble.innerHTML = m.html;
+        else bubble.textContent = m.text;
+        div.appendChild(avatar);
+        div.appendChild(bubble);
+        container.appendChild(div);
+      });
+      // Update active tab
+      document.querySelectorAll('.chat-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.scenario === key);
+      });
+    }
+
+    // Also re-render chat when language changes
+    const _origSetLang = setLang;
+    setLang = function(lang) {
+      _origSetLang(lang);
+      if (currentScenario) switchScenario(currentScenario);
+    };
+
     // Initialize with Indonesian as default
     setLang('id');
+
+    // Initialize chat demo with first scenario
+    switchScenario('invoice');
+
+    // === FAQ Accordion ===
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      // Toggle clicked
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // === Animated Stats Counter ===
+    let statsAnimated = false;
+    function animateCounters() {
+      if (statsAnimated) return;
+      const bar = document.getElementById('statsBar');
+      if (!bar) return;
+      const rect = bar.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        statsAnimated = true;
+        document.querySelectorAll('.stat-value[data-count]').forEach(el => {
+          const target = parseInt(el.dataset.count);
+          const prefix = el.dataset.prefix || '';
+          const suffix = el.dataset.suffix || '';
+          const duration = 1600;
+          const startTime = performance.now();
+          function tick(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(target * eased);
+            el.textContent = prefix + current + suffix;
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      }
+    }
+    window.addEventListener('scroll', animateCounters, { passive: true });
+    animateCounters(); // Check if already in view
+
+
+    // === Sticky Mobile CTA ===
+    const mobileCtaBar = document.getElementById('mobileCtaBar');
+    const heroSection = document.querySelector('.hero');
+    if (mobileCtaBar && heroSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            mobileCtaBar.classList.remove('visible');
+          } else {
+            mobileCtaBar.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(heroSection);
+    }
 
     // === Settings Dropdown ===
     function toggleSettings() {
@@ -1724,123 +2062,23 @@
     const savedTheme = localStorage.getItem('responin-theme') || 'dark';
     setTheme(savedTheme);
 
-    // === Chat Demo Scenarios ===
-    const chatScenarios = {
-      invoice: {
-        en: [
-          { role: 'user', text: 'Hi, has John paid invoice #1042 yet?' },
-          { role: 'agent', html: 'Yes — John paid invoice #1042 on <span class="highlight">April 18</span> via bank transfer. The payment of <span class="highlight">Rp 12,500,000</span> has been reconciled in your accounting system.' },
-          { role: 'user', text: "What's Mary's total orders with us this quarter?" },
-          { role: 'agent', html: 'Mary has placed <span class="highlight">7 orders</span> this quarter totaling <span class="highlight">Rp 48,200,000</span>. Her most recent order was on April 22. She also has one pending delivery scheduled for April 29.' },
-          { role: 'user', text: 'Send her a reminder about that delivery.' },
-          { role: 'agent', html: 'Done! I\'ve sent Mary a delivery reminder for <span class="highlight">April 29</span>. She\'ll receive it via email and WhatsApp. Want me to follow up if she doesn\'t confirm by tomorrow?' }
-        ],
-        id: [
-          { role: 'user', text: 'Hai, apakah John sudah membayar invoice #1042?' },
-          { role: 'agent', html: 'Ya — John membayar invoice #1042 pada <span class="highlight">18 April</span> melalui transfer bank. Pembayaran sebesar <span class="highlight">Rp 12.500.000</span> sudah direkonsiliasi di sistem akuntansi Anda.' },
-          { role: 'user', text: 'Berapa total pesanan Mary dengan kami kuartal ini?' },
-          { role: 'agent', html: 'Mary telah melakukan <span class="highlight">7 pesanan</span> kuartal ini dengan total <span class="highlight">Rp 48.200.000</span>. Pesanan terakhirnya pada 22 April. Dia juga memiliki satu pengiriman tertunda yang dijadwalkan pada 29 April.' },
-          { role: 'user', text: 'Kirimkan pengingat tentang pengiriman itu.' },
-          { role: 'agent', html: 'Selesai! Saya sudah mengirim pengingat pengiriman untuk <span class="highlight">29 April</span> ke Mary melalui email dan WhatsApp. Mau saya follow up kalau belum konfirmasi besok?' }
-        ]
-      },
-      delivery: {
-        en: [
-          { role: 'user', text: 'Where is order #8834 right now?' },
-          { role: 'agent', html: 'Order #8834 is currently <span class="highlight">in transit</span> — last scanned at the Jakarta sorting hub at <span class="highlight">2:45 PM</span>. Estimated delivery: tomorrow by 5 PM.' },
-          { role: 'user', text: 'Can you notify the customer?' },
-          { role: 'agent', html: 'Done! I\'ve sent a tracking update to <span class="highlight">Budi Santoso</span> via WhatsApp and email. He\'ll get a confirmation once it\'s delivered.' }
-        ],
-        id: [
-          { role: 'user', text: 'Di mana pesanan #8834 sekarang?' },
-          { role: 'agent', html: 'Pesanan #8834 saat ini <span class="highlight">dalam perjalanan</span> — terakhir dipindai di hub penyortiran Jakarta pukul <span class="highlight">14:45</span>. Estimasi pengiriman: besok pukul 17:00.' },
-          { role: 'user', text: 'Bisa beri tahu pelanggannya?' },
-          { role: 'agent', html: 'Selesai! Saya sudah mengirim pembaruan pelacakan ke <span class="highlight">Budi Santoso</span> melalui WhatsApp dan email. Dia akan menerima konfirmasi setelah pesanan diterima.' }
-        ]
-      },
-      sales: {
-        en: [
-          { role: 'user', text: 'Give me a sales summary for this month.' },
-          { role: 'agent', html: 'This month: <span class="highlight">Rp 2.4B</span> in revenue across <span class="highlight">342 transactions</span>. Top category is Electronics at 38%. Revenue is up <span class="highlight">12%</span> vs. last month. Top customer: PT Mitra Abadi at Rp 310M.' },
-          { role: 'user', text: 'How does that compare to the same period last year?' },
-          { role: 'agent', html: 'April last year was <span class="highlight">Rp 1.9B</span> — so you\'re up <span class="highlight">26% YoY</span>. The growth is mostly driven by Electronics (+34%) and Home & Living (+18%). Want a detailed breakdown by product line?' }
-        ],
-        id: [
-          { role: 'user', text: 'Kasih ringkasan penjualan bulan ini.' },
-          { role: 'agent', html: 'Bulan ini: pendapatan <span class="highlight">Rp 2,4 miliar</span> dari <span class="highlight">342 transaksi</span>. Kategori teratas adalah Elektronik sebesar 38%. Pendapatan naik <span class="highlight">12%</span> dibanding bulan lalu. Pelanggan teratas: PT Mitra Abadi sebesar Rp 310 juta.' },
-          { role: 'user', text: 'Bagaimana perbandingannya dengan periode yang sama tahun lalu?' },
-          { role: 'agent', html: 'April tahun lalu <span class="highlight">Rp 1,9 miliar</span> — jadi naik <span class="highlight">26% YoY</span>. Pertumbuhan terutama didorong oleh Elektronik (+34%) dan Rumah & Hunian (+18%). Mau rincian lengkap per lini produk?' }
-        ]
-      },
-      email: {
-        en: [
-          { role: 'user', text: 'Draft a follow-up email to PT Sentosa about the pending proposal.' },
-          { role: 'agent', html: 'Here\'s the draft:<br><br>Subject: <span class="highlight">Following Up: Responin Partnership Proposal</span><br><br>Hi Pak Hendri,<br><br>I wanted to follow up on the proposal we sent last week regarding the Responin partnership. We\'d love to discuss any questions or adjustments. Would this Thursday work for a quick call?<br><br>Best regards' },
-          { role: 'user', text: 'Send it, and CC the sales team.' },
-          { role: 'agent', html: 'Sent! The email has been delivered to <span class="highlight">hendri@sentsa.co.id</span> with the sales team CC\'d. I\'ll flag it if there\'s no reply within <span class="highlight">48 hours</span>.' }
-        ],
-        id: [
-          { role: 'user', text: 'Buat email tindak lanjut ke PT Sentosa tentang proposal yang tertunda.' },
-          { role: 'agent', html: 'Ini draft-nya:<br><br>Subjek: <span class="highlight">Tindak Lanjut: Proposal Kemitraan Responin</span><br><br>Halo Pak Hendri,<br><br>Saya ingin menindaklanjuti proposal yang kami kirim minggu lalu terkait kemitraan Responin. Kami senang bisa mendiskusikan pertanyaan atau penyesuaian. Apakah Kamis ini bisa untuk telepon singkat?<br><br>Salam hormat' },
-          { role: 'user', text: 'Kirim, dan CC tim sales.' },
-          { role: 'agent', html: 'Terkirim! Email telah dikirim ke <span class="highlight">hendri@sentsa.co.id</span> dengan CC ke tim sales. Saya akan menandai jika tidak ada balasan dalam <span class="highlight">48 jam</span>.' }
-        ]
-      },
-      customer: {
-        en: [
-          { role: 'user', text: 'Pull up the full profile for PT Karya Mandiri.' },
-          { role: 'agent', html: 'PT Karya Mandiri — active since <span class="highlight">March 2023</span>. Lifetime value: <span class="highlight">Rp 1.2B</span>. 42 orders total, last order on April 15. Primary contact: Ibu Rina (Procurement). Payment terms: Net 30. No overdue invoices.' },
-          { role: 'user', text: 'Any issues or complaints from them recently?' },
-          { role: 'agent', html: 'One ticket from <span class="highlight">April 10</span> about a delayed shipment — resolved within 24 hours. They gave <span class="highlight">4.8/5</span> on the last satisfaction survey. Overall, a healthy account with no red flags.' }
-        ],
-        id: [
-          { role: 'user', text: 'Tampilkan profil lengkap PT Karya Mandiri.' },
-          { role: 'agent', html: 'PT Karya Mandiri — aktif sejak <span class="highlight">Maret 2023</span>. Nilai seumur hidup: <span class="highlight">Rp 1,2 miliar</span>. Total 42 pesanan, pesanan terakhir pada 15 April. Kontak utama: Ibu Rina (Pengadaan). Syarat pembayaran: Net 30. Tidak ada invoice yang tertunggak.' },
-          { role: 'user', text: 'Ada masalah atau keluhan dari mereka belakangan ini?' },
-          { role: 'agent', html: 'Satu tiket dari <span class="highlight">10 April</span> tentang pengiriman yang tertunda — diselesaikan dalam 24 jam. Mereka memberi skor <span class="highlight">4,8/5</span> pada survei kepuasan terakhir. Secara keseluruhan, akun sehat tanpa tanda bahaya.' }
-        ]
+    // === Chat Theme Badge ===
+    function updateChatThemeBadge(theme) {
+      const badge = document.getElementById('chatThemeBadge');
+      if (!badge) return;
+      if (theme === 'light') {
+        badge.textContent = '☀️ Light';
+      } else {
+        badge.textContent = '🌙 Dark';
       }
-    };
-
-    let currentScenario = 'invoice';
-
-    function switchScenario(key) {
-      currentScenario = key;
-      const lang = currentLang;
-      const msgs = chatScenarios[key][lang] || chatScenarios[key]['en'];
-      const container = document.getElementById('chatMessages');
-      container.innerHTML = '';
-      msgs.forEach((m, i) => {
-        const div = document.createElement('div');
-        div.className = 'chat-msg ' + m.role;
-        div.style.animationDelay = (i * 0.3) + 's';
-        const avatar = document.createElement('div');
-        avatar.className = 'chat-msg-avatar';
-        avatar.textContent = m.role === 'user' ? 'Y' : 'R';
-        const bubble = document.createElement('div');
-        bubble.className = 'chat-msg-bubble';
-        if (m.html) bubble.innerHTML = m.html;
-        else bubble.textContent = m.text;
-        div.appendChild(avatar);
-        div.appendChild(bubble);
-        container.appendChild(div);
-      });
-      // Update active tab
-      document.querySelectorAll('.chat-tab').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.scenario === key);
-      });
     }
-
-    // Also re-render chat when language changes
-    const _origSetLang = setLang;
-    setLang = function(lang) {
-      _origSetLang(lang);
-      if (currentScenario) switchScenario(currentScenario);
+    // Hook into setTheme
+    const _origSetTheme = setTheme;
+    setTheme = function(theme) {
+      _origSetTheme(theme);
+      updateChatThemeBadge(theme);
     };
-
-    // Initialize default scenario
-    switchScenario('invoice');
-
+    updateChatThemeBadge(localStorage.getItem('responin-theme') || 'dark');
 
   </script>
 
@@ -1860,6 +2098,7 @@
         <a href="#how" class="mobile-menu-link" data-i18n="nav_how" onclick="closeMobileMenu()">How It Works</a>
         <a href="#industries" class="mobile-menu-link" data-i18n="nav_industries" onclick="closeMobileMenu()">Industries</a>
         <a href="#compare" class="mobile-menu-link" data-i18n="nav_compare" onclick="closeMobileMenu()">Compare</a>
+        <a href="#faq" class="mobile-menu-link" data-i18n="nav_faq" onclick="closeMobileMenu()">FAQ</a>
       </div>
     </div>
     <div class="mobile-menu-settings">
@@ -1880,6 +2119,11 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="mobile-cta-bar" id="mobileCtaBar">
+    <a href="mailto:hi@responin.com?subject=I'm%20Interested%20in%20Responin" data-i18n="hero_cta_primary">Join the Waitlist</a>
   </div>
 
 </body>
