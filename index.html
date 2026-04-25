@@ -738,12 +738,81 @@
       .mobile-menu-overlay.open { pointer-events: auto; }
     }
 
+    @media (min-width: 769px) {
+      .sticky-cta-mobile { display: none !important; }
+    }
+
+    /* --- FAQ Accordion --- */
+    .faq-section { padding: 100px 0; }
+    .faq-list { max-width: 720px; margin: 56px auto 0; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .faq-item:hover { border-color: var(--border-hover); }
+    .faq-item.open { border-color: var(--accent); }
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; cursor: pointer; gap: 16px;
+      font-weight: 600; font-size: 0.95rem; color: var(--text);
+      background: transparent; border: none; width: 100%; text-align: left;
+      font-family: inherit;
+    }
+    .faq-question:hover { color: var(--accent-light); }
+    .faq-icon {
+      width: 24px; height: 24px; min-width: 24px; border-radius: 50%;
+      background: var(--bg-elevated); display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2)); }
+    .faq-icon svg { width: 14px; height: 14px; }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding: 0 24px 20px; }
+    .faq-answer p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+    [data-theme="light"] .faq-item { background: var(--bg-card); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+
+    /* --- Sticky CTA on Mobile --- */
+    .sticky-cta-mobile {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      background: var(--bg-card); border-top: 1px solid var(--border);
+      padding: 12px 16px; display: flex; align-items: center; justify-content: center;
+      transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    }
+    .sticky-cta-mobile.visible { transform: translateY(0); }
+    .sticky-cta-mobile a {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 12px 24px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+      color: #fff; font-weight: 600; font-size: 0.9rem; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .sticky-cta-mobile a:hover { transform: translateY(-1px); box-shadow: 0 4px 16px var(--accent-glow); }
+    .sticky-cta-mobile svg { width: 16px; height: 16px; }
+
+    /* --- Chat System Message --- */
+    .chat-msg.system {
+      align-self: center; max-width: 90%; text-align: center;
+    }
+    .chat-msg.system .chat-msg-bubble {
+      background: rgba(108, 92, 231, 0.1); border: 1px solid rgba(108, 92, 231, 0.2);
+      border-radius: 12px; font-size: 0.8rem; color: var(--accent-light);
+      padding: 8px 16px; display: inline-flex; align-items: center; gap: 6px;
+    }
+    [data-theme="light"] .chat-msg.system .chat-msg-bubble {
+      background: rgba(108, 92, 231, 0.08); border-color: rgba(108, 92, 231, 0.15);
+    }
+
     /* --- Animations --- */
     .fade-up {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      opacity: 0; transform: translateY(24px) scale(0.97);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.visible { opacity: 1; transform: translateY(0) scale(1); }
 
 
   </style>
@@ -1210,6 +1279,72 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="fade-up" style="text-align: center;">
+        <p class="section-label" data-i18n="faq_label">Frequently Asked Questions</p>
+        <h2 class="section-title" style="max-width: 100%;" data-i18n="faq_title">Got questions? We've got answers.</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item fade-up">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q1">Is my data safe with Responin?</span>
+            <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a1">Absolutely. Your data never leaves your environment. Responin agents operate within your own infrastructure — nothing is shared, nothing trains public models. We build privacy-first architecture into every deployment.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q2">How long until I see results?</span>
+            <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a2">Most businesses see measurable time savings within the first week of deployment. Full automation workflows typically take 2–4 weeks to architect, deploy, and refine. You'll see ROI from day one — and it compounds from there.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q3">What if I already use [tool]?</span>
+            <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a3">Great — Responin works with your existing tools, not against them. We integrate with your CRM, email, accounting software, project management, and more. Your agent plugs into what you're already using and makes it all work together seamlessly.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q4">How is this different from ChatGPT or other AI tools?</span>
+            <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a4">Generic AI tools forget everything after each session and give the same answers to everyone. Responin builds you a personal agent that learns your workflows, remembers your context, and actually takes action on your behalf — not just advice, execution.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q5">What if something goes wrong — can the AI make mistakes?</span>
+            <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a5">Every Responin agent deploys with human-in-the-loop safeguards. High-confidence tasks run automatically; uncertain decisions get routed to you for approval. You stay in control — the agent handles the volume, you handle the nuance.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span data-i18n="faq_q6">Do I need a technical team to set this up?</span>
+            <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq_a6">Not at all. We handle the architecture, deployment, and ongoing refinement. You tell us what needs to happen in your business — we build the agent that makes it happen. No coding required on your end.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="section cta-section" id="cta">
     <div class="container fade-up">
@@ -1244,6 +1379,7 @@
           <li><a href="#how" data-i18n="foot_comp_2">How It Works</a></li>
           <li><a href="#industries" data-i18n="foot_comp_3">Industries</a></li>
           <li><a href="#compare" data-i18n="foot_comp_4">Compare</a></li>
+          <li><a href="#faq" data-i18n="foot_comp_6">FAQ</a></li>
           <li><a href="#cta" data-i18n="foot_comp_5">Contact</a></li>
         </ul>
       </div>
@@ -1264,6 +1400,7 @@
         nav_how: "How It Works",
         nav_industries: "Industries",
         nav_compare: "Compare",
+        nav_faq: "FAQ",
         settings_language: "Language",
         settings_theme: "Theme",
         vs_label: "Why Not Just ChatGPT?",
@@ -1435,7 +1572,25 @@
         foot_comp_2: "How It Works",
         foot_comp_3: "Industries",
         foot_comp_4: "Compare",
-        foot_comp_5: "Contact"
+        foot_comp_5: "Contact",
+        foot_comp_6: "FAQ",
+        faq_label: "Frequently Asked Questions",
+        faq_title: "Got questions? We've got answers.",
+        faq_q1: "Is my data safe with Responin?",
+        faq_a1: "Absolutely. Your data never leaves your environment. Responin agents operate within your own infrastructure — nothing is shared, nothing trains public models. We build privacy-first architecture into every deployment.",
+        faq_q2: "How long until I see results?",
+        faq_a2: "Most businesses see measurable time savings within the first week of deployment. Full automation workflows typically take 2–4 weeks to architect, deploy, and refine. You'll see ROI from day one — and it compounds from there.",
+        faq_q3: "What if I already use [tool]?",
+        faq_a3: "Great — Responin works with your existing tools, not against them. We integrate with your CRM, email, accounting software, project management, and more. Your agent plugs into what you're already using and makes it all work together seamlessly.",
+        faq_q4: "How is this different from ChatGPT or other AI tools?",
+        faq_a4: "Generic AI tools forget everything after each session and give the same answers to everyone. Responin builds you a personal agent that learns your workflows, remembers your context, and actually takes action on your behalf — not just advice, execution.",
+        faq_q5: "What if something goes wrong — can the AI make mistakes?",
+        faq_a5: "Every Responin agent deploys with human-in-the-loop safeguards. High-confidence tasks run automatically; uncertain decisions get routed to you for approval. You stay in control — the agent handles the volume, you handle the nuance.",
+        faq_q6: "Do I need a technical team to set this up?",
+        faq_a6: "Not at all. We handle the architecture, deployment, and ongoing refinement. You tell us what needs to happen in your business — we build the agent that makes it happen. No coding required on your end.",
+        sticky_cta_text: "Join the Waitlist",
+        chat_theme_dark: "Dark mode activated — easy on the eyes 🌙",
+        chat_theme_light: "Light mode — crisp and clear ☀️"
       },
       id: {
         nav_cta: "Mulai",
@@ -1444,6 +1599,7 @@
         nav_how: "Cara Kerja",
         nav_industries: "Industri",
         nav_compare: "Perbandingan",
+        nav_faq: "FAQ",
         settings_language: "Bahasa",
         settings_theme: "Tema",
         vs_label: "Kenapa Bukan ChatGPT Saja?",
@@ -1615,7 +1771,25 @@
         foot_comp_2: "Cara Kerja",
         foot_comp_3: "Industri",
         foot_comp_4: "Perbandingan",
-        foot_comp_5: "Kontak"
+        foot_comp_5: "Kontak",
+        foot_comp_6: "FAQ",
+        faq_label: "Pertanyaan yang Sering Diajukan",
+        faq_title: "Ada pertanyaan? Kami punya jawabannya.",
+        faq_q1: "Apakah data saya aman dengan Responin?",
+        faq_a1: "Tentu saja. Data Anda tidak pernah keluar dari lingkungan Anda. Agen Responin beroperasi di dalam infrastruktur Anda sendiri — tidak ada yang dibagikan, tidak ada yang melatih model publik. Kami membangun arsitektur privacy-first di setiap deployment.",
+        faq_q2: "Berapa lama sampai saya melihat hasil?",
+        faq_a2: "Sebagian besar bisnis melihat penghematan waktu yang terukur dalam minggu pertama deployment. Alur otomasi lengkap biasanya membutuhkan 2–4 minggu untuk dirancang, diterapkan, dan disempurnakan. ROI terlihat dari hari pertama — dan terus meningkat dari sana.",
+        faq_q3: "Bagaimana jika saya sudah menggunakan [alat] lain?",
+        faq_a3: "Bagus — Responin bekerja dengan alat yang sudah Anda gunakan, bukan melawannya. Kami integrasikan dengan CRM, email, software akuntansi, manajemen proyek, dan lainnya. Agen Anda terhubung ke apa yang sudah Anda pakai dan membuat semuanya bekerja bersama secara mulus.",
+        faq_q4: "Apa bedanya dengan ChatGPT atau alat AI lain?",
+        faq_a4: "Alat AI generik melupakan semuanya setelah setiap sesi dan memberikan jawaban yang sama untuk semua orang. Responin membangun agen personal yang mempelajari alur kerja Anda, mengingat konteks Anda, dan benar-benar bertindak atas nama Anda — bukan sekadar saran, tapi eksekusi.",
+        faq_q5: "Bagaimana jika terjadi kesalahan — apakah AI bisa membuat kesalahan?",
+        faq_a5: "Setiap agen Responin diluncurkan dengan pengaman human-in-the-loop. Tugas dengan keyakinan tinggi berjalan otomatis; keputusan yang tidak pasti dirutekan ke Anda untuk persetujuan. Anda tetap ber kendali — agen menangani volume, Anda menangani nuansa.",
+        faq_q6: "Apakah saya butuh tim teknis untuk mengaturnya?",
+        faq_a6: "Sama sekali tidak. Kami menangani arsitektur, deployment, dan penyempurnaan berkelanjutan. Anda cukup memberitahu apa yang perlu terjadi di bisnis Anda — kami membangun agen yang mewujudkannya. Tidak perlu coding dari pihak Anda.",
+        sticky_cta_text: "Daftar Waitlist",
+        chat_theme_dark: "Mode gelap aktif — nyaman untuk mata 🌙",
+        chat_theme_light: "Mode terang — tajam dan jelas ☀️"
       }
     };
 
@@ -1670,7 +1844,7 @@
     document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
 
     // Stagger cards
-    document.querySelectorAll('.solution-card, .problem-card, .step, .sector-card').forEach((card, i) => {
+    document.querySelectorAll('.solution-card, .problem-card, .step, .sector-card, .faq-item').forEach((card, i) => {
       card.style.transitionDelay = `${(i % 4) * 0.08}s`;
     });
 
@@ -1841,6 +2015,112 @@
     // Initialize default scenario
     switchScenario('invoice');
 
+    // === FAQ Accordion ===
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      // Close all others
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        if (el !== item) el.classList.remove('open');
+      });
+      item.classList.toggle('open', !wasOpen);
+    }
+
+    // === Animated Stats Counter ===
+    const statsData = [
+      { end: 45, suffix: '%', prefix: '', selector: '.stat:nth-child(1) .stat-value' },
+      { end: 60, suffix: '%', prefix: '', selector: '.stat:nth-child(2) .stat-value' },
+      { end: 24, suffix: '/7', prefix: '', selector: '.stat:nth-child(3) .stat-value' },
+      { end: 30, suffix: 's', prefix: '<', selector: '.stat:nth-child(4) .stat-value' }
+    ];
+
+    let statsCounted = false;
+    function animateCounter(el, end, suffix, prefix, duration) {
+      const start = 0;
+      const startTime = performance.now();
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(start + (end - start) * eased);
+        el.textContent = prefix + current + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const statsBar = document.querySelector('.stats-bar');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !statsCounted) {
+          statsCounted = true;
+          statsData.forEach((s, i) => {
+            const el = document.querySelector(s.selector);
+            if (el) {
+              setTimeout(() => animateCounter(el, s.end, s.suffix, s.prefix, 1500), i * 200);
+            }
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    if (statsBar) statsObserver.observe(statsBar);
+
+    // === Theme Change Chat Message ===
+    const _origSetTheme = setTheme;
+    setTheme = function(theme) {
+      _origSetTheme(theme);
+      // Add system message to chat demo
+      const container = document.getElementById('chatMessages');
+      if (!container) return;
+      const key = theme === 'dark' ? 'chat_theme_dark' : 'chat_theme_light';
+      const msg = translations[currentLang][key] || translations['en'][key];
+      // Remove any existing system message
+      const existing = container.querySelector('.chat-msg.system');
+      if (existing) existing.remove();
+      // Create system message
+      const div = document.createElement('div');
+      div.className = 'chat-msg system';
+      div.innerHTML = '<div class="chat-msg-bubble" style="animation: chatFadeIn 0.35s ease forwards; opacity: 0;">' + msg + '</div>';
+      container.appendChild(div);
+      // Auto-dismiss after 4s
+      setTimeout(() => {
+        div.style.transition = 'opacity 0.4s ease';
+        div.style.opacity = '0';
+        setTimeout(() => div.remove(), 400);
+      }, 4000);
+    };
+
+    // === Sticky CTA on Mobile ===
+    const stickyCta = document.getElementById('stickyCtaMobile');
+    const heroSection = document.querySelector('.hero');
+    if (stickyCta && heroSection) {
+      const stickyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            stickyCta.classList.remove('visible');
+          } else {
+            // Only show on mobile
+            if (window.innerWidth <= 768) {
+              stickyCta.classList.add('visible');
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+      stickyObserver.observe(heroSection);
+      // Also handle resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          stickyCta.classList.remove('visible');
+        }
+      });
+    }
+
+    // Re-apply saved theme (to trigger chat message if needed on init)
+    // Don't show theme message on initial load, only on user switch
+    // So we just keep setTheme as is without initial message
+
 
   </script>
 
@@ -1860,6 +2140,7 @@
         <a href="#how" class="mobile-menu-link" data-i18n="nav_how" onclick="closeMobileMenu()">How It Works</a>
         <a href="#industries" class="mobile-menu-link" data-i18n="nav_industries" onclick="closeMobileMenu()">Industries</a>
         <a href="#compare" class="mobile-menu-link" data-i18n="nav_compare" onclick="closeMobileMenu()">Compare</a>
+        <a href="#faq" class="mobile-menu-link" data-i18n="nav_faq" onclick="closeMobileMenu()">FAQ</a>
       </div>
     </div>
     <div class="mobile-menu-settings">
@@ -1880,6 +2161,14 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <!-- Sticky CTA Mobile -->
+  <div class="sticky-cta-mobile" id="stickyCtaMobile">
+    <a href="mailto:hi@responin.com?subject=I'm%20Interested%20in%20Responin&body=Hi%20Responin%20Team%2C%0A%0AI'm%20interested%20in%20learning%20more%20about%20how%20Responin%20can%20help%20automate%20my%20business%20operations.%0A%0ACompany%3A%20%0AIndustry%3A%20%0AWhat%20processes%20I'd%20like%20to%20automate%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      <span data-i18n="sticky_cta_text">Join the Waitlist</span>
+    </a>
   </div>
 
 </body>
