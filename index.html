@@ -268,18 +268,20 @@
       font-size: 1.125rem; color: var(--text-muted); max-width: 560px;
       margin-bottom: 40px; line-height: 1.7;
     }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: flex-start; }
+    .btn-primary, .btn-secondary {
+      padding: 14px 32px; border-radius: 10px; font-size: 1rem;
+      font-weight: 600; cursor: pointer; transition: all 0.25s; text-decoration: none;
+      min-width: 200px; text-align: center; display: inline-block;
+    }
     .btn-primary {
       background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
-      color: #fff; border: none; padding: 14px 32px; border-radius: 10px;
-      font-size: 1rem; font-weight: 600; cursor: pointer;
-      transition: all 0.25s; text-decoration: none;
+      color: #fff; border: none;
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
     .btn-secondary {
       background: transparent; color: var(--text); border: 1px solid var(--border);
-      padding: 14px 32px; border-radius: 10px; font-size: 1rem;
-      font-weight: 500; cursor: pointer; transition: all 0.25s; text-decoration: none;
+      font-weight: 500;
     }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent-light); }
 
@@ -638,15 +640,20 @@
     .chat-demo-header .section-title { margin: 0 auto 16px; text-align: center; max-width: 560px; }
     .chat-demo-header .section-desc { margin: 0 auto; text-align: center; }
     .chat-tabs {
-      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      display: flex; gap: 10px; justify-content: flex-start;
       margin-bottom: 32px;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory; scrollbar-width: none;
+      padding: 4px 0;
     }
+    .chat-tabs::-webkit-scrollbar { display: none; }
     .chat-tab {
       padding: 10px 20px; border-radius: 999px;
       background: var(--bg-card); border: 1px solid var(--border);
       font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
       cursor: pointer; transition: all 0.25s;
-      font-family: inherit; white-space: nowrap;
+      font-family: inherit; white-space: nowrap; flex-shrink: 0;
+      scroll-snap-align: start;
     }
     .chat-tab:hover { border-color: var(--border-hover); color: var(--accent-light); }
     .chat-tab.active {
@@ -714,6 +721,14 @@
       .sectors-grid { grid-template-columns: 1fr; }
       .stats-bar { gap: 32px; }
       .comparison-table { min-width: 540px; }
+      .chat-tabs {
+        margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px;
+      }
+      .chat-tabs::after {
+        content: ''; position: sticky; right: 0; flex-shrink: 0;
+        width: 40px; height: 100%; pointer-events: none;
+        background: linear-gradient(to right, transparent, var(--bg));
+      }
       footer .container { flex-direction: column; }
 
       /* Mobile nav: show hamburger, hide desktop settings */
@@ -1281,6 +1296,7 @@
         chat_bot_name: "Responin Assistant",
         chat_bot_status: "● Online — remembers your business",
         chat_placeholder: "Ask anything about your business...",
+        hero_badge: "Your Personal AI Agent",
         chat_ex_1: "📋 Check invoice status",
         chat_ex_2: "📦 Track deliveries",
         chat_ex_3: "📊 Summarize sales",
@@ -1300,7 +1316,7 @@
         problem_card_1_title: "The Admin Black Hole",
         problem_card_1_desc: "Average employees spend 2+ hours daily on admin tasks — data entry, status updates, meeting notes, follow-ups. That's 25% of every workday that produces zero strategic value.",
         problem_card_2_title: "Disconnected Systems",
-        problem_card_2_desc: "Your CRM doesn't talk to your email. Your calendar doesn't update your project board. Your finance tool doesn't flag your operations. Every gap is a dropped ball and a manual bridge.",
+        problem_card_2_desc: "Your CRM doesn't talk to your email. Your calendar doesn't update your project board. Your finance tool doesn't flag your operations. Every gap is a dropped ball — and a manual bridge someone has to build.",
         problem_card_3_title: "Human Bottlenecks",
         problem_card_3_desc: 'Every process that requires a person to "check and route" is a process that stops when that person is busy, asleep, or on leave. Your operations run at human speed — not business speed.',
         problem_card_4_title: "Scale = More Headcount",
@@ -1455,11 +1471,12 @@
         vs_r6_c3: "Terhubung ke CRM, email, akuntansi, dan lainnya",
         hero_badge: "Agen AI Personal Anda",
         chat_label: "Lihat Aksinya",
-        chat_title: "Agen AI personal Anda, selalu satu pesan jauhnya.",
+        chat_title: "Agen AI personal Anda, selalu siap dalam satu pesan.",
         chat_desc: "Tanya apa saja dalam bahasa sehari-hari — agen Anda memeriksa sistem Anda, mengingat konteks, dan memberikan jawaban secara instan.",
         chat_bot_name: "Asisten Responin",
         chat_bot_status: "● Online — mengingat bisnis Anda",
         chat_placeholder: "Tanya apa saja tentang bisnis Anda...",
+        hero_badge: "Agen AI Personal Anda",
         chat_ex_1: "📋 Cek status invoice",
         chat_ex_2: "📦 Lacak pengiriman",
         chat_ex_3: "📊 Ringkas penjualan",
@@ -1479,7 +1496,7 @@
         problem_card_1_title: "Lubang Hitam Administrasi",
         problem_card_1_desc: "Rata-rata karyawan menghabiskan 2+ jam per hari untuk tugas admin — entri data, pembaruan status, notulensi, tindak lanjut. Itu 25% dari setiap hari kerja yang menghasilkan nol nilai strategis.",
         problem_card_2_title: "Sistem Terputus",
-        problem_card_2_desc: "CRM Anda tidak terhubung dengan email. Kalender Anda tidak memperbarui papan proyek. Alat keuangan Anda tidak menandai operasi Anda. Setiap kesenjangan adalah bola yang jatuh dan jembatan manual.",
+        problem_card_2_desc: "CRM Anda tidak terhubung dengan email. Kalender Anda tidak memperbarui papan proyek. Alat keuangan Anda tidak menandai operasi Anda. Setiap kesenjangan adalah bola yang jatuh dan jembatan manual — harus dihubungkan satu per satu.",
         problem_card_3_title: "Kemacetan Manusia",
         problem_card_3_desc: 'Setiap proses yang membutuhkan seseorang untuk "cek dan rutekan" adalah proses yang berhenti ketika orang tersebut sibuk, tidur, atau cuti. Operasi Anda berjalan pada kecepatan manusia — bukan kecepatan bisnis.',
         problem_card_4_title: "Skala = Lebih Banyak Orang",
@@ -1511,12 +1528,12 @@
         sol_5_tag: "Intelijen Arus Kas",
         sol_6_title: "Alur Kerja Penjualan & CRM",
         sol_6_desc: "Temukan kontak baru secara otomatis, catat notulensi rapat dari pesan suara singkat, dan dapatkan peringatan proaktif saat deal mulai stagnan. Agen AI Anda memastikan tidak ada yang lolos — agar tim sales fokus menutup deal, bukan mengerjakan administrasi.",
-        sol_6_tag: "Percepatan Pipeline",
+        sol_6_tag: "Akselerasi Pipeline",
         sol_7_title: "Otomasi Dukungan Pelanggan",
         sol_7_desc: "Agen AI memantau saluran dukungan masuk, membaca permintaan, mengonsultasikan basis pengetahuan, dan menyusun respons. 60%+ ditangani secara otonom. Sisanya? Sudah disusun dan siap untuk review manusia satu klik.",
-        sol_7_tag: "Dukungan Tier-0",
+        sol_7_tag: "Dukungan Otomatis Tier-0",
         sol_8_title: "Pelaporan & Briefing Cerdas",
-        sol_8_desc: "Standup harian, ringkasan mingguan, tinjauan bulanan — semuanya dihasilkan secara otomatis. Agen AI Anda mengumpulkan data dari setiap sistem, menampilkan yang penting, dan mengirimkan briefing ke orang yang tepat di waktu yang tepat.",
+        sol_8_desc: "Standup harian, ringkasan mingguan, tinjauan bulanan — semuanya dihasilkan secara otomatis. Agen AI Anda mengumpulkan data dari setiap sistem, menampilkan yang penting, dan mengirimkan laporan singkat ke orang yang tepat di waktu yang tepat.",
         sol_8_tag: "Briefing Otomatis",
         how_label: "Cara Kerja",
         how_title: "Dari kekacauan ke otonomi dalam empat minggu.",
