@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Responin — The Future of Autonomous Business Operations</title>
-  <meta name="description" content="Responin is an AI-driven consultancy and automation agency that transforms complex business operations into seamless, autonomous workflows powered by OpenClaw." />
+  <title>Responin — Masa Depan Operasi Bisnis Otonom</title>
+  <meta name="description" content="Responin builds you a personal AI agent — one that learns your workflows, remembers your context, and operates with intimate knowledge of how your business runs." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -263,19 +263,48 @@
     }
     .step p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
 
-    /* --- Industries --- */
-    .industry-pills {
-      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px;
+
+    /* --- Business Sectors --- */
+    .sectors-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px; margin-top: 56px;
     }
-    .industry-pill {
-      padding: 10px 20px; border-radius: 999px;
+    .sector-card {
       background: var(--bg-card); border: 1px solid var(--border);
-      font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
-      transition: all 0.25s; cursor: default;
+      border-radius: var(--radius-lg); padding: 28px 24px;
+      transition: all 0.3s; position: relative; overflow: hidden;
+      display: flex; align-items: flex-start; gap: 18px;
     }
-    .industry-pill:hover {
-      border-color: var(--border-hover); color: var(--accent-light);
-      background: rgba(108, 92, 231, 0.06);
+    .sector-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .sector-card:hover {
+      border-color: var(--border-hover); transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(108, 92, 231, 0.08);
+    }
+    .sector-card:hover::after { opacity: 1; }
+    .sector-emoji {
+      width: 52px; height: 52px; min-width: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; flex-shrink: 0;
+    }
+    .sector-card:nth-child(1) .sector-emoji { background: rgba(255, 107, 107, 0.1); }
+    .sector-card:nth-child(2) .sector-emoji { background: rgba(85, 239, 196, 0.1); }
+    .sector-card:nth-child(3) .sector-emoji { background: rgba(116, 185, 255, 0.1); }
+    .sector-card:nth-child(4) .sector-emoji { background: rgba(253, 203, 110, 0.1); }
+    .sector-card:nth-child(5) .sector-emoji { background: rgba(162, 155, 254, 0.1); }
+    .sector-card:nth-child(6) .sector-emoji { background: rgba(0, 206, 201, 0.1); }
+    .sector-card:nth-child(7) .sector-emoji { background: rgba(255, 159, 67, 0.1); }
+    .sector-card:nth-child(8) .sector-emoji { background: rgba(108, 92, 231, 0.1); }
+    .sector-card:nth-child(9) .sector-emoji { background: rgba(255, 107, 129, 0.1); }
+    .sector-body h3 {
+      font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+    .sector-body p {
+      font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;
     }
 
     /* --- Comparison --- */
@@ -415,8 +444,8 @@
       </div>
       <div class="nav-right">
         <div class="lang-switch">
-          <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
-          <button class="lang-btn" data-lang="id" onclick="setLang('id')">ID</button>
+          <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn active" data-lang="id" onclick="setLang('id')">ID</button>
         </div>
         <a href="mailto:hi@responin.com?subject=I'm%20Interested%20in%20Responin&body=Hi%20Responin%20Team%2C%0A%0AI'm%20interested%20in%20learning%20more%20about%20how%20Responin%20can%20help%20automate%20my%20business%20operations.%0A%0ACompany%3A%20%0AIndustry%3A%20%0AWhat%20processes%20I'd%20like%20to%20automate%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!" class="nav-cta" data-i18n="nav_cta">Get Started</a>
       </div>
@@ -428,10 +457,10 @@
     <div class="container">
       <div class="hero-badge">
         <span class="dot"></span>
-        <span data-i18n="hero_badge">Powered by OpenClaw</span>
+        <span data-i18n="hero_badge">Agen AI Personal Anda</span>
       </div>
       <h1 data-i18n="hero_title" data-i18n-html>The Future of <span>Autonomous Business Operations</span></h1>
-      <p data-i18n="hero_desc">Your team spends 20–40% of their day on coordination work — routing info, chasing updates, bridging systems. Responin builds the AI agents that handle all of it, so your people can focus on work that actually moves the needle.</p>
+      <p data-i18n="hero_desc">Bukan sekadar alat AI generik. Responin membangun agen AI khusus untuk Anda — yang mempelajari alur kerja Anda, mengingat konteks bisnis Anda, dan beroperasi dengan pengetahuan mendalam tentang cara bisnis Anda berjalan.</p>
       <div class="hero-actions">
         <a href="mailto:hi@responin.com?subject=I'm%20Interested%20in%20Responin&body=Hi%20Responin%20Team%2C%0A%0AI'm%20interested%20in%20learning%20more%20about%20how%20Responin%20can%20help%20automate%20my%20business%20operations.%0A%0ACompany%3A%20%0AIndustry%3A%20%0AWhat%20processes%20I'd%20like%20to%20automate%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!" class="btn-primary" data-i18n="hero_cta_primary">Join the Waitlist</a>
         <a href="#how" class="btn-secondary" data-i18n="hero_cta_secondary">See How It Works</a>
@@ -486,6 +515,16 @@
           <h3 data-i18n="problem_card_4_title">Scale = More Headcount</h3>
           <p data-i18n="problem_card_4_desc">Traditional scaling means hiring more people to do more of the same. More coordinators, more assistants, more overhead. The cost compounds — but the output per person doesn't.</p>
         </div>
+        <div class="problem-card fade-up">
+          <div class="problem-icon">🧠</div>
+          <h3 data-i18n="problem_card_5_title">Decision Fatigue & Information Overload</h3>
+          <p data-i18n="problem_card_5_desc">Your managers drown in dashboards, reports, and notifications daily. Critical signals get buried in noise — important decisions delayed or made on gut instead of data.</p>
+        </div>
+        <div class="problem-card fade-up">
+          <div class="problem-icon">🎯</div>
+          <h3 data-i18n="problem_card_6_title">Inconsistent Execution</h3>
+          <p data-i18n="problem_card_6_desc">The same process gets done differently by different people. Steps get skipped, details slip, and quality depends on who's working that day — not on a reliable standard.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -507,7 +546,7 @@
       <div class="fade-up">
         <p class="section-label" data-i18n="solutions_label">Core Solutions</p>
         <h2 class="section-title" data-i18n="solutions_title">Automation that actually works for your business.</h2>
-        <p class="section-desc" data-i18n="solutions_desc">Every solution is built on OpenClaw and tailored to your specific workflows. No cookie-cutter templates — just agents that understand your business.</p>
+        <p class="section-desc" data-i18n="solutions_desc">Setiap solusi disesuaikan dengan alur kerja spesifik Anda dan didukung oleh agen AI personal Anda. Tanpa template generik — hanya otomasi cerdas yang memahami bisnis Anda.</p>
       </div>
       <div class="solutions-grid">
         <div class="solution-card fade-up">
@@ -531,7 +570,7 @@
         <div class="solution-card fade-up">
           <div class="solution-icon">🗺️</div>
           <h3 data-i18n="sol_4_title">End-to-End Process Mapping</h3>
-          <p data-i18n="sol_4_desc">Beyond simple tasks, we architect custom OpenClaw instances to automate unique workflows tailored to your industry. From multi-step approval chains to cross-department handoffs — every process, automated.</p>
+          <p data-i18n="sol_4_desc">Melampaui tugas sederhana, kami merancang instance otomasi kustom yang disesuaikan dengan industri Anda. Dari rantai persetujuan multi-langkah hingga serah terima lintas departemen — agen Anda menangani setiap proses dengan memori dan konteks.</p>
           <span class="solution-tag" data-i18n="sol_4_tag">Custom Architecture</span>
         </div>
         <div class="solution-card fade-up">
@@ -579,7 +618,7 @@
         <div class="step fade-up">
           <div class="step-number">2</div>
           <h3 data-i18n="step_2_title">Architect</h3>
-          <p data-i18n="step_2_desc">We design your custom OpenClaw instance — skills, memory, triggers, escalation rules, and integrations. Every agent is built for your specific business logic.</p>
+          <p data-i18n="step_2_desc">Kami merancang agen AI personal Anda — skill, memori, pemicu, aturan eskalasi, dan integrasinya. Setiap agen dibangun untuk logika bisnis spesifik Anda dan belajar cara kerja Anda.</p>
         </div>
         <div class="step fade-up">
           <div class="step-number">3</div>
@@ -603,19 +642,70 @@
         <h2 class="section-title" data-i18n="industries_title">Built for any business. Specialized for yours.</h2>
         <p class="section-desc" data-i18n="industries_desc">Every industry has its own processes, terminology, and edge cases. We build agents that understand the nuances of your domain — not just generic automation.</p>
       </div>
-      <div class="industry-pills fade-up">
-        <span class="industry-pill" data-i18n="ind_1">🏥 Healthcare & Clinics</span>
-        <span class="industry-pill" data-i18n="ind_2">⚖️ Law Firms</span>
-        <span class="industry-pill" data-i18n="ind_3">🏠 Real Estate</span>
-        <span class="industry-pill" data-i18n="ind_4">🛒 E-Commerce</span>
-        <span class="industry-pill" data-i18n="ind_5">📊 Financial Services</span>
-        <span class="industry-pill" data-i18n="ind_6">🍕 Restaurants & F&B</span>
-        <span class="industry-pill" data-i18n="ind_7">🦷 Dental Practices</span>
-        <span class="industry-pill" data-i18n="ind_8">🎓 Coaching & Consulting</span>
-        <span class="industry-pill" data-i18n="ind_9">🏗️ Construction</span>
-        <span class="industry-pill" data-i18n="ind_10">🏭 Manufacturing</span>
-        <span class="industry-pill" data-i18n="ind_11">📦 Logistics</span>
-        <span class="industry-pill" data-i18n="ind_12">🎯 SaaS & Tech</span>
+      <div class="sectors-grid fade-up">
+        <div class="sector-card">
+          <div class="sector-emoji">🏥</div>
+          <div class="sector-body">
+            <h3 data-i18n="sec_health_title">Healthcare</h3>
+            <p data-i18n="sec_health_desc">Automate patient scheduling, triage intake forms, and send appointment reminders — freeing staff to focus on care, not paperwork.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-emoji">💰</div>
+          <div class="sector-body">
+            <h3 data-i18n="sec_finance_title">Finance</h3>
+            <p data-i18n="sec_finance_desc">Monitor transactions in real time, auto-flag anomalies, and generate compliance reports — reducing risk while cutting manual review time.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-emoji">🛒</div>
+          <div class="sector-body">
+            <h3 data-i18n="sec_retail_title">Retail & Commerce</h3>
+            <p data-i18n="sec_retail_desc">Auto-update inventory, sync listings across platforms, and handle order inquiries instantly — so nothing falls between the shelves.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-emoji">🏭</div>
+          <div class="sector-body">
+            <h3 data-i18n="sec_manufacturing_title">Manufacturing</h3>
+            <p data-i18n="sec_manufacturing_desc">Track production schedules, auto-escalate equipment alerts, and generate quality reports — keeping your line running without delays.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-emoji">⚖️</div>
+          <div class="sector-body">
+            <h3 data-i18n="sec_legal_title">Legal</h3>
+            <p data-i18n="sec_legal_desc">Draft standard contracts, track filing deadlines, and organize case documents automatically — less time on paperwork, more on strategy.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-emoji">📦</div>
+          <div class="sector-body">
+            <h3 data-i18n="sec_logistics_title">Logistic & Supply Chain</h3>
+            <p data-i18n="sec_logistics_desc">Auto-route shipments, sync warehouse status, and send proactive delivery updates — keeping goods moving and clients informed.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-emoji">🎓</div>
+          <div class="sector-body">
+            <h3 data-i18n="sec_education_title">Education</h3>
+            <p data-i18n="sec_education_desc">Handle enrollment inquiries, schedule classes, and send grade notifications — so educators spend time teaching, not administrating.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-emoji">🏠</div>
+          <div class="sector-body">
+            <h3 data-i18n="sec_realestate_title">Real Estate</h3>
+            <p data-i18n="sec_realestate_desc">Auto-qualify leads, schedule property viewings, and generate listing descriptions — closing deals faster with less manual follow-up.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-emoji">🚀</div>
+          <div class="sector-body">
+            <h3 data-i18n="sec_startup_title">Startup & SaaS</h3>
+            <p data-i18n="sec_startup_desc">Automate onboarding flows, triage support tickets, and track churn signals — scaling your ops without scaling your headcount.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -650,7 +740,7 @@
             <tr>
               <td data-i18n="cmp_r3_c1">Workflow</td>
               <td data-i18n="cmp_r3_c2">Rigid and fragmented</td>
-              <td data-i18n="cmp_r3_c3">Dynamic and integrated via OpenClaw</td>
+              <td data-i18n="cmp_r3_c3">Dinamis, terintegrasi, dan sadar konteks</td>
             </tr>
             <tr>
               <td data-i18n="cmp_r4_c1">Scalability</td>
@@ -696,7 +786,7 @@
   <section class="section cta-section" id="cta">
     <div class="container fade-up">
       <h2 data-i18n="cta_title">Ready to Automate?</h2>
-      <p data-i18n="cta_desc">Join the waitlist for a custom OpenClaw consultation and take the first step toward autonomous operations.</p>
+      <p data-i18n="cta_desc">Bergabunglah dengan waitlist untuk konsultasi agen AI personal dan ambil langkah pertama menuju operasi otonom.</p>
       <a href="mailto:hi@responin.com?subject=I'm%20Interested%20in%20Responin&body=Hi%20Responin%20Team%2C%0A%0AI'm%20interested%20in%20learning%20more%20about%20how%20Responin%20can%20help%20automate%20my%20business%20operations.%0A%0ACompany%3A%20%0AIndustry%3A%20%0AWhat%20processes%20I'd%20like%20to%20automate%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!" class="btn-primary" data-i18n="cta_btn">Get Started Today</a>
     </div>
   </section>
@@ -746,9 +836,9 @@
         nav_compare: "Compare",
         nav_industries: "Industries",
         nav_cta: "Get Started",
-        hero_badge: "Powered by OpenClaw",
+        hero_badge: "Your Personal AI Agent",
         hero_title: 'The Future of <span>Autonomous Business Operations</span>',
-        hero_desc: "Your team spends 20–40% of their day on coordination work — routing info, chasing updates, bridging systems. Responin builds the AI agents that handle all of it, so your people can focus on work that actually moves the needle.",
+        hero_desc: "Not a generic AI tool. Responin builds you a dedicated AI agent — one that learns your workflows, remembers your context, and operates with intimate knowledge of how your business runs.",
         hero_cta_primary: "Join the Waitlist",
         hero_cta_secondary: "See How It Works",
         stat_1_label: "Avg. support time reduced",
@@ -766,12 +856,16 @@
         problem_card_3_desc: 'Every process that requires a person to "check and route" is a process that stops when that person is busy, asleep, or on leave. Your operations run at human speed — not business speed.',
         problem_card_4_title: "Scale = More Headcount",
         problem_card_4_desc: "Traditional scaling means hiring more people to do more of the same. More coordinators, more assistants, more overhead. The cost compounds — but the output per person doesn't.",
+        problem_card_5_title: "Decision Fatigue & Information Overload",
+        problem_card_5_desc: "Your managers drown in dashboards, reports, and notifications daily. Critical signals get buried in noise — important decisions delayed or made on gut instead of data.",
+        problem_card_6_title: "Inconsistent Execution",
+        problem_card_6_desc: "The same process gets done differently by different people. Steps get skipped, details slip, and quality depends on who's working that day — not on a reliable standard.",
         why_label: "Why Responin",
         why_title: "In a world of constant noise, we provide the signal.",
         why_desc: "We don't just offer tools — we build intelligent ecosystems that allow your team to focus on high-value strategy while the AI handles the logistics. Unlike rigid RPA or simple trigger-action automation, our agents use AI reasoning to handle edge cases, interpret ambiguity, and make judgment calls that would break simpler systems.",
         solutions_label: "Core Solutions",
         solutions_title: "Automation that actually works for your business.",
-        solutions_desc: "Every solution is built on OpenClaw and tailored to your specific workflows. No cookie-cutter templates — just agents that understand your business.",
+        solutions_desc: "Every solution is tailored to your specific workflows and powered by your personal AI agent. No cookie-cutter templates — just intelligent automation that understands your business.",
         sol_1_title: "Intelligent Internal Reminders",
         sol_1_desc: "Never let a task slip through the cracks. Our proactive AI monitors your timeline and ensures your team stays ahead of every deadline — not just reminding, but contextually nudging with the right info at the right time.",
         sol_1_tag: "Deadline Management",
@@ -782,7 +876,7 @@
         sol_3_desc: "From drafting personalized responses to sending scheduled updates and escalating unanswered threads, our AI manages your inbox with professional precision. High-confidence emails go out automatically; complex ones get human review.",
         sol_3_tag: "Smart Escalation",
         sol_4_title: "End-to-End Process Mapping",
-        sol_4_desc: "Beyond simple tasks, we architect custom OpenClaw instances to automate unique workflows tailored to your industry. From multi-step approval chains to cross-department handoffs — every process, automated.",
+        sol_4_desc: "Beyond simple tasks, we architect custom automation instances tailored to your industry. From multi-step approval chains to cross-department handoffs — your agent handles every process with memory and context.",
         sol_4_tag: "Custom Architecture",
         sol_5_title: "Financial Monitoring & Alerts",
         sol_5_desc: "Your AI agent connects to accounting and banking systems, monitors cash position daily, alerts when thresholds are crossed, manages overdue invoices with escalation logic, and generates weekly projections — autonomously.",
@@ -802,7 +896,7 @@
         step_1_title: "Discover",
         step_1_desc: "We audit your current workflows, identify the highest-ROI automation opportunities, and map every handoff, bottleneck, and exception in your operations.",
         step_2_title: "Architect",
-        step_2_desc: "We design your custom OpenClaw instance — skills, memory, triggers, escalation rules, and integrations. Every agent is built for your specific business logic.",
+        step_2_desc: "We design your personal AI agent — its skills, memory, triggers, escalation rules, and integrations. Every agent is built for your specific business logic and learns your way of working.",
         step_3_title: "Deploy",
         step_3_desc: "We launch your AI agents into production with human-in-the-loop safeguards. They start handling volume; your people handle nuance. Immediate time savings from day one.",
         step_4_title: "Evolve",
@@ -810,18 +904,25 @@
         industries_label: "Industries",
         industries_title: "Built for any business. Specialized for yours.",
         industries_desc: "Every industry has its own processes, terminology, and edge cases. We build agents that understand the nuances of your domain — not just generic automation.",
-        ind_1: "🏥 Healthcare & Clinics",
-        ind_2: "⚖️ Law Firms",
-        ind_3: "🏠 Real Estate",
-        ind_4: "🛒 E-Commerce",
-        ind_5: "📊 Financial Services",
-        ind_6: "🍕 Restaurants & F&B",
-        ind_7: "🦷 Dental Practices",
-        ind_8: "🎓 Coaching & Consulting",
-        ind_9: "🏗️ Construction",
-        ind_10: "🏭 Manufacturing",
-        ind_11: "📦 Logistics",
-        ind_12: "🎯 SaaS & Tech",
+
+        sec_health_title: "Healthcare",
+        sec_health_desc: "Automate patient scheduling, triage intake forms, and send appointment reminders — freeing staff to focus on care, not paperwork.",
+        sec_finance_title: "Finance",
+        sec_finance_desc: "Monitor transactions in real time, auto-flag anomalies, and generate compliance reports — reducing risk while cutting manual review time.",
+        sec_retail_title: "Retail & Commerce",
+        sec_retail_desc: "Auto-update inventory, sync listings across platforms, and handle order inquiries instantly — so nothing falls between the shelves.",
+        sec_manufacturing_title: "Manufacturing",
+        sec_manufacturing_desc: "Track production schedules, auto-escalate equipment alerts, and generate quality reports — keeping your line running without delays.",
+        sec_legal_title: "Legal",
+        sec_legal_desc: "Draft standard contracts, track filing deadlines, and organize case documents automatically — less time on paperwork, more on strategy.",
+        sec_logistics_title: "Logistic & Supply Chain",
+        sec_logistics_desc: "Auto-route shipments, sync warehouse status, and send proactive delivery updates — keeping goods moving and clients informed.",
+        sec_education_title: "Education",
+        sec_education_desc: "Handle enrollment inquiries, schedule classes, and send grade notifications — so educators spend time teaching, not administrating.",
+        sec_realestate_title: "Real Estate",
+        sec_realestate_desc: "Auto-qualify leads, schedule property viewings, and generate listing descriptions — closing deals faster with less manual follow-up.",
+        sec_startup_title: "Startup & SaaS",
+        sec_startup_desc: "Automate onboarding flows, triage support tickets, and track churn signals — scaling your ops without scaling your headcount.",
         compare_label: "The Responin Advantage",
         compare_title: "Smarter automation, not more headcount.",
         cmp_head_dim: "Dimension",
@@ -835,7 +936,7 @@
         cmp_r2_c3: "Instant, AI-generated accuracy",
         cmp_r3_c1: "Workflow",
         cmp_r3_c2: "Rigid and fragmented",
-        cmp_r3_c3: "Dynamic and integrated via OpenClaw",
+        cmp_r3_c3: "Dynamic, integrated, and context-aware",
         cmp_r4_c1: "Scalability",
         cmp_r4_c2: "Requires more headcount",
         cmp_r4_c3: "Requires smarter automation",
@@ -854,7 +955,7 @@
         quote_text: "Responin isn't just about saving time — it's about reclaiming your business's creative and strategic potential. When the machines handle the machinery, your people are free to do what only people can do: think, create, and lead.",
         quote_author: "— The Responin Team",
         cta_title: "Ready to Automate?",
-        cta_desc: "Join the waitlist for a custom OpenClaw consultation and take the first step toward autonomous operations.",
+        cta_desc: "Join the waitlist for a personal AI agent consultation and take the first step toward autonomous operations.",
         cta_btn: "Get Started Today",
         footer_desc: "AI-driven consultancy and automation agency. Transforming business operations through intelligent, autonomous workflows powered by OpenClaw.",
         footer_solutions: "Solutions",
@@ -878,9 +979,9 @@
         nav_compare: "Perbandingan",
         nav_industries: "Industri",
         nav_cta: "Mulai",
-        hero_badge: "Didukung OpenClaw",
+        hero_badge: "Agen AI Personal Anda",
         hero_title: 'Masa Depan <span>Operasi Bisnis Otonom</span>',
-        hero_desc: "Tim Anda menghabiskan 20–40% hari kerja untuk koordinasi — merutekan info, mengejar pembaruan, menjembatani sistem. Responin membangun agen AI yang menangani semuanya, agar orang Anda fokus pada pekerjaan yang benar-benar berdampak.",
+        hero_desc: "Bukan sekadar alat AI generik. Responin membangun agen AI khusus untuk Anda — yang mempelajari alur kerja Anda, mengingat konteks bisnis Anda, dan beroperasi dengan pengetahuan mendalam tentang cara bisnis Anda berjalan.",
         hero_cta_primary: "Daftar Waitlist",
         hero_cta_secondary: "Lihat Cara Kerja",
         stat_1_label: "Rata-rata waktu dukungan berkurang",
@@ -898,12 +999,16 @@
         problem_card_3_desc: 'Setiap proses yang membutuhkan seseorang untuk "cek dan rutekan" adalah proses yang berhenti ketika orang tersebut sibuk, tidur, atau cuti. Operasi Anda berjalan pada kecepatan manusia — bukan kecepatan bisnis.',
         problem_card_4_title: "Skala = Lebih Banyak Orang",
         problem_card_4_desc: "Penskalaan tradisional berarti mempekerjakan lebih banyak orang untuk melakukan hal yang sama. Lebih banyak koordinator, lebih banyak asisten, lebih banyak overhead. Biayanya membesar — tapi output per orang tidak.",
+        problem_card_5_title: "Kelelahan Keputusan \u0026 Kelebihan Informasi",
+        problem_card_5_desc: "Manajer Anda tenggelam dalam dashboard, laporan, dan notifikasi setiap hari. Sinyal penting terkubur dalam kebisingan — keputusan penting tertunda atau diambil berdasarkan insting, bukan data.",
+        problem_card_6_title: "Eksekusi Tidak Konsisten",
+        problem_card_6_desc: "Proses yang sama dikerjakan berbeda oleh orang yang berbeda. Langkah terlewat, detail salah, dan kualitas bergantung pada siapa yang bekerja hari itu — bukan pada standar yang andal.",
         why_label: "Mengapa Responin",
         why_title: "Di dunia yang penuh kebisingan, kami memberikan sinyal.",
         why_desc: "Kami tidak hanya menawarkan alat — kami membangun ekosistem cerdas yang memungkinkan tim Anda fokus pada strategi bernilai tinggi sementara AI menangani logistiknya. Berbeda dengan RPA kaku atau otomasi pemicu-aksi sederhana, agen kami menggunakan penalaran AI untuk menangani kasus-kasus sulit, menginterpretasikan ambiguitas, dan membuat keputusan yang akan merusak sistem yang lebih sederhana.",
         solutions_label: "Solusi Utama",
         solutions_title: "Otomasi yang benar-benar berfungsi untuk bisnis Anda.",
-        solutions_desc: "Setiap solusi dibangun di atas OpenClaw dan disesuaikan dengan alur kerja spesifik Anda. Tanpa template generik — hanya agen yang memahami bisnis Anda.",
+        solutions_desc: "Setiap solusi disesuaikan dengan alur kerja spesifik Anda dan didukung oleh agen AI personal Anda. Tanpa template generik — hanya otomasi cerdas yang memahami bisnis Anda.",
         sol_1_title: "Pengingat Internal Cerdas",
         sol_1_desc: "Jangan biarkan satu pun tugas terlewat. AI proaktif kami memantau timeline Anda dan memastikan tim Anda selangkah lebih maju dari setiap tenggat waktu — bukan sekadar mengingatkan, tapi memberikan dorongan kontekstual dengan info yang tepat di waktu yang tepat.",
         sol_1_tag: "Manajemen Tenggat",
@@ -914,7 +1019,7 @@
         sol_3_desc: "Dari menyusun respons personal hingga mengirim pembaruan terjadwal dan menaikkan eskalasi thread yang tidak dijawab, AI kami mengelola kotak masuk Anda dengan presisi profesional. Email dengan keyakinan tinggi dikirim otomatis; yang kompleks mendapatkan review manusia.",
         sol_3_tag: "Eskalasi Cerdas",
         sol_4_title: "Pemetaan Proses Ujung-ke-Ujung",
-        sol_4_desc: "Melampaui tugas sederhana, kami merancang instance OpenClaw kustom untuk mengotomasi alur kerja unik yang disesuaikan dengan industri Anda. Dari rantai persetujuan multi-langkah hingga serah terima lintas departemen — setiap proses, terotomasi.",
+        sol_4_desc: "Melampaui tugas sederhana, kami merancang instance otomasi kustom yang disesuaikan dengan industri Anda. Dari rantai persetujuan multi-langkah hingga serah terima lintas departemen — agen Anda menangani setiap proses dengan memori dan konteks.",
         sol_4_tag: "Arsitektur Kustom",
         sol_5_title: "Pemantauan Keuangan & Peringatan",
         sol_5_desc: "Agen AI Anda terhubung ke sistem akuntansi dan perbankan, memantau posisi kas setiap hari, memperingatkan saat ambang batas tercapai, mengelola faktur jatuh tempo dengan logika eskalasi, dan menghasilkan proyeksi mingguan — secara otonom.",
@@ -934,7 +1039,7 @@
         step_1_title: "Temukan",
         step_1_desc: "Kami audit alur kerja Anda saat ini, mengidentifikasi peluang otomasi dengan ROI tertinggi, dan memetakan setiap serah terima, kemacetan, dan pengecualian dalam operasi Anda.",
         step_2_title: "Rancang",
-        step_2_desc: "Kami merancang instance OpenClaw kustom Anda — skill, memori, pemicu, aturan eskalasi, dan integrasi. Setiap agen dibangun untuk logika bisnis spesifik Anda.",
+        step_2_desc: "Kami merancang agen AI personal Anda — skill, memori, pemicu, aturan eskalasi, dan integrasinya. Setiap agen dibangun untuk logika bisnis spesifik Anda dan belajar cara kerja Anda.",
         step_3_title: "Terapkan",
         step_3_desc: "Kami meluncurkan agen AI Anda ke produksi dengan pengaman human-in-the-loop. Mereka mulai menangani volume; orang Anda menangani nuansa. Penghematan waktu langsung dari hari pertama.",
         step_4_title: "Evolusi",
@@ -942,18 +1047,25 @@
         industries_label: "Industri",
         industries_title: "Dibuat untuk semua bisnis. Dikhususkan untuk milik Anda.",
         industries_desc: "Setiap industri memiliki proses, terminologi, dan kasus khususnya sendiri. Kami membangun agen yang memahami nuansa domain Anda — bukan sekadar otomasi generik.",
-        ind_1: "🏥 Kesehatan & Klinik",
-        ind_2: "⚖️ Kantor Hukum",
-        ind_3: "🏠 Real Estate",
-        ind_4: "🛒 E-Commerce",
-        ind_5: "📊 Jasa Keuangan",
-        ind_6: "🍕 Restoran & F&B",
-        ind_7: "🦷 Klinik Gigi",
-        ind_8: "🎓 Coaching & Konsultasi",
-        ind_9: "🏗️ Konstruksi",
-        ind_10: "🏭 Manufaktur",
-        ind_11: "📦 Logistik",
-        ind_12: "🎯 SaaS & Teknologi",
+
+        sec_health_title: "Kesehatan",
+        sec_health_desc: "Otomasi penjadwalan pasien, formulir triase, dan pengingat janji — membebaskan staf untuk fokus pada perawatan, bukan administrasi.",
+        sec_finance_title: "Keuangan",
+        sec_finance_desc: "Pantau transaksi real-time, tandai anomali otomatis, dan buat laporan kepatuhan — kurangi risiko sambil memangkas waktu review manual.",
+        sec_retail_title: "Retail & Perdagangan",
+        sec_retail_desc: "Perbarui inventaris otomatis, sinkronkan listing lintas platform, dan tangani pertanyaan pesanan instan — tidak ada yang terlewat.",
+        sec_manufacturing_title: "Manufaktur",
+        sec_manufacturing_desc: "Lacak jadwal produksi, eskalasi peringatan peralatan otomatis, dan buat laporan kualitas — lini produksi tetap berjalan tanpa penundaan.",
+        sec_legal_title: "Hukum",
+        sec_legal_desc: "Susun kontrak standar, lacak tenggat pengajuan, dan organisir dokumen kasus otomatis — kurangi waktu administrasi, tingkatkan strategi.",
+        sec_logistics_title: "Logistik & Rantai Pasok",
+        sec_logistics_desc: "Rutekan pengiriman otomatis, sinkronkan status gudang, dan kirim pembaruan pengiriman proaktif — barang terus bergerak, klien terinformasi.",
+        sec_education_title: "Pendidikan",
+        sec_education_desc: "Tangani pertanyaan pendaftaran, jadwalkan kelas, dan kirim notifikasi nilai — pendidik fokus mengajar, bukan mengurus administrasi.",
+        sec_realestate_title: "Real Estate",
+        sec_realestate_desc: "Kualifikasi leads otomatis, jadwalkan kunjungan properti, dan buat deskripsi listing — tutup deal lebih cepat dengan lebih sedikit tindak lanjut manual.",
+        sec_startup_title: "Startup & SaaS",
+        sec_startup_desc: "Otomasi alur onboarding, triase tiket dukungan, dan lacak sinyal churn — skalakan operasi tanpa menambah headcount.",
         compare_label: "Keunggulan Responin",
         compare_title: "Otomasi yang lebih cerdas, bukan lebih banyak orang.",
         cmp_head_dim: "Dimensi",
@@ -967,7 +1079,7 @@
         cmp_r2_c3: "Akurasi instan yang dihasilkan AI",
         cmp_r3_c1: "Alur Kerja",
         cmp_r3_c2: "Kaku dan terfragmentasi",
-        cmp_r3_c3: "Dinamis dan terintegrasi via OpenClaw",
+        cmp_r3_c3: "Dinamis, terintegrasi, dan sadar konteks",
         cmp_r4_c1: "Skalabilitas",
         cmp_r4_c2: "Butuh lebih banyak orang",
         cmp_r4_c3: "Butuh otomasi yang lebih cerdas",
@@ -986,7 +1098,7 @@
         quote_text: "Responin bukan sekadar menghemat waktu — ini tentang merebut kembali potensi kreatif dan strategis bisnis Anda. Ketika mesin menangani hal-hal mekanis, orang Anda bebas melakukan hal yang hanya bisa dilakukan manusia: berpikir, berkarya, dan memimpin.",
         quote_author: "— Tim Responin",
         cta_title: "Siap Mengotomasi?",
-        cta_desc: "Bergabunglah dengan waitlist untuk konsultasi OpenClaw kustom dan ambil langkah pertama menuju operasi otonom.",
+        cta_desc: "Bergabunglah dengan waitlist untuk konsultasi agen AI personal dan ambil langkah pertama menuju operasi otonom.",
         cta_btn: "Mulai Sekarang",
         footer_desc: "Konsultan dan agensi otomasi berbasis AI. Mengubah operasi bisnis melalui alur kerja cerdas dan otonom yang didukung OpenClaw.",
         footer_solutions: "Solusi",
@@ -1005,7 +1117,7 @@
       }
     };
 
-    let currentLang = 'en';
+    let currentLang = 'id';
 
     function setLang(lang) {
       currentLang = lang;
@@ -1056,9 +1168,12 @@
     document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
 
     // Stagger cards
-    document.querySelectorAll('.solution-card, .problem-card, .step').forEach((card, i) => {
+    document.querySelectorAll('.solution-card, .problem-card, .step, .sector-card').forEach((card, i) => {
       card.style.transitionDelay = `${(i % 4) * 0.08}s`;
     });
+
+    // Initialize with Indonesian as default
+    setLang('id');
 
 
   </script>
