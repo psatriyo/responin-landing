@@ -5,11 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Responin — Masa Depan Operasi Bisnis Otonom</title>
   <meta name="description" content="Responin builds you a personal AI agent — one that learns your workflows, remembers your context, and operates with intimate knowledge of how your business runs." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%236c5ce7'/%3E%3Cstop offset='100%25' stop-color='%2300cec9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' font-size='20' fill='white'%3ER%3C/text%3E%3C/svg%3E" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Responin — Your Personal AI Agent" />
+  <meta property="og:description" content="Not a generic AI tool. Responin builds you a dedicated AI agent that learns your workflows, remembers your context, and operates with intimate knowledge of your business." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://responin.com" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Responin — Your Personal AI Agent" />
+  <meta name="twitter:description" content="A personal AI agent that learns your workflows, remembers your context, and operates your business." />
+  <meta name="theme-color" content="#6c5ce7" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      scroll-behavior: smooth;
+    }
+
+    section[id] {
+      scroll-margin-top: 80px;
+    }
 
     :root {
       --bg: #0a0a0f;
@@ -77,6 +101,56 @@
       background-clip: text;
     }
     .nav-right { display: flex; align-items: center; gap: 12px; }
+
+    /* --- Hamburger (mobile) --- */
+    .nav-hamburger {
+      display: none; width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--bg-elevated);
+      color: var(--text-muted); align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+    }
+    .nav-hamburger:hover { border-color: var(--border-hover); color: var(--text); }
+    .nav-hamburger svg { width: 20px; height: 20px; }
+
+    /* --- Mobile Menu Overlay --- */
+    .mobile-menu-overlay {
+      display: none; position: fixed; inset: 0; z-index: 998;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .mobile-menu-overlay.open { opacity: 1; }
+
+    /* --- Mobile Slide-Out --- */
+    .mobile-menu {
+      position: fixed; top: 0; right: 0; bottom: 0; width: 280px;
+      z-index: 999; background: var(--bg-card); border-left: 1px solid var(--border);
+      transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      display: flex; flex-direction: column; overflow-y: auto;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu-close {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+      background: transparent; color: var(--text-muted); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .mobile-menu-close:hover { border-color: var(--border-hover); color: var(--text); }
+    .mobile-menu-close svg { width: 18px; height: 18px; }
+    .mobile-menu-body { padding: 12px 0; flex: 1; }
+    .mobile-menu-links { padding: 0 20px; }
+    .mobile-menu-link {
+      display: block; padding: 12px 0; color: var(--text-muted); font-size: 0.95rem;
+      font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .mobile-menu-link:hover { color: var(--accent-light); }
+    .mobile-menu-link:last-child { border-bottom: none; }
+    .mobile-menu-settings {
+      padding: 20px; border-top: 1px solid var(--border); margin-top: auto;
+    }
 
     /* --- Nav CTA --- */
     .nav-cta {
@@ -510,6 +584,25 @@
     [data-theme="light"] .settings-btn {
       background: var(--bg-card);
     }
+    [data-theme="light"] .nav-hamburger {
+      background: var(--bg-card); border-color: var(--border);
+    }
+    [data-theme="light"] .mobile-menu {
+      background: #fff; border-left-color: var(--border);
+    }
+    [data-theme="light"] .mobile-menu-header {
+      border-bottom-color: var(--border);
+    }
+    [data-theme="light"] .mobile-menu-close {
+      border-color: var(--border); color: var(--text-muted);
+    }
+    [data-theme="light"] .mobile-menu-link {
+      border-bottom-color: var(--border); color: var(--text-muted);
+    }
+    [data-theme="light"] .mobile-menu-link:hover { color: var(--accent); }
+    [data-theme="light"] .mobile-menu-settings {
+      border-top-color: var(--border);
+    }
     [data-theme="light"] .lang-switch {
       background: var(--bg-card);
     }
@@ -622,6 +715,12 @@
       .stats-bar { gap: 32px; }
       .comparison-table { min-width: 540px; }
       footer .container { flex-direction: column; }
+
+      /* Mobile nav: show hamburger, hide desktop settings */
+      .nav-hamburger { display: flex; }
+      .settings-btn { display: none; }
+      .mobile-menu-overlay { display: block; pointer-events: none; }
+      .mobile-menu-overlay.open { pointer-events: auto; }
     }
 
     /* --- Animations --- */
@@ -642,6 +741,9 @@
       <div class="logo">Responin</div>
       <div class="nav-right">
         <a href="mailto:hi@responin.com?subject=I'm%20Interested%20in%20Responin&body=Hi%20Responin%20Team%2C%0A%0AI'm%20interested%20in%20learning%20more%20about%20how%20Responin%20can%20help%20automate%20my%20business%20operations.%0A%0ACompany%3A%20%0AIndustry%3A%20%0AWhat%20processes%20I'd%20like%20to%20automate%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!" class="nav-cta" data-i18n="nav_cta">Get Started</a>
+        <button class="nav-hamburger" onclick="openMobileMenu()" aria-label="Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
         <div style="position: relative;">
           <button class="settings-btn" onclick="toggleSettings()" aria-label="Settings">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1142,6 +1244,11 @@
     const translations = {
       en: {
         nav_cta: "Get Started",
+        nav_vs: "Why Not ChatGPT?",
+        nav_problem: "The Problem",
+        nav_how: "How It Works",
+        nav_industries: "Industries",
+        nav_compare: "Compare",
         settings_language: "Language",
         settings_theme: "Theme",
         vs_label: "Why Not Just ChatGPT?",
@@ -1167,6 +1274,8 @@
         vs_r6_c1: "Integration",
         vs_r6_c2: "Isolated text box — no connection to your tools",
         vs_r6_c3: "Plugs into your CRM, email, accounting, and more",
+        chat_label: "See It In Action",
+        hero_badge: "Your Personal AI Agent",
         chat_title: "Your personal AI agent, always one message away.",
         chat_desc: "Ask anything in plain language — your agent checks your systems, remembers context, and gives you the answer instantly.",
         chat_bot_name: "Responin Assistant",
@@ -1314,6 +1423,11 @@
       },
       id: {
         nav_cta: "Mulai",
+        nav_vs: "Kenapa Bukan ChatGPT?",
+        nav_problem: "Masalahnya",
+        nav_how: "Cara Kerja",
+        nav_industries: "Industri",
+        nav_compare: "Perbandingan",
         settings_language: "Bahasa",
         settings_theme: "Tema",
         vs_label: "Kenapa Bukan ChatGPT Saja?",
@@ -1339,6 +1453,7 @@
         vs_r6_c1: "Integrasi",
         vs_r6_c2: "Kotak teks terisolasi — tidak terhubung ke alat Anda",
         vs_r6_c3: "Terhubung ke CRM, email, akuntansi, dan lainnya",
+        hero_badge: "Agen AI Personal Anda",
         chat_label: "Lihat Aksinya",
         chat_title: "Agen AI personal Anda, selalu satu pesan jauhnya.",
         chat_desc: "Tanya apa saja dalam bahasa sehari-hari — agen Anda memeriksa sistem Anda, mengingat konteks, dan memberikan jawaban secara instan.",
@@ -1551,6 +1666,18 @@
       dd.classList.toggle('open');
     }
 
+    // === Mobile Menu ===
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('open');
+      document.getElementById('mobileOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('mobileOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
     // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
       const dd = document.getElementById('settingsDropdown');
@@ -1699,6 +1826,44 @@
 
 
   </script>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <span class="logo">Responin</span>
+      <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="mobile-menu-body">
+      <div class="mobile-menu-links">
+        <a href="#vs-generic" class="mobile-menu-link" data-i18n="nav_vs" onclick="closeMobileMenu()">Why Not ChatGPT?</a>
+        <a href="#problem" class="mobile-menu-link" data-i18n="nav_problem" onclick="closeMobileMenu()">The Problem</a>
+        <a href="#how" class="mobile-menu-link" data-i18n="nav_how" onclick="closeMobileMenu()">How It Works</a>
+        <a href="#industries" class="mobile-menu-link" data-i18n="nav_industries" onclick="closeMobileMenu()">Industries</a>
+        <a href="#compare" class="mobile-menu-link" data-i18n="nav_compare" onclick="closeMobileMenu()">Compare</a>
+      </div>
+    </div>
+    <div class="mobile-menu-settings">
+      <div class="settings-group-label" data-i18n="settings_language">Language</div>
+      <div class="lang-switch" style="margin-bottom: 12px;">
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn active" data-lang="id" onclick="setLang('id')">ID</button>
+      </div>
+      <div class="settings-group-label" data-i18n="settings_theme">Theme</div>
+      <div class="theme-options">
+        <button class="theme-btn" data-theme-opt="light" onclick="setTheme('light')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          Light
+        </button>
+        <button class="theme-btn active" data-theme-opt="dark" onclick="setTheme('dark')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          Dark
+        </button>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
