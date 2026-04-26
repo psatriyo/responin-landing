@@ -27,7 +27,6 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<body>
 
   <!-- Nav -->
   <nav>
@@ -185,6 +184,42 @@
         <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-input-bar">
           <input type="text" disabled placeholder="Ask anything about your business..." data-i18n-placeholder="chat_placeholder">
+          <button class="chat-send-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Group Chat Demo -->
+  <section class="group-chat-demo">
+    <div class="container">
+      <div class="chat-demo-header fade-up">
+        <p class="section-label" data-i18n="gc_label">Or… Add It to a Group Chat</p>
+        <h2 class="section-title" data-i18n="gc_title">Your AI agent works alongside your team — like a colleague who never sleeps.</h2>
+        <p class="section-desc" data-i18n="gc_desc">Add Responin to your team channels. It monitors, summarizes, escalates, and acts — so your team spends less time coordinating and more time executing.</p>
+      </div>
+      <div class="chat-tabs fade-up">
+        <button class="chat-tab active" data-gc-scenario="project" onclick="switchGcScenario('project')" data-i18n="gc_ex_1">📋 Project status update</button>
+        <button class="chat-tab" data-gc-scenario="escalation" onclick="switchGcScenario('escalation')" data-i18n="gc_ex_2">🚨 Order escalation</button>
+        <button class="chat-tab" data-gc-scenario="briefing" onclick="switchGcScenario('briefing')" data-i18n="gc_ex_3">📊 Weekly briefing</button>
+      </div>
+      <div class="chat-window fade-up">
+        <div class="chat-topbar">
+          <div class="gc-topbar-avatars">
+            <div class="gc-topbar-avatar" style="background:rgba(108,92,231,0.2);">R</div>
+            <div class="gc-topbar-avatar" style="background:rgba(85,239,196,0.2);">A</div>
+            <div class="gc-topbar-avatar" style="background:rgba(116,185,255,0.2);">S</div>
+          </div>
+          <div class="chat-topbar-info">
+            <h4 data-i18n="gc_group_name">Marketing & Ops</h4>
+            <span data-i18n="gc_group_status">Rizal, Andi, Sari & Responin</span>
+          </div>
+        </div>
+        <div class="chat-messages" id="gcMessages"></div>
+        <div class="chat-input-bar">
+          <input type="text" disabled placeholder="Type a message..." data-i18n-placeholder="gc_placeholder">
           <button class="chat-send-btn">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
