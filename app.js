@@ -4,14 +4,29 @@ function setLang(lang) {
   document.documentElement.lang = lang;
   const t = translations[lang];
 
+  // Helper to traverse nested keys with dot notation
+  function getNestedTranslation(obj, key) {
+    const parts = key.split('.');
+    let val = obj;
+    for (const part of parts) {
+      if (val && typeof val === 'object' && part in val) {
+        val = val[part];
+      } else {
+        return undefined;
+      }
+    }
+    return val;
+  }
+
   // Update all data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (t[key] !== undefined) {
+    const val = getNestedTranslation(t, key);
+    if (val !== undefined) {
       if (el.hasAttribute('data-i18n-html')) {
-        el.innerHTML = t[key];
+        el.innerHTML = val;
       } else {
-        el.textContent = t[key];
+        el.textContent = val;
       }
     }
   });
@@ -19,15 +34,19 @@ function setLang(lang) {
   // Update placeholders
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
-    if (t[key] !== undefined) {
-      el.placeholder = t[key];
+    const val = getNestedTranslation(t, key);
+    if (val !== undefined) {
+      el.placeholder = val;
     }
   });
 
   // Update title (page-specific)
   const titleKey = document.documentElement.dataset.pageTitle;
-  if (titleKey && t[titleKey]) {
-    document.title = t[titleKey];
+  if (titleKey) {
+    const val = getNestedTranslation(t, titleKey);
+    if (val) {
+      document.title = val;
+    }
   } else {
     document.title = lang === 'id'
       ? 'Responin — Masa Depan Operasi Bisnis Otonom'
@@ -292,7 +311,7 @@ setTheme = function(theme) {
   const container = document.getElementById('chatMessages');
   if (!container) return;
   const key = theme === 'dark' ? 'chat_theme_dark' : 'chat_theme_light';
-  const msg = translations[currentLang][key] || translations['en'][key];
+  const msg = translations[currentLang].ui[key] || translations['en'].ui[key];
   // Remove any existing system message
   const existing = container.querySelector('.chat-msg.system');
   if (existing) existing.remove();
@@ -433,23 +452,23 @@ function switchGcScenario(key) {
     if (m.role !== 'system') {
       const senderName = document.createElement('div');
       senderName.className = 'gc-sender';
-      senderName.textContent = m.role === 'agent' ? 'Responin' : (translations[lang][m.sender] || translations['en'][m.sender] || m.sender);
+      senderName.textContent = m.role === 'agent' ? 'Responin' : (translations[lang].gc[m.sender] || translations['en'].gc[m.sender] || m.sender);
       bubble.appendChild(senderName);
     }
 
     if (m.lines) {
       const mainLine = document.createElement('div');
-      mainLine.innerHTML = translations[lang][m.html] || translations['en'][m.html];
+      mainLine.innerHTML = translations[lang].gc[m.html] || translations['en'].gc[m.html];
       bubble.appendChild(mainLine);
       m.lines.forEach(lineKey => {
         const line = document.createElement('div');
-        line.innerHTML = translations[lang][lineKey] || translations['en'][lineKey];
+        line.innerHTML = translations[lang].gc[lineKey] || translations['en'].gc[lineKey];
         bubble.appendChild(line);
       });
     } else if (m.html) {
-      bubble.innerHTML += translations[lang][m.html] || translations['en'][m.html];
+      bubble.innerHTML += translations[lang].gc[m.html] || translations['en'].gc[m.html];
     } else {
-      bubble.textContent = translations[lang][m.text] || translations['en'][m.text] || m.text;
+      bubble.textContent = translations[lang].gc[m.text] || translations['en'].gc[m.text] || m.text;
     }
 
     div.appendChild(avatar);
