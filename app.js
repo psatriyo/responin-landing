@@ -338,3 +338,136 @@ if (stickyCta && heroSection) {
 // Don't show theme message on initial load, only on user switch
 // So we just keep setTheme as is without initial message
 
+
+// === Group Chat Demo Scenarios ===
+const gcScenarios = {
+  project: {
+    en: [
+      { role: 'member', sender: 'gc_project_1_sender', text: 'gc_project_1_1' },
+      { role: 'agent', html: 'gc_project_1_2', lines: ['gc_project_1_2b', 'gc_project_1_2c', 'gc_project_1_2d', 'gc_project_1_2e'] },
+      { role: 'member', sender: 'gc_project_1_3_sender', text: 'gc_project_1_3' },
+      { role: 'agent', html: 'gc_project_1_4' }
+    ],
+    id: [
+      { role: 'member', sender: 'gc_project_1_sender', text: 'gc_project_1_1' },
+      { role: 'agent', html: 'gc_project_1_2', lines: ['gc_project_1_2b', 'gc_project_1_2c', 'gc_project_1_2d', 'gc_project_1_2e'] },
+      { role: 'member', sender: 'gc_project_1_3_sender', text: 'gc_project_1_3' },
+      { role: 'agent', html: 'gc_project_1_4' }
+    ]
+  },
+  escalation: {
+    en: [
+      { role: 'agent', html: 'gc_esc_1' },
+      { role: 'member', sender: 'gc_esc_2_sender', text: 'gc_esc_2' },
+      { role: 'agent', html: 'gc_esc_3', lines: ['gc_esc_3b'] },
+      { role: 'member', sender: 'gc_esc_4_sender', text: 'gc_esc_4' },
+      { role: 'agent', html: 'gc_esc_5' }
+    ],
+    id: [
+      { role: 'agent', html: 'gc_esc_1' },
+      { role: 'member', sender: 'gc_esc_2_sender', text: 'gc_esc_2' },
+      { role: 'agent', html: 'gc_esc_3', lines: ['gc_esc_3b'] },
+      { role: 'member', sender: 'gc_esc_4_sender', text: 'gc_esc_4' },
+      { role: 'agent', html: 'gc_esc_5' }
+    ]
+  },
+  briefing: {
+    en: [
+      { role: 'agent', html: 'gc_brief_1', lines: ['gc_brief_1b', 'gc_brief_1c', 'gc_brief_1d', 'gc_brief_1e'] },
+      { role: 'member', sender: 'gc_brief_2_sender', text: 'gc_brief_2' },
+      { role: 'agent', html: 'gc_brief_3', lines: ['gc_brief_3b'] },
+      { role: 'member', sender: 'gc_brief_4_sender', text: 'gc_brief_4' }
+    ],
+    id: [
+      { role: 'agent', html: 'gc_brief_1', lines: ['gc_brief_1b', 'gc_brief_1c', 'gc_brief_1d', 'gc_brief_1e'] },
+      { role: 'member', sender: 'gc_brief_2_sender', text: 'gc_brief_2' },
+      { role: 'agent', html: 'gc_brief_3', lines: ['gc_brief_3b'] },
+      { role: 'member', sender: 'gc_brief_4_sender', text: 'gc_brief_4' }
+    ]
+  }
+};
+
+const gcAvatarColors = {
+  'R': 'rgba(108,92,231,0.2)',
+  'A': 'rgba(85,239,196,0.2)',
+  'S': 'rgba(116,185,255,0.2)',
+};
+
+const gcSenderAvatars = {
+  'gc_project_1_sender': 'R', 'gc_project_1_3_sender': 'A',
+  'gc_esc_2_sender': 'S', 'gc_esc_4_sender': 'S',
+  'gc_brief_2_sender': 'R', 'gc_brief_4_sender': 'A'
+};
+
+let currentGcScenario = 'project';
+
+function switchGcScenario(key) {
+  currentGcScenario = key;
+  const lang = currentLang;
+  const msgs = gcScenarios[key][lang] || gcScenarios[key]['en'];
+  const container = document.getElementById('gcMessages');
+  if (!container) return;
+  container.innerHTML = '';
+
+  msgs.forEach((m, i) => {
+    const div = document.createElement('div');
+    div.className = 'gc-msg ' + m.role;
+    div.style.animationDelay = (i * 0.3) + 's';
+
+    const avatar = document.createElement('div');
+    avatar.className = 'chat-msg-avatar';
+    if (m.role === 'agent') {
+      avatar.textContent = 'R';
+      avatar.style.background = 'linear-gradient(135deg, var(--gradient-1), var(--gradient-2))';
+      avatar.style.color = '#fff';
+    } else {
+      const senderKey = m.sender;
+      const letter = gcSenderAvatars[senderKey] || senderKey.charAt(0).toUpperCase();
+      avatar.textContent = letter;
+      avatar.style.background = gcAvatarColors[letter] || 'rgba(255,255,255,0.1)';
+    }
+
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-msg-bubble';
+
+    if (m.role !== 'system') {
+      const senderName = document.createElement('div');
+      senderName.className = 'gc-sender';
+      senderName.textContent = m.role === 'agent' ? 'Responin' : (translations[lang][m.sender] || translations['en'][m.sender] || m.sender);
+      bubble.appendChild(senderName);
+    }
+
+    if (m.lines) {
+      const mainLine = document.createElement('div');
+      mainLine.innerHTML = translations[lang][m.html] || translations['en'][m.html];
+      bubble.appendChild(mainLine);
+      m.lines.forEach(lineKey => {
+        const line = document.createElement('div');
+        line.innerHTML = translations[lang][lineKey] || translations['en'][lineKey];
+        bubble.appendChild(line);
+      });
+    } else if (m.html) {
+      bubble.innerHTML += translations[lang][m.html] || translations['en'][m.html];
+    } else {
+      bubble.textContent = translations[lang][m.text] || translations['en'][m.text] || m.text;
+    }
+
+    div.appendChild(avatar);
+    div.appendChild(bubble);
+    container.appendChild(div);
+  });
+
+  document.querySelectorAll('[data-gc-scenario]').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.gcScenario === key);
+  });
+}
+
+if (document.getElementById('gcMessages')) {
+  switchGcScenario('project');
+}
+
+const _origSetLangGc = setLang;
+setLang = function(lang) {
+  _origSetLangGc(lang);
+  if (currentGcScenario) switchGcScenario(currentGcScenario);
+};
