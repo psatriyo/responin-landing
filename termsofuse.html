@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-page-title="terms_page_title">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,200 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --bg: #0a0a0f;
-      --bg-elevated: #12121a;
-      --bg-card: #16161f;
-      --border: rgba(255, 255, 255, 0.06);
-      --border-hover: rgba(108, 92, 231, 0.3);
-      --text: #e8e8ed;
-      --text-muted: #8a8a9a;
-      --accent: #6c5ce7;
-      --accent-light: #a29bfe;
-      --accent-glow: rgba(108, 92, 231, 0.25);
-      --teal: #00cec9;
-      --gradient-1: #6c5ce7;
-      --gradient-2: #00cec9;
-      --radius: 12px;
-      --radius-lg: 20px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg); color: var(--text); line-height: 1.7;
-      -webkit-font-smoothing: antialiased; overflow-x: hidden;
-    }
-
-    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
-
-    /* --- Nav --- */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      background: rgba(10, 10, 15, 0.8); border-bottom: 1px solid var(--border);
-    }
-    nav .container {
-      display: flex; align-items: center; justify-content: space-between; height: 64px;
-    }
-    .logo {
-      font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px;
-      background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      text-decoration: none;
-    }
-    .nav-back {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border);
-      background: var(--bg-elevated); color: var(--text-muted); font-size: 0.85rem;
-      font-weight: 500; text-decoration: none; transition: all 0.2s; font-family: inherit;
-      cursor: pointer;
-    }
-    .nav-back:hover { border-color: var(--accent); color: var(--accent-light); }
-    .nav-back svg { width: 16px; height: 16px; }
-    .nav-center {
-      display: flex; align-items: center; gap: 8px; position: absolute; left: 50%; transform: translateX(-50%);
-    }
-    .nav-page-title {
-      font-size: 0.85rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px;
-    }
-    .lang-switch-nav {
-      display: inline-flex; align-items: center;
-      background: var(--bg-elevated); border: 1px solid var(--border);
-      border-radius: 8px; overflow: hidden; font-size: 0.75rem;
-    }
-    .lang-btn-nav {
-      padding: 4px 12px; border: none; background: transparent;
-      color: var(--text-muted); font-size: 0.75rem; font-weight: 600;
-      font-family: inherit; cursor: pointer; transition: all 0.2s; white-space: nowrap;
-    }
-    .lang-btn-nav:hover { color: var(--text); }
-    .lang-btn-nav.active {
-      background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
-      color: #fff; border-radius: 6px; margin: 2px; padding: 3px 10px;
-    }
-
-    /* --- Hero Header --- */
-    .page-hero {
-      padding: 140px 0 60px; text-align: center;
-      background: linear-gradient(180deg, #0d0d18 0%, var(--bg) 100%);
-      position: relative; overflow: hidden;
-    }
-    .page-hero::before {
-      content: ''; position: absolute; top: -30%; left: 50%; transform: translateX(-50%);
-      width: 80%; height: 60%;
-      background: radial-gradient(circle, rgba(0, 206, 201, 0.15), transparent 55%);
-      pointer-events: none;
-    }
-    .page-hero .container { position: relative; z-index: 1; }
-    .page-hero-icon {
-      width: 64px; height: 64px; border-radius: 16px; margin: 0 auto 24px;
-      background: rgba(0, 206, 201, 0.1); border: 1px solid rgba(0, 206, 201, 0.25);
-      display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
-    }
-    .page-hero h1 {
-      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
-      letter-spacing: -1px; margin-bottom: 12px;
-    }
-    .page-hero h1 span {
-      background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .page-hero p {
-      font-size: 1.05rem; color: var(--text-muted); max-width: 540px; margin: 0 auto;
-    }
-    .page-hero .last-updated {
-      margin-top: 16px; font-size: 0.8rem; color: var(--text-muted); opacity: 0.6;
-    }
-
-    /* --- Content --- */
-    .content { padding: 60px 0 100px; }
-    .content h2 {
-      font-size: 1.35rem; font-weight: 700; margin-top: 48px; margin-bottom: 16px;
-      letter-spacing: -0.3px; color: var(--text);
-      padding-bottom: 12px; border-bottom: 1px solid var(--border);
-    }
-    .content h2:first-child { margin-top: 0; }
-    .content h3 {
-      font-size: 1.05rem; font-weight: 600; margin-top: 28px; margin-bottom: 10px;
-      color: var(--text);
-    }
-    .content p {
-      color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem; line-height: 1.75;
-    }
-    .content ul, .content ol {
-      color: var(--text-muted); margin-bottom: 16px; padding-left: 20px;
-    }
-    .content li {
-      margin-bottom: 8px; font-size: 0.95rem; line-height: 1.65;
-    }
-    .content strong { color: var(--text); }
-    .content a {
-      color: var(--accent-light); text-decoration: none;
-      border-bottom: 1px solid transparent; transition: border-color 0.2s;
-    }
-    .content a:hover { border-bottom-color: var(--accent-light); }
-
-    .highlight-box {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px; margin: 24px 0;
-      border-left: 3px solid var(--teal);
-    }
-    .highlight-box p { margin-bottom: 0; }
-
-    .warning-box {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px; margin: 24px 0;
-      border-left: 3px solid #ff6b6b;
-    }
-    .warning-box p { margin-bottom: 0; }
-
-    /* --- Footer --- */
-    footer { border-top: 1px solid var(--border); padding: 32px 0; }
-    footer .container {
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    }
-    footer span { font-size: 0.8rem; color: var(--text-muted); }
-    footer a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; }
-    footer a:hover { color: var(--accent-light); }
-
-    /* --- Light Mode --- */
-    [data-theme="light"] {
-      --bg: #f7f7fa;
-      --bg-elevated: #ffffff;
-      --bg-card: #ffffff;
-      --border: rgba(0, 0, 0, 0.08);
-      --border-hover: rgba(108, 92, 231, 0.35);
-      --text: #1a1a2e;
-      --text-muted: #6b6b80;
-      --accent: #6c5ce7;
-      --accent-light: #5a4bd4;
-    }
-    [data-theme="light"] nav {
-      background: rgba(247, 247, 250, 0.85); border-bottom-color: rgba(0,0,0,0.06);
-    }
-    [data-theme="light"] .page-hero {
-      background: linear-gradient(180deg, #eeeef5 0%, var(--bg) 100%);
-    }
-    [data-theme="light"] .page-hero::before {
-      background: radial-gradient(circle, rgba(0, 206, 201, 0.08), transparent 55%);
-    }
-    [data-theme="light"] .highlight-box,
-    [data-theme="light"] .warning-box {
-      background: var(--bg-card); box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    }
-    [data-theme="light"] footer { border-top-color: rgba(0,0,0,0.06); }
-
-    @media (max-width: 768px) {
-      .page-hero { padding: 120px 0 40px; }
-      .nav-center { position: static; transform: none; }
-      nav .container { flex-wrap: wrap; gap: 8px; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -212,7 +19,7 @@
     <div class="container">
       <a href="index.html" class="logo">Responin</a>
       <div class="nav-center">
-        <span class="nav-page-title" data-i18n="page_title">Terms of Use</span>
+        <span class="nav-page-title" data-i18n="terms_page_title">Terms of Use</span>
         <div class="lang-switch-nav">
           <button class="lang-btn-nav" data-lang="en" onclick="setLang('en')">EN</button>
           <button class="lang-btn-nav active" data-lang="id" onclick="setLang('id')">ID</button>
@@ -220,7 +27,7 @@
       </div>
       <a href="index.html" class="nav-back">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <span data-i18n="nav_back">Home</span>
+        <span data-i18n="terms_nav_back">Home</span>
       </a>
     </div>
   </nav>
@@ -228,122 +35,122 @@
   <section class="page-hero">
     <div class="container">
       <div class="page-hero-icon">📋</div>
-      <h1 data-i18n-html="hero_title"><span>Terms of Use</span></h1>
-      <p data-i18n="hero_desc">The rules and guidelines for using our AI agent services.</p>
-      <div class="last-updated" data-i18n="last_updated">Last updated: April 26, 2026</div>
+      <h1 data-i18n="terms_hero_title" data-i18n-html><span>Terms of Use</span></h1>
+      <p data-i18n="terms_hero_desc">The rules and guidelines for using our AI agent services.</p>
+      <div class="last-updated" data-i18n="terms_last_updated">Last updated: April 26, 2026</div>
     </div>
   </section>
 
-  <section class="content">
+  <section class="legal-content">
     <div class="container" id="content-area">
 
-      <h2 data-i18n="s1_title">1. Acceptance of Terms</h2>
-      <p data-i18n="s1_p1">By accessing or using the Responin website and services, you agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use our services. These terms apply to all visitors, users, and others who access or use Responin.</p>
-      <p data-i18n="s1_p2">We may update these Terms from time to time. We will notify you of any material changes by posting the updated terms on our website. Your continued use of our services after such changes constitutes your acceptance of the new terms.</p>
+      <h2 data-i18n="terms_s1_title">1. Acceptance of Terms</h2>
+      <p data-i18n="terms_s1_p1">By accessing or using the Responin website and services, you agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use our services. These terms apply to all visitors, users, and others who access or use Responin.</p>
+      <p data-i18n="terms_s1_p2">We may update these Terms from time to time. We will notify you of any material changes by posting the updated terms on our website. Your continued use of our services after such changes constitutes your acceptance of the new terms.</p>
 
-      <h2 data-i18n="s2_title">2. Description of Services</h2>
-      <p data-i18n="s2_p1">Responin provides AI-driven business automation services, including but not limited to:</p>
+      <h2 data-i18n="terms_s2_title">2. Description of Services</h2>
+      <p data-i18n="terms_s2_p1">Responin provides AI-driven business automation services, including but not limited to:</p>
       <ul>
-        <li data-i18n="s2_li1"><strong>Personal AI Agents</strong> — dedicated AI agents that learn your workflows, remember your context, and operate your business processes.</li>
-        <li data-i18n="s2_li2"><strong>Intelligent Reminders</strong> — proactive deadline monitoring and contextual nudges for your team.</li>
-        <li data-i18n="s2_li3"><strong>Natural Language Data Entry</strong> — update business databases through plain language commands.</li>
-        <li data-i18n="s2_li4"><strong>Email Orchestration</strong> — automated drafting, sending, and escalation of business emails.</li>
-        <li data-i18n="s2_li5"><strong>Process Automation</strong> — end-to-end mapping and execution of business workflows.</li>
-        <li data-i18n="s2_li6"><strong>Financial Monitoring</strong> — cash flow tracking, overdue invoice management, and financial alerts.</li>
-        <li data-i18n="s2_li7"><strong>CRM & Sales Workflows</strong> — contact discovery, deal tracking, and pipeline acceleration.</li>
-        <li data-i18n="s2_li8"><strong>Customer Support Automation</strong> — AI-powered support ticket handling and response drafting.</li>
-        <li data-i18n="s2_li9"><strong>Intelligent Reporting</strong> — automated briefings, summaries, and cross-system data compilation.</li>
+        <li data-i18n="terms_s2_li1" data-i18n-html><strong>Personal AI Agents</strong> — dedicated AI agents that learn your workflows, remember your context, and operate your business processes.</li>
+        <li data-i18n="terms_s2_li2" data-i18n-html><strong>Intelligent Reminders</strong> — proactive deadline monitoring and contextual nudges for your team.</li>
+        <li data-i18n="terms_s2_li3" data-i18n-html><strong>Natural Language Data Entry</strong> — update business databases through plain language commands.</li>
+        <li data-i18n="terms_s2_li4" data-i18n-html><strong>Email Orchestration</strong> — automated drafting, sending, and escalation of business emails.</li>
+        <li data-i18n="terms_s2_li5" data-i18n-html><strong>Process Automation</strong> — end-to-end mapping and execution of business workflows.</li>
+        <li data-i18n="terms_s2_li6" data-i18n-html><strong>Financial Monitoring</strong> — cash flow tracking, overdue invoice management, and financial alerts.</li>
+        <li data-i18n="terms_s2_li7" data-i18n-html><strong>CRM & Sales Workflows</strong> — contact discovery, deal tracking, and pipeline acceleration.</li>
+        <li data-i18n="terms_s2_li8" data-i18n-html><strong>Customer Support Automation</strong> — AI-powered support ticket handling and response drafting.</li>
+        <li data-i18n="terms_s2_li9" data-i18n-html><strong>Intelligent Reporting</strong> — automated briefings, summaries, and cross-system data compilation.</li>
       </ul>
 
-      <h2 data-i18n="s3_title">3. User Accounts and Responsibilities</h2>
-      <p data-i18n="s3_p1">To access certain features of our services, you may need to create an account. You are responsible for:</p>
+      <h2 data-i18n="terms_s3_title">3. User Accounts and Responsibilities</h2>
+      <p data-i18n="terms_s3_p1">To access certain features of our services, you may need to create an account. You are responsible for:</p>
       <ul>
-        <li data-i18n="s3_li1">Providing accurate and complete information during registration.</li>
-        <li data-i18n="s3_li2">Maintaining the security of your account credentials and promptly notifying us of any unauthorized access.</li>
-        <li data-i18n="s3_li3">All activities that occur under your account.</li>
-        <li data-i18n="s3_li4">Ensuring that your use of our services complies with all applicable laws and regulations.</li>
+        <li data-i18n="terms_s3_li1">Providing accurate and complete information during registration.</li>
+        <li data-i18n="terms_s3_li2">Maintaining the security of your account credentials and promptly notifying us of any unauthorized access.</li>
+        <li data-i18n="terms_s3_li3">All activities that occur under your account.</li>
+        <li data-i18n="terms_s3_li4">Ensuring that your use of our services complies with all applicable laws and regulations.</li>
       </ul>
-      <p data-i18n="s3_p2">You must be at least 18 years old to use our services. If you are using our services on behalf of a business, you represent that you have the authority to bind that business to these terms.</p>
+      <p data-i18n="terms_s3_p2">You must be at least 18 years old to use our services. If you are using our services on behalf of a business, you represent that you have the authority to bind that business to these terms.</p>
 
-      <h2 data-i18n="s4_title">4. Acceptable Use</h2>
-      <p data-i18n="s4_p1">You agree not to use our services to:</p>
+      <h2 data-i18n="terms_s4_title">4. Acceptable Use</h2>
+      <p data-i18n="terms_s4_p1">You agree not to use our services to:</p>
       <ul>
-        <li data-i18n="s4_li1">Violate any applicable laws, regulations, or third-party rights.</li>
-        <li data-i18n="s4_li2">Transmit or store malicious, harmful, or unlawful content.</li>
-        <li data-i18n="s4_li3">Attempt to gain unauthorized access to our systems or other users' accounts.</li>
-        <li data-i18n="s4_li4">Interfere with or disrupt the integrity or performance of our services.</li>
-        <li data-i18n="s4_li5">Use our AI agents for deceptive, fraudulent, or manipulative purposes.</li>
-        <li data-i18n="s4_li6">Reverse-engineer, decompile, or disassemble any part of our services.</li>
-        <li data-i18n="s4_li7">Use automated tools to scrape, crawl, or extract data from our platform without permission.</li>
+        <li data-i18n="terms_s4_li1">Violate any applicable laws, regulations, or third-party rights.</li>
+        <li data-i18n="terms_s4_li2">Transmit or store malicious, harmful, or unlawful content.</li>
+        <li data-i18n="terms_s4_li3">Attempt to gain unauthorized access to our systems or other users' accounts.</li>
+        <li data-i18n="terms_s4_li4">Interfere with or disrupt the integrity or performance of our services.</li>
+        <li data-i18n="terms_s4_li5">Use our AI agents for deceptive, fraudulent, or manipulative purposes.</li>
+        <li data-i18n="terms_s4_li6">Reverse-engineer, decompile, or disassemble any part of our services.</li>
+        <li data-i18n="terms_s4_li7">Use automated tools to scrape, crawl, or extract data from our platform without permission.</li>
       </ul>
 
       <div class="warning-box">
-        <p data-i18n="s4_note"><strong>⚠️ Important:</strong> Responin AI agents are designed to assist and augment human decision-making — not replace it entirely. You remain ultimately responsible for all actions taken through or by your AI agent, especially those involving financial transactions, legal commitments, or customer communications.</p>
+        <p data-i18n="terms_s4_note" data-i18n-html><strong>⚠️ Important:</strong> Responin AI agents are designed to assist and augment human decision-making — not replace it entirely. You remain ultimately responsible for all actions taken through or by your AI agent, especially those involving financial transactions, legal commitments, or customer communications.</p>
       </div>
 
-      <h2 data-i18n="s5_title">5. Human-in-the-Loop Safeguards</h2>
-      <p data-i18n="s5_p1">Responin deploys AI agents with built-in human-in-the-loop safeguards. This means:</p>
+      <h2 data-i18n="terms_s5_title">5. Human-in-the-Loop Safeguards</h2>
+      <p data-i18n="terms_s5_p1">Responin deploys AI agents with built-in human-in-the-loop safeguards. This means:</p>
       <ul>
-        <li data-i18n="s5_li1"><strong>High-confidence tasks</strong> (e.g., routine reminders, status updates) may be handled automatically by your agent.</li>
-        <li data-i18n="s5_li2"><strong>Low-confidence or high-stakes decisions</strong> (e.g., financial approvals, legal commitments, sensitive customer communications) will be routed to you for review before execution.</li>
-        <li data-i18n="s5_li3">You have full control over escalation thresholds and approval workflows.</li>
+        <li data-i18n="terms_s5_li1" data-i18n-html><strong>High-confidence tasks</strong> (e.g., routine reminders, status updates) may be handled automatically by your agent.</li>
+        <li data-i18n="terms_s5_li2" data-i18n-html><strong>Low-confidence or high-stakes decisions</strong> (e.g., financial approvals, legal commitments, sensitive customer communications) will be routed to you for review before execution.</li>
+        <li data-i18n="terms_s5_li3">You have full control over escalation thresholds and approval workflows.</li>
       </ul>
-      <p data-i18n="s5_p2">You acknowledge that while our AI agents are designed to be reliable, they are not infallible. We recommend reviewing agent actions periodically, especially in the early stages of deployment.</p>
+      <p data-i18n="terms_s5_p2">You acknowledge that while our AI agents are designed to be reliable, they are not infallible. We recommend reviewing agent actions periodically, especially in the early stages of deployment.</p>
 
-      <h2 data-i18n="s6_title">6. Data Ownership and Processing</h2>
+      <h2 data-i18n="terms_s6_title">6. Data Ownership and Processing</h2>
 
       <div class="highlight-box">
-        <p data-i18n="s6_note"><strong>🛡️ Your Data Is Yours.</strong> All business data you provide to Responin remains your property. We do not claim ownership of your data, nor do we use it to train public models. Your AI agent's memory and context are isolated and exclusive to your account.</p>
+        <p data-i18n="terms_s6_note" data-i18n-html><strong>🛡️ Your Data Is Yours.</strong> All business data you provide to Responin remains your property. We do not claim ownership of your data, nor do we use it to train public models. Your AI agent's memory and context are isolated and exclusive to your account.</p>
       </div>
 
-      <p data-i18n="s6_p1">By using our services, you grant Responin a limited, non-exclusive license to process your data solely for the purpose of providing and improving the services described in these terms. This includes:</p>
+      <p data-i18n="terms_s6_p1">By using our services, you grant Responin a limited, non-exclusive license to process your data solely for the purpose of providing and improving the services described in these terms. This includes:</p>
       <ul>
-        <li data-i18n="s6_li1">Storing and processing your data within your dedicated agent environment.</li>
-        <li data-i18n="s6_li2">Enabling your AI agent to learn from your workflows and context.</li>
-        <li data-i18n="s6_li3">Generating automated outputs (emails, reports, reminders) on your behalf.</li>
-        <li data-i18n="s6_li4">Anonymizing and aggregating usage data for service improvement (never identifying you or your business).</li>
+        <li data-i18n="terms_s6_li1">Storing and processing your data within your dedicated agent environment.</li>
+        <li data-i18n="terms_s6_li2">Enabling your AI agent to learn from your workflows and context.</li>
+        <li data-i18n="terms_s6_li3">Generating automated outputs (emails, reports, reminders) on your behalf.</li>
+        <li data-i18n="terms_s6_li4">Anonymizing and aggregating usage data for service improvement (never identifying you or your business).</li>
       </ul>
 
-      <h2 data-i18n="s7_title">7. Intellectual Property</h2>
-      <p data-i18n="s7_p1">The Responin platform, including its software, design, branding, and underlying technology, is owned by Responin and protected by intellectual property laws. You may not copy, modify, distribute, or create derivative works from our platform without explicit written permission.</p>
-      <p data-i18n="s7_p2">Content you generate through our services (e.g., emails, reports, data entries) belongs to you. You grant us a limited license to process this content solely to deliver the services.</p>
+      <h2 data-i18n="terms_s7_title">7. Intellectual Property</h2>
+      <p data-i18n="terms_s7_p1">The Responin platform, including its software, design, branding, and underlying technology, is owned by Responin and protected by intellectual property laws. You may not copy, modify, distribute, or create derivative works from our platform without explicit written permission.</p>
+      <p data-i18n="terms_s7_p2">Content you generate through our services (e.g., emails, reports, data entries) belongs to you. You grant us a limited license to process this content solely to deliver the services.</p>
 
-      <h2 data-i18n="s8_title">8. Service Availability and Support</h2>
-      <p data-i18n="s8_p1">We strive to provide continuous, reliable access to our services but do not guarantee uninterrupted availability. We may experience downtime for maintenance, updates, or reasons beyond our control. We will make reasonable efforts to provide advance notice of planned maintenance.</p>
-      <p data-i18n="s8_p2">For support, please contact us at <a href="mailto:hi@responin.com">hi@responin.com</a>.</p>
+      <h2 data-i18n="terms_s8_title">8. Service Availability and Support</h2>
+      <p data-i18n="terms_s8_p1">We strive to provide continuous, reliable access to our services but do not guarantee uninterrupted availability. We may experience downtime for maintenance, updates, or reasons beyond our control. We will make reasonable efforts to provide advance notice of planned maintenance.</p>
+      <p data-i18n="terms_s8_p2" data-i18n-html>For support, please contact us at <a href="mailto:hi@responin.com">hi@responin.com</a>.</p>
 
-      <h2 data-i18n="s9_title">9. Limitation of Liability</h2>
-      <p data-i18n="s9_p1">To the maximum extent permitted by law:</p>
+      <h2 data-i18n="terms_s9_title">9. Limitation of Liability</h2>
+      <p data-i18n="terms_s9_p1">To the maximum extent permitted by law:</p>
       <ul>
-        <li data-i18n="s9_li1">Responin is provided "as is" and "as available" without warranties of any kind, either express or implied.</li>
-        <li data-i18n="s9_li2">We are not liable for any indirect, incidental, special, or consequential damages arising from your use of our services.</li>
-        <li data-i18n="s9_li3">Our total liability for any claim arising from these terms shall not exceed the fees you paid to Responin in the twelve (12) months preceding the claim.</li>
-        <li data-i18n="s9_li4">We are not responsible for decisions made based on AI-generated outputs. You are responsible for reviewing and approving all agent actions.</li>
+        <li data-i18n="terms_s9_li1">Responin is provided "as is" and "as available" without warranties of any kind, either express or implied.</li>
+        <li data-i18n="terms_s9_li2">We are not liable for any indirect, incidental, special, or consequential damages arising from your use of our services.</li>
+        <li data-i18n="terms_s9_li3">Our total liability for any claim arising from these terms shall not exceed the fees you paid to Responin in the twelve (12) months preceding the claim.</li>
+        <li data-i18n="terms_s9_li4">We are not responsible for decisions made based on AI-generated outputs. You are responsible for reviewing and approving all agent actions.</li>
       </ul>
 
-      <h2 data-i18n="s10_title">10. Indemnification</h2>
-      <p data-i18n="s10_p1">You agree to indemnify and hold harmless Responin, its affiliates, officers, directors, employees, and agents from any claims, damages, losses, or expenses (including reasonable legal fees) arising from your use of our services, your violation of these terms, or your violation of any rights of another party.</p>
+      <h2 data-i18n="terms_s10_title">10. Indemnification</h2>
+      <p data-i18n="terms_s10_p1">You agree to indemnify and hold harmless Responin, its affiliates, officers, directors, employees, and agents from any claims, damages, losses, or expenses (including reasonable legal fees) arising from your use of our services, your violation of these terms, or your violation of any rights of another party.</p>
 
-      <h2 data-i18n="s11_title">11. Termination</h2>
-      <p data-i18n="s11_p1">Either party may terminate these terms at any time. Upon termination:</p>
+      <h2 data-i18n="terms_s11_title">11. Termination</h2>
+      <p data-i18n="terms_s11_p1">Either party may terminate these terms at any time. Upon termination:</p>
       <ul>
-        <li data-i18n="s11_li1">Your right to use our services will immediately cease.</li>
-        <li data-i18n="s11_li2">We will provide a reasonable period for you to export your data.</li>
-        <li data-i18n="s11_li3">After the export period, we will securely delete your data in accordance with our data retention policy.</li>
+        <li data-i18n="terms_s11_li1">Your right to use our services will immediately cease.</li>
+        <li data-i18n="terms_s11_li2">We will provide a reasonable period for you to export your data.</li>
+        <li data-i18n="terms_s11_li3">After the export period, we will securely delete your data in accordance with our data retention policy.</li>
       </ul>
-      <p data-i18n="s11_p2">We reserve the right to suspend or terminate your account if you violate these terms.</p>
+      <p data-i18n="terms_s11_p2">We reserve the right to suspend or terminate your account if you violate these terms.</p>
 
-      <h2 data-i18n="s12_title">12. Governing Law</h2>
-      <p data-i18n="s12_p1">These Terms of Use shall be governed by and construed in accordance with the laws of Indonesia. Any disputes arising under these terms shall be resolved through good-faith negotiation, and if necessary, through the courts of Indonesia.</p>
+      <h2 data-i18n="terms_s12_title">12. Governing Law</h2>
+      <p data-i18n="terms_s12_p1">These Terms of Use shall be governed by and construed in accordance with the laws of Indonesia. Any disputes arising under these terms shall be resolved through good-faith negotiation, and if necessary, through the courts of Indonesia.</p>
 
-      <h2 data-i18n="s13_title">13. Severability</h2>
-      <p data-i18n="s13_p1">If any provision of these terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that the remaining provisions remain in full force and effect.</p>
+      <h2 data-i18n="terms_s13_title">13. Severability</h2>
+      <p data-i18n="terms_s13_p1">If any provision of these terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that the remaining provisions remain in full force and effect.</p>
 
-      <h2 data-i18n="s14_title">14. Contact</h2>
-      <p data-i18n="s14_p1">If you have any questions about these Terms of Use, please contact us:</p>
+      <h2 data-i18n="terms_s14_title">14. Contact</h2>
+      <p data-i18n="terms_s14_p1">If you have any questions about these Terms of Use, please contact us:</p>
       <ul>
-        <li data-i18n="s14_li1"><strong>Email:</strong> <a href="mailto:hi@responin.com">hi@responin.com</a></li>
-        <li data-i18n="s14_li2"><strong>Website:</strong> <a href="https://responin.com">responin.com</a></li>
+        <li data-i18n="terms_s14_li1" data-i18n-html><strong>Email:</strong> <a href="mailto:hi@responin.com">hi@responin.com</a></li>
+        <li data-i18n="terms_s14_li2" data-i18n-html><strong>Website:</strong> <a href="https://responin.com">responin.com</a></li>
       </ul>
 
     </div>
@@ -360,207 +167,7 @@
     </div>
   </footer>
 
-  <script>
-    const translations = {
-      en: {
-        page_title: "Terms of Use",
-        nav_back: "Home",
-        hero_title: "<span>Terms of Use</span>",
-        hero_desc: "The rules and guidelines for using our AI agent services.",
-        last_updated: "Last updated: April 26, 2026",
-        s1_title: "1. Acceptance of Terms",
-        s1_p1: "By accessing or using the Responin website and services, you agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use our services. These terms apply to all visitors, users, and others who access or use Responin.",
-        s1_p2: 'We may update these Terms from time to time. We will notify you of any material changes by posting the updated terms on our website. Your continued use of our services after such changes constitutes your acceptance of the new terms.',
-        s2_title: "2. Description of Services",
-        s2_p1: "Responin provides AI-driven business automation services, including but not limited to:",
-        s2_li1: "<strong>Personal AI Agents</strong> — dedicated AI agents that learn your workflows, remember your context, and operate your business processes.",
-        s2_li2: "<strong>Intelligent Reminders</strong> — proactive deadline monitoring and contextual nudges for your team.",
-        s2_li3: "<strong>Natural Language Data Entry</strong> — update business databases through plain language commands.",
-        s2_li4: "<strong>Email Orchestration</strong> — automated drafting, sending, and escalation of business emails.",
-        s2_li5: "<strong>Process Automation</strong> — end-to-end mapping and execution of business workflows.",
-        s2_li6: "<strong>Financial Monitoring</strong> — cash flow tracking, overdue invoice management, and financial alerts.",
-        s2_li7: "<strong>CRM & Sales Workflows</strong> — contact discovery, deal tracking, and pipeline acceleration.",
-        s2_li8: "<strong>Customer Support Automation</strong> — AI-powered support ticket handling and response drafting.",
-        s2_li9: "<strong>Intelligent Reporting</strong> — automated briefings, summaries, and cross-system data compilation.",
-        s3_title: "3. User Accounts and Responsibilities",
-        s3_p1: "To access certain features of our services, you may need to create an account. You are responsible for:",
-        s3_li1: "Providing accurate and complete information during registration.",
-        s3_li2: "Maintaining the security of your account credentials and promptly notifying us of any unauthorized access.",
-        s3_li3: "All activities that occur under your account.",
-        s3_li4: "Ensuring that your use of our services complies with all applicable laws and regulations.",
-        s3_p2: "You must be at least 18 years old to use our services. If you are using our services on behalf of a business, you represent that you have the authority to bind that business to these terms.",
-        s4_title: "4. Acceptable Use",
-        s4_p1: "You agree not to use our services to:",
-        s4_li1: "Violate any applicable laws, regulations, or third-party rights.",
-        s4_li2: "Transmit or store malicious, harmful, or unlawful content.",
-        s4_li3: "Attempt to gain unauthorized access to our systems or other users' accounts.",
-        s4_li4: "Interfere with or disrupt the integrity or performance of our services.",
-        s4_li5: "Use our AI agents for deceptive, fraudulent, or manipulative purposes.",
-        s4_li6: "Reverse-engineer, decompile, or disassemble any part of our services.",
-        s4_li7: "Use automated tools to scrape, crawl, or extract data from our platform without permission.",
-        s4_note: "<strong>⚠️ Important:</strong> Responin AI agents are designed to assist and augment human decision-making — not replace it entirely. You remain ultimately responsible for all actions taken through or by your AI agent, especially those involving financial transactions, legal commitments, or customer communications.",
-        s5_title: "5. Human-in-the-Loop Safeguards",
-        s5_p1: "Responin deploys AI agents with built-in human-in-the-loop safeguards. This means:",
-        s5_li1: "<strong>High-confidence tasks</strong> (e.g., routine reminders, status updates) may be handled automatically by your agent.",
-        s5_li2: "<strong>Low-confidence or high-stakes decisions</strong> (e.g., financial approvals, legal commitments, sensitive customer communications) will be routed to you for review before execution.",
-        s5_li3: "You have full control over escalation thresholds and approval workflows.",
-        s5_p2: "You acknowledge that while our AI agents are designed to be reliable, they are not infallible. We recommend reviewing agent actions periodically, especially in the early stages of deployment.",
-        s6_title: "6. Data Ownership and Processing",
-        s6_note: "<strong>🛡️ Your Data Is Yours.</strong> All business data you provide to Responin remains your property. We do not claim ownership of your data, nor do we use it to train public models. Your AI agent's memory and context are isolated and exclusive to your account.",
-        s6_p1: "By using our services, you grant Responin a limited, non-exclusive license to process your data solely for the purpose of providing and improving the services described in these terms. This includes:",
-        s6_li1: "Storing and processing your data within your dedicated agent environment.",
-        s6_li2: "Enabling your AI agent to learn from your workflows and context.",
-        s6_li3: "Generating automated outputs (emails, reports, reminders) on your behalf.",
-        s6_li4: "Anonymizing and aggregating usage data for service improvement (never identifying you or your business).",
-        s7_title: "7. Intellectual Property",
-        s7_p1: "The Responin platform, including its software, design, branding, and underlying technology, is owned by Responin and protected by intellectual property laws. You may not copy, modify, distribute, or create derivative works from our platform without explicit written permission.",
-        s7_p2: "Content you generate through our services (e.g., emails, reports, data entries) belongs to you. You grant us a limited license to process this content solely to deliver the services.",
-        s8_title: "8. Service Availability and Support",
-        s8_p1: 'We strive to provide continuous, reliable access to our services but do not guarantee uninterrupted availability. We may experience downtime for maintenance, updates, or reasons beyond our control. We will make reasonable efforts to provide advance notice of planned maintenance.',
-        s8_p2: 'For support, please contact us at <a href="mailto:hi@responin.com">hi@responin.com</a>.',
-        s9_title: "9. Limitation of Liability",
-        s9_p1: "To the maximum extent permitted by law:",
-        s9_li1: 'Responin is provided "as is" and "as available" without warranties of any kind, either express or implied.',
-        s9_li2: "We are not liable for any indirect, incidental, special, or consequential damages arising from your use of our services.",
-        s9_li3: "Our total liability for any claim arising from these terms shall not exceed the fees you paid to Responin in the twelve (12) months preceding the claim.",
-        s9_li4: "We are not responsible for decisions made based on AI-generated outputs. You are responsible for reviewing and approving all agent actions.",
-        s10_title: "10. Indemnification",
-        s10_p1: "You agree to indemnify and hold harmless Responin, its affiliates, officers, directors, employees, and agents from any claims, damages, losses, or expenses (including reasonable legal fees) arising from your use of our services, your violation of these terms, or your violation of any rights of another party.",
-        s11_title: "11. Termination",
-        s11_p1: "Either party may terminate these terms at any time. Upon termination:",
-        s11_li1: "Your right to use our services will immediately cease.",
-        s11_li2: "We will provide a reasonable period for you to export your data.",
-        s11_li3: "After the export period, we will securely delete your data in accordance with our data retention policy.",
-        s11_p2: "We reserve the right to suspend or terminate your account if you violate these terms.",
-        s12_title: "12. Governing Law",
-        s12_p1: "These Terms of Use shall be governed by and construed in accordance with the laws of Indonesia. Any disputes arising under these terms shall be resolved through good-faith negotiation, and if necessary, through the courts of Indonesia.",
-        s13_title: "13. Severability",
-        s13_p1: "If any provision of these terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that the remaining provisions remain in full force and effect.",
-        s14_title: "14. Contact",
-        s14_p1: "If you have any questions about these Terms of Use, please contact us:",
-        s14_li1: '<strong>Email:</strong> <a href="mailto:hi@responin.com">hi@responin.com</a>',
-        s14_li2: '<strong>Website:</strong> <a href="https://responin.com">responin.com</a>',
-        footer_home: "Home",
-        footer_privacy: "Privacy Policy",
-        footer_terms: "Terms of Use"
-      },
-      id: {
-        page_title: "Ketentuan Penggunaan",
-        nav_back: "Beranda",
-        hero_title: "<span>Ketentuan Penggunaan</span>",
-        hero_desc: "Aturan dan pedoman untuk menggunakan layanan agen AI kami.",
-        last_updated: "Terakhir diperbarui: 26 April 2026",
-        s1_title: "1. Penerimaan Ketentuan",
-        s1_p1: "Dengan mengakses atau menggunakan website dan layanan Responin, Anda menyetujui untuk terikat oleh Ketentuan Penggunaan ini. Jika Anda tidak setuju dengan ketentuan ini, mohon untuk tidak menggunakan layanan kami. Ketentuan ini berlaku untuk semua pengunjung, pengguna, dan pihak lain yang mengakses atau menggunakan Responin.",
-        s1_p2: "Kami mungkin memperbarui Ketentuan ini dari waktu ke waktu. Kami akan memberitahu Anda tentang perubahan material dengan memposting ketentuan yang diperbarui di website kami. Penggunaan layanan kami yang berkelanjutan setelah perubahan tersebut merupakan penerimaan Anda atas ketentuan baru.",
-        s2_title: "2. Deskripsi Layanan",
-        s2_p1: "Responin menyediakan layanan otomasi bisnis berbasis AI, termasuk namun tidak terbatas pada:",
-        s2_li1: "<strong>Agen AI Personal</strong> — agen AI khusus yang mempelajari alur kerja Anda, mengingat konteks Anda, dan mengoperasikan proses bisnis Anda.",
-        s2_li2: "<strong>Pengingat Cerdas</strong> — pemantauan tenggat waktu proaktif dan dorongan kontekstual untuk tim Anda.",
-        s2_li3: "<strong>Entri Data Bahasa Alami</strong> — perbarui database bisnis melalui perintah bahasa sehari-hari.",
-        s2_li4: "<strong>Orkestrasi Email</strong> — penyusunan, pengiriman, dan eskalasi email bisnis secara otomatis.",
-        s2_li5: "<strong>Otomasi Proses</strong> — pemetaan dan eksekusi alur kerja bisnis secara ujung-ke-ujung.",
-        s2_li6: "<strong>Pemantauan Keuangan</strong> — pelacakan arus kas, manajemen invoice jatuh tempo, dan peringatan keuangan.",
-        s2_li7: "<strong>Alur Kerja CRM & Penjualan</strong> — penemuan kontak, pelacakan deal, dan akselerasi pipeline.",
-        s2_li8: "<strong>Otomasi Dukungan Pelanggan</strong> — penanganan tiket dukungan berbasis AI dan penyusunan respons.",
-        s2_li9: "<strong>Pelaporan Cerdas</strong> — briefing otomatis, ringkasan, dan kompilasi data lintas sistem.",
-        s3_title: "3. Akun Pengguna dan Tanggung Jawab",
-        s3_p1: "Untuk mengakses fitur tertentu dari layanan kami, Anda mungkin perlu membuat akun. Anda bertanggung jawab untuk:",
-        s3_li1: "Memberikan informasi yang akurat dan lengkap saat pendaftaran.",
-        s3_li2: "Menjaga keamanan kredensial akun Anda dan segera memberitahu kami tentang akses tidak sah.",
-        s3_li3: "Semua aktivitas yang terjadi di bawah akun Anda.",
-        s3_li4: "Memastikan bahwa penggunaan layanan kami mematuhi semua hukum dan regulasi yang berlaku.",
-        s3_p2: "Anda harus berusia minimal 18 tahun untuk menggunakan layanan kami. Jika Anda menggunakan layanan kami atas nama bisnis, Anda menyatakan bahwa Anda memiliki wewenang untuk mengikat bisnis tersebut pada ketentuan ini.",
-        s4_title: "4. Penggunaan yang Dapat Diterima",
-        s4_p1: "Anda setuju untuk tidak menggunakan layanan kami untuk:",
-        s4_li1: "Melanggar hukum, regulasi, atau hak pihak ketiga yang berlaku.",
-        s4_li2: "Mengirimkan atau menyimpan konten yang berbahaya atau melanggar hukum.",
-        s4_li3: "Mencoba mendapatkan akses tidak sah ke sistem kami atau akun pengguna lain.",
-        s4_li4: "Mengganggu atau merusak integritas atau kinerja layanan kami.",
-        s4_li5: "Menggunakan agen AI kami untuk tujuan yang menipu, curang, atau manipulatif.",
-        s4_li6: "Melakukan reverse-engineering, dekompilasi, atau membongkar bagian mana pun dari layanan kami.",
-        s4_li7: "Menggunakan alat otomatis untuk mengambil, merayapi, atau mengekstrak data dari platform kami tanpa izin.",
-        s4_note: "<strong>⚠️ Penting:</strong> Agen AI Responin dirancang untuk membantu dan meningkatkan pengambilan keputusan manusia — bukan menggantikannya sepenuhnya. Anda tetap bertanggung jawab atas semua tindakan yang diambil melalui atau oleh agen AI Anda, terutama yang melibatkan transaksi keuangan, komitmen hukum, atau komunikasi pelanggan.",
-        s5_title: "5. Pengamanan Human-in-the-Loop",
-        s5_p1: "Responin menerapkan agen AI dengan pengamanan human-in-the-loop bawaan. Ini berarti:",
-        s5_li1: "<strong>Tugas berkeyakinan tinggi</strong> (misalnya, pengingat rutin, pembaruan status) mungkin ditangani secara otomatis oleh agen Anda.",
-        s5_li2: "<strong>Keputusan berkeyakinan rendah atau berisiko tinggi</strong> (misalnya, persetujuan keuangan, komitmen hukum, komunikasi pelanggan sensitif) akan dirutekan kepada Anda untuk ditinjau sebelum dieksekusi.",
-        s5_li3: "Anda memiliki kendali penuh atas ambang batas eskalasi dan alur kerja persetujuan.",
-        s5_p2: "Anda mengakui bahwa meskipun agen AI kami dirancang untuk dapat diandalkan, mereka tidak sempurna. Kami merekomendasikan untuk meninjau tindakan agen secara berkala, terutama di tahap awal deployment.",
-        s6_title: "6. Kepemilikan dan Pemrosesan Data",
-        s6_note: "<strong>🛡️ Data Anda Milik Anda.</strong> Semua data bisnis yang Anda berikan kepada Responin tetap menjadi milik Anda. Kami tidak mengklaim kepemilikan atas data Anda, dan tidak menggunakannya untuk melatih model publik. Memori dan konteks agen AI Anda terisolasi dan eksklusif untuk akun Anda.",
-        s6_p1: "Dengan menggunakan layanan kami, Anda memberikan Responin lisensi terbatas dan non-eksklusif untuk memproses data Anda semata-mata untuk tujuan menyediakan dan meningkatkan layanan yang dijelaskan dalam ketentuan ini. Ini termasuk:",
-        s6_li1: "Menyimpan dan memproses data Anda dalam lingkungan agen khusus Anda.",
-        s6_li2: "Memungkinkan agen AI Anda belajar dari alur kerja dan konteks Anda.",
-        s6_li3: "Menghasilkan keluaran otomatis (email, laporan, pengingat) atas nama Anda.",
-        s6_li4: "Menganonimkan dan mengagregasi data penggunaan untuk peningkatan layanan (tidak pernah mengidentifikasi Anda atau bisnis Anda).",
-        s7_title: "7. Kekayaan Intelektual",
-        s7_p1: "Platform Responin, termasuk perangkat lunak, desain, merek, dan teknologi yang mendasarinya, dimiliki oleh Responin dan dilindungi oleh hukum kekayaan intelektual. Anda tidak boleh menyalin, memodifikasi, mendistribusikan, atau membuat karya turunan dari platform kami tanpa izin tertulis eksplisit.",
-        s7_p2: "Konten yang Anda hasilkan melalui layanan kami (misalnya, email, laporan, entri data) menjadi milik Anda. Anda memberikan kami lisensi terbatas untuk memproses konten ini semata-mata untuk menyediakan layanan.",
-        s8_title: "8. Ketersediaan dan Dukungan Layanan",
-        s8_p1: "Kami berupaya menyediakan akses yang berkelanjutan dan andal ke layanan kami tetapi tidak menjamin ketersediaan tanpa gangguan. Kami mungkin mengalami waktu henti untuk pemeliharaan, pembaruan, atau alasan di luar kendali kami. Kami akan berupaya wajar untuk memberikan pemberitahuan sebelumnya tentang pemeliharaan yang direncanakan.",
-        s8_p2: 'Untuk dukungan, silakan hubungi kami di <a href="mailto:hi@responin.com">hi@responin.com</a>.',
-        s9_title: "9. Batasan Tanggung Jawab",
-        s9_p1: "Sejauh diizinkan oleh hukum:",
-        s9_li1: 'Responin disediakan "sebagaimana adanya" dan "sebagaimana tersedia" tanpa jaminan apa pun, baik tersurat maupun tersirat.',
-        s9_li2: "Kami tidak bertanggung jawab atas kerugian tidak langsung, insidental, khusus, atau konsekuensial yang timbul dari penggunaan layanan Anda.",
-        s9_li3: "Total tanggung jawab kami atas klaim apa pun yang timbul dari ketentuan ini tidak boleh melebihi biaya yang Anda bayarkan kepada Responin dalam dua belas (12) bulan sebelum klaim.",
-        s9_li4: "Kami tidak bertanggung jawab atas keputusan yang dibuat berdasarkan output yang dihasilkan AI. Anda bertanggung jawab untuk meninjau dan menyetujui semua tindakan agen.",
-        s10_title: "10. Ganti Rugi",
-        s10_p1: "Anda setuju untuk mengganti kerugian dan membebaskan Responin, afiliasinya, pejabat, direktur, karyawan, dan agennya dari segala klaim, kerugian, kehilangan, atau pengeluaran (termasuk biaya hukum yang wajar) yang timbul dari penggunaan layanan Anda, pelanggaran ketentuan ini, atau pelanggaran hak pihak lain.",
-        s11_title: "11. Pengakhiran",
-        s11_p1: "Either party may terminate these terms at any time. Upon termination:",
-        s11_li1: "Hak Anda untuk menggunakan layanan kami akan segera berhenti.",
-        s11_li2: "Kami akan menyediakan periode yang wajar bagi Anda untuk mengekspor data Anda.",
-        s11_li3: "Setelah periode ekspor, kami akan menghapus data Anda secara aman sesuai dengan kebijakan penyimpanan data kami.",
-        s11_p2: "Kami berhak untuk menangguhkan atau mengakhiri akun Anda jika Anda melanggar ketentuan ini.",
-        s12_title: "12. Hukum yang Berlaku",
-        s12_p1: "Ketentuan Penggunaan ini akan diatur oleh dan ditafsirkan sesuai dengan hukum Indonesia. Segala sengketa yang timbul dari ketentuan ini akan diselesaikan melalui negosiasi itikad baik, dan jika perlu, melalui pengadilan di Indonesia.",
-        s13_title: "13. Keterpisahan",
-        s13_p1: "Jika ada ketentuan dari syarat ini yang ditemukan tidak dapat dilaksanakan atau tidak sah, ketentuan tersebut akan dibatasi atau dihilangkan seminimal mungkin sehingga ketentuan yang tersisa tetap berlaku penuh.",
-        s14_title: "14. Hubungi Kami",
-        s14_p1: "Jika Anda memiliki pertanyaan tentang Ketentuan Penggunaan ini, silakan hubungi kami:",
-        s14_li1: '<strong>Email:</strong> <a href="mailto:hi@responin.com">hi@responin.com</a>',
-        s14_li2: '<strong>Website:</strong> <a href="https://responin.com">responin.com</a>',
-        footer_home: "Beranda",
-        footer_privacy: "Kebijakan Privasi",
-        footer_terms: "Ketentuan Penggunaan"
-      }
-    };
-
-    let currentLang = 'id';
-
-    function setLang(lang) {
-      currentLang = lang;
-      document.documentElement.lang = lang;
-      const t = translations[lang];
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key] !== undefined) {
-          if (el.hasAttribute('data-i18n-html')) {
-            el.innerHTML = t[key];
-          } else {
-            el.innerHTML = t[key];
-          }
-        }
-      });
-      document.title = lang === 'id'
-        ? 'Ketentuan Penggunaan — Responin'
-        : 'Terms of Use — Responin';
-      document.querySelectorAll('.lang-btn-nav').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-      });
-    }
-
-    // Theme
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('responin-theme', theme);
-    }
-    const savedTheme = localStorage.getItem('responin-theme') || 'dark';
-    setTheme(savedTheme);
-
-    setLang('id');
-  </script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
