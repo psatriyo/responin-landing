@@ -50,6 +50,9 @@ const observer = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
       observer.unobserve(entry.target);
+      // Dismiss skeleton on first visible content
+      const sk = document.getElementById('skeleton');
+      if (sk) { sk.classList.add('hide'); setTimeout(() => sk.remove(), 500); }
     }
   });
 }, { threshold: 0.12 });

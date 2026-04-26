@@ -25,9 +25,37 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    #skeleton{position:fixed;inset:0;z-index:9999;background:#0d0d18;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;opacity:1;transition:opacity .4s ease}
+    #skeleton.hide{opacity:0;pointer-events:none}
+    .sk-logo{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#6c5ce7,#00cec9);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#fff;font-family:Inter,sans-serif;margin-bottom:8px;animation:skPulse 2s ease-in-out infinite}
+    .sk-line{height:12px;border-radius:6px;background:linear-gradient(90deg,rgba(108,92,231,0.12) 25%,rgba(108,92,231,0.25) 50%,rgba(108,92,231,0.12) 75%);background-size:200% 100%;animation:skShimmer 1.5s ease-in-out infinite}
+    .sk-line:nth-child(1){width:180px}.sk-line:nth-child(2){width:260px}.sk-line:nth-child(3){width:140px}
+    .sk-text{display:flex;flex-direction:column;align-items:center;gap:12px}
+    @keyframes skShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    @keyframes skPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  </style>
+
 </head>
 <body>
+  <div id="skeleton">
+    <div class="sk-logo">R</div>
+    <div class="sk-text">
+      <div class="sk-line"></div>
+      <div class="sk-line"></div>
+      <div class="sk-line"></div>
+    </div>
+  </div>
 <body>
+  <div id="skeleton">
+    <div class="sk-logo">R</div>
+    <div class="sk-text">
+      <div class="sk-line"></div>
+      <div class="sk-line"></div>
+      <div class="sk-line"></div>
+    </div>
+  </div>
 
   <!-- Nav -->
   <nav>
