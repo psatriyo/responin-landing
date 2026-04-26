@@ -455,6 +455,14 @@ function switchGcScenario(key) {
     div.appendChild(avatar);
     div.appendChild(bubble);
     container.appendChild(div);
+
+    // Fallback: ensure message is visible even if animation doesn't trigger (mobile)
+    setTimeout(() => {
+      if (div.style.opacity === '0' || getComputedStyle(div).opacity === '0') {
+        div.style.opacity = '1';
+        div.style.transform = 'none';
+      }
+    }, (i * 300) + 500);
   });
 
   document.querySelectorAll('[data-gc-scenario]').forEach(tab => {
