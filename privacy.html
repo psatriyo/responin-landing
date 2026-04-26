@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Responin</title>
+  <meta name="description" content="Responin Privacy Policy — how we collect, use, and protect your data." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%236c5ce7'/%3E%3Cstop offset='100%25' stop-color='%2300cec9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' font-size='20' fill='white'%3ER%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg-elevated: #12121a;
+      --bg-card: #16161f;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(108, 92, 231, 0.3);
+      --text: #e8e8ed;
+      --text-muted: #8a8a9a;
+      --accent: #6c5ce7;
+      --accent-light: #a29bfe;
+      --accent-glow: rgba(108, 92, 231, 0.25);
+      --teal: #00cec9;
+      --gradient-1: #6c5ce7;
+      --gradient-2: #00cec9;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    /* --- Nav --- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.8); border-bottom: 1px solid var(--border);
+    }
+    nav .container {
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .logo {
+      font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      text-decoration: none;
+    }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg-elevated); color: var(--text-muted); font-size: 0.85rem;
+      font-weight: 500; text-decoration: none; transition: all 0.2s; font-family: inherit;
+      cursor: pointer;
+    }
+    .nav-back:hover { border-color: var(--accent); color: var(--accent-light); }
+    .nav-back svg { width: 16px; height: 16px; }
+    .nav-center {
+      display: flex; align-items: center; gap: 8px; position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .nav-page-title {
+      font-size: 0.85rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px;
+    }
+    .lang-switch-nav {
+      display: inline-flex; align-items: center;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden; font-size: 0.75rem;
+    }
+    .lang-btn-nav {
+      padding: 4px 12px; border: none; background: transparent;
+      color: var(--text-muted); font-size: 0.75rem; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .lang-btn-nav:hover { color: var(--text); }
+    .lang-btn-nav.active {
+      background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+      color: #fff; border-radius: 6px; margin: 2px; padding: 3px 10px;
+    }
+
+    /* --- Hero Header --- */
+    .page-hero {
+      padding: 140px 0 60px; text-align: center;
+      background: linear-gradient(180deg, #0d0d18 0%, var(--bg) 100%);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; top: -30%; left: 50%; transform: translateX(-50%);
+      width: 80%; height: 60%;
+      background: radial-gradient(circle, rgba(108, 92, 231, 0.15), transparent 55%);
+      pointer-events: none;
+    }
+    .page-hero .container { position: relative; z-index: 1; }
+    .page-hero-icon {
+      width: 64px; height: 64px; border-radius: 16px; margin: 0 auto 24px;
+      background: rgba(108, 92, 231, 0.1); border: 1px solid rgba(108, 92, 231, 0.25);
+      display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
+      letter-spacing: -1px; margin-bottom: 12px;
+    }
+    .page-hero h1 span {
+      background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-hero p {
+      font-size: 1.05rem; color: var(--text-muted); max-width: 540px; margin: 0 auto;
+    }
+    .page-hero .last-updated {
+      margin-top: 16px; font-size: 0.8rem; color: var(--text-muted); opacity: 0.6;
+    }
+
+    /* --- Content --- */
+    .content { padding: 60px 0 100px; }
+    .content h2 {
+      font-size: 1.35rem; font-weight: 700; margin-top: 48px; margin-bottom: 16px;
+      letter-spacing: -0.3px; color: var(--text);
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+    .content h2:first-child { margin-top: 0; }
+    .content h3 {
+      font-size: 1.05rem; font-weight: 600; margin-top: 28px; margin-bottom: 10px;
+      color: var(--text);
+    }
+    .content p {
+      color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem; line-height: 1.75;
+    }
+    .content ul {
+      color: var(--text-muted); margin-bottom: 16px; padding-left: 20px;
+    }
+    .content li {
+      margin-bottom: 8px; font-size: 0.95rem; line-height: 1.65;
+    }
+    .content strong { color: var(--text); }
+    .content a {
+      color: var(--accent-light); text-decoration: none;
+      border-bottom: 1px solid transparent; transition: border-color 0.2s;
+    }
+    .content a:hover { border-bottom-color: var(--accent-light); }
+
+    .highlight-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; margin: 24px 0;
+      border-left: 3px solid var(--accent);
+    }
+    .highlight-box p { margin-bottom: 0; }
+
+    /* --- Footer --- */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; }
+    footer .container {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    footer span { font-size: 0.8rem; color: var(--text-muted); }
+    footer a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; }
+    footer a:hover { color: var(--accent-light); }
+
+    /* --- Light Mode --- */
+    [data-theme="light"] {
+      --bg: #f7f7fa;
+      --bg-elevated: #ffffff;
+      --bg-card: #ffffff;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(108, 92, 231, 0.35);
+      --text: #1a1a2e;
+      --text-muted: #6b6b80;
+      --accent: #6c5ce7;
+      --accent-light: #5a4bd4;
+    }
+    [data-theme="light"] nav {
+      background: rgba(247, 247, 250, 0.85); border-bottom-color: rgba(0,0,0,0.06);
+    }
+    [data-theme="light"] .page-hero {
+      background: linear-gradient(180deg, #eeeef5 0%, var(--bg) 100%);
+    }
+    [data-theme="light"] .page-hero::before {
+      background: radial-gradient(circle, rgba(108, 92, 231, 0.08), transparent 55%);
+    }
+    [data-theme="light"] .highlight-box {
+      background: var(--bg-card); box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    [data-theme="light"] footer { border-top-color: rgba(0,0,0,0.06); }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 120px 0 40px; }
+      .nav-center { position: static; transform: none; }
+      nav .container { flex-wrap: wrap; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">Responin</a>
+      <div class="nav-center">
+        <span class="nav-page-title" data-i18n="page_title">Privacy Policy</span>
+        <div class="lang-switch-nav">
+          <button class="lang-btn-nav" data-lang="en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn-nav active" data-lang="id" onclick="setLang('id')">ID</button>
+        </div>
+      </div>
+      <a href="index.html" class="nav-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span data-i18n="nav_back">Home</span>
+      </a>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-icon">🔒</div>
+      <h1 data-i18n-html="hero_title"><span>Privacy Policy</span></h1>
+      <p data-i18n="hero_desc">How we collect, use, and protect your personal data.</p>
+      <div class="last-updated" data-i18n="last_updated">Last updated: April 26, 2026</div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container" id="content-area">
+
+      <h2 data-i18n="s1_title">1. Introduction</h2>
+      <p data-i18n="s1_p1">Responin ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>responin.com</strong> and use our AI agent services.</p>
+      <p data-i18n="s1_p2">By accessing or using our services, you agree to this Privacy Policy. If you do not agree, please do not use our services.</p>
+
+      <h2 data-i18n="s2_title">2. Information We Collect</h2>
+      <h3 data-i18n="s2a_title">a) Information You Provide</h3>
+      <ul>
+        <li data-i18n="s2_li1"><strong>Contact information</strong> — name, email address, company name, and industry when you join our waitlist or contact us.</li>
+        <li data-i18n="s2_li2"><strong>Business context</strong> — workflows, processes, and operational details you share during onboarding and consultation.</li>
+        <li data-i18n="s2_li3"><strong>Communication data</strong> — messages, emails, and feedback you send to us or through our AI agents.</li>
+      </ul>
+      <h3 data-i18n="s2b_title">b) Information Collected Automatically</h3>
+      <ul>
+        <li data-i18n="s2_li4"><strong>Usage data</strong> — pages visited, time spent, interaction patterns, and feature usage within our platform.</li>
+        <li data-i18n="s2_li5"><strong>Device information</strong> — browser type, operating system, IP address, and device identifiers.</li>
+        <li data-i18n="s2_li6"><strong>Cookies and similar technologies</strong> — to improve your experience and analyze how our services are used.</li>
+      </ul>
+
+      <h2 data-i18n="s3_title">3. How We Use Your Information</h2>
+      <p data-i18n="s3_p1">We use your information to:</p>
+      <ul>
+        <li data-i18n="s3_li1">Build, train, and refine your personal AI agent to understand your specific business context and workflows.</li>
+        <li data-i18n="s3_li2">Provide, maintain, and improve our services, including automated email orchestration, data entry, financial monitoring, and CRM workflows.</li>
+        <li data-i18n="s3_li3">Communicate with you about service updates, new features, and support requests.</li>
+        <li data-i18n="s3_li4">Analyze usage patterns to enhance performance, reliability, and user experience.</li>
+        <li data-i18n="s3_li5">Comply with legal obligations and enforce our terms.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p data-i18n="s3_note"><strong>🛡️ Privacy-First Architecture:</strong> Your personal AI agent operates within your own infrastructure. Your business data is never used to train public models or shared with third parties. Each agent's memory is isolated and belongs exclusively to you.</p>
+      </div>
+
+      <h2 data-i18n="s4_title">4. Data Sharing and Disclosure</h2>
+      <p data-i18n="s4_p1">We do <strong>not</strong> sell, rent, or trade your personal data. We may share your information only in the following circumstances:</p>
+      <ul>
+        <li data-i18n="s4_li1"><strong>Service providers</strong> — trusted third parties who help us deliver our services (e.g., cloud hosting, email delivery), bound by strict data protection agreements.</li>
+        <li data-i18n="s4_li2"><strong>Legal requirements</strong> — when required by law, regulation, or legal process.</li>
+        <li data-i18n="s4_li3"><strong>Business transfers</strong> — in connection with a merger, acquisition, or sale of assets, with assurance that your data will remain protected.</li>
+        <li data-i18n="s4_li4"><strong>With your consent</strong> — when you have explicitly agreed to share your data.</li>
+      </ul>
+
+      <h2 data-i18n="s5_title">5. Data Security</h2>
+      <p data-i18n="s5_p1">We implement industry-standard security measures to protect your data, including:</p>
+      <ul>
+        <li data-i18n="s5_li1">Encryption of data in transit (TLS/SSL) and at rest (AES-256).</li>
+        <li data-i18n="s5_li2">Access controls ensuring only authorized personnel can access your data.</li>
+        <li data-i18n="s5_li3">Regular security assessments and vulnerability testing.</li>
+        <li data-i18n="s5_li4">Isolation of each client's AI agent environment to prevent cross-contamination.</li>
+      </ul>
+      <p data-i18n="s5_p2">While we strive to protect your data, no method of electronic transmission or storage is 100% secure. We encourage you to use strong passwords and to contact us immediately if you suspect unauthorized access.</p>
+
+      <h2 data-i18n="s6_title">6. Data Retention</h2>
+      <p data-i18n="s6_p1">We retain your personal data only for as long as necessary to fulfill the purposes outlined in this policy, unless a longer retention period is required by law. When your data is no longer needed, we securely delete or anonymize it.</p>
+      <p data-i18n="s6_p2">Your AI agent's operational memory (context, learned workflows, business rules) is retained for the duration of your subscription and can be exported or deleted upon request.</p>
+
+      <h2 data-i18n="s7_title">7. Your Rights</h2>
+      <p data-i18n="s7_p1">Depending on your jurisdiction, you may have the following rights:</p>
+      <ul>
+        <li data-i18n="s7_li1"><strong>Access</strong> — request a copy of your personal data.</li>
+        <li data-i18n="s7_li2"><strong>Correction</strong> — request corrections to inaccurate or incomplete data.</li>
+        <li data-i18n="s7_li3"><strong>Deletion</strong> — request deletion of your personal data.</li>
+        <li data-i18n="s7_li4"><strong>Portability</strong> — receive your data in a structured, machine-readable format.</li>
+        <li data-i18n="s7_li5"><strong>Objection</strong> — object to certain processing activities.</li>
+        <li data-i18n="s7_li6"><strong>Restriction</strong> — request that we limit the processing of your data.</li>
+      </ul>
+      <p data-i18n="s7_p2">To exercise any of these rights, please contact us at <a href="mailto:hi@responin.com">hi@responin.com</a>.</p>
+
+      <h2 data-i18n="s8_title">8. Cookies</h2>
+      <p data-i18n="s8_p1">Our website uses cookies and similar tracking technologies to enhance your browsing experience. These include essential cookies for site functionality and analytics cookies to understand how visitors interact with our site. You can manage your cookie preferences through your browser settings at any time.</p>
+
+      <h2 data-i18n="s9_title">9. Third-Party Links</h2>
+      <p data-i18n="s9_p1">Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any third-party sites you visit.</p>
+
+      <h2 data-i18n="s10_title">10. Children's Privacy</h2>
+      <p data-i18n="s10_p1">Our services are intended for businesses and professionals. We do not knowingly collect personal information from children under 16. If we discover that we have collected data from a child under 16, we will delete it promptly.</p>
+
+      <h2 data-i18n="s11_title">11. International Data Transfers</h2>
+      <p data-i18n="s11_p1">Responin operates globally. Your data may be processed in countries other than your country of residence. We ensure that appropriate safeguards are in place, such as Standard Contractual Clauses, to protect your data in accordance with applicable regulations.</p>
+
+      <h2 data-i18n="s12_title">12. Changes to This Policy</h2>
+      <p data-i18n="s12_p1">We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy on our website and updating the "Last updated" date. Your continued use of our services after changes are posted constitutes your acceptance of the updated policy.</p>
+
+      <h2 data-i18n="s13_title">13. Contact Us</h2>
+      <p data-i18n="s13_p1">If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
+      <ul>
+        <li data-i18n="s13_li1"><strong>Email:</strong> <a href="mailto:hi@responin.com">hi@responin.com</a></li>
+        <li data-i18n="s13_li2"><strong>Website:</strong> <a href="https://responin.com">responin.com</a></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <span>© 2026 Responin. All rights reserved.</span>
+      <div style="display: flex; gap: 16px;">
+        <a href="index.html" data-i18n="footer_home">Home</a>
+        <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="termsofuse.html" data-i18n="footer_terms">Terms of Use</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        page_title: "Privacy Policy",
+        nav_back: "Home",
+        hero_title: "<span>Privacy Policy</span>",
+        hero_desc: "How we collect, use, and protect your personal data.",
+        last_updated: "Last updated: April 26, 2026",
+        s1_title: "1. Introduction",
+        s1_p1: 'Responin ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>responin.com</strong> and use our AI agent services.',
+        s1_p2: "By accessing or using our services, you agree to this Privacy Policy. If you do not agree, please do not use our services.",
+        s2_title: "2. Information We Collect",
+        s2a_title: "a) Information You Provide",
+        s2_li1: "<strong>Contact information</strong> — name, email address, company name, and industry when you join our waitlist or contact us.",
+        s2_li2: "<strong>Business context</strong> — workflows, processes, and operational details you share during onboarding and consultation.",
+        s2_li3: "<strong>Communication data</strong> — messages, emails, and feedback you send to us or through our AI agents.",
+        s2b_title: "b) Information Collected Automatically",
+        s2_li4: "<strong>Usage data</strong> — pages visited, time spent, interaction patterns, and feature usage within our platform.",
+        s2_li5: "<strong>Device information</strong> — browser type, operating system, IP address, and device identifiers.",
+        s2_li6: "<strong>Cookies and similar technologies</strong> — to improve your experience and analyze how our services are used.",
+        s3_title: "3. How We Use Your Information",
+        s3_p1: "We use your information to:",
+        s3_li1: "Build, train, and refine your personal AI agent to understand your specific business context and workflows.",
+        s3_li2: "Provide, maintain, and improve our services, including automated email orchestration, data entry, financial monitoring, and CRM workflows.",
+        s3_li3: "Communicate with you about service updates, new features, and support requests.",
+        s3_li4: "Analyze usage patterns to enhance performance, reliability, and user experience.",
+        s3_li5: "Comply with legal obligations and enforce our terms.",
+        s3_note: "<strong>🛡️ Privacy-First Architecture:</strong> Your personal AI agent operates within your own infrastructure. Your business data is never used to train public models or shared with third parties. Each agent's memory is isolated and belongs exclusively to you.",
+        s4_title: "4. Data Sharing and Disclosure",
+        s4_p1: 'We do <strong>not</strong> sell, rent, or trade your personal data. We may share your information only in the following circumstances:',
+        s4_li1: "<strong>Service providers</strong> — trusted third parties who help us deliver our services (e.g., cloud hosting, email delivery), bound by strict data protection agreements.",
+        s4_li2: "<strong>Legal requirements</strong> — when required by law, regulation, or legal process.",
+        s4_li3: "<strong>Business transfers</strong> — in connection with a merger, acquisition, or sale of assets, with assurance that your data will remain protected.",
+        s4_li4: "<strong>With your consent</strong> — when you have explicitly agreed to share your data.",
+        s5_title: "5. Data Security",
+        s5_p1: "We implement industry-standard security measures to protect your data, including:",
+        s5_li1: "Encryption of data in transit (TLS/SSL) and at rest (AES-256).",
+        s5_li2: "Access controls ensuring only authorized personnel can access your data.",
+        s5_li3: "Regular security assessments and vulnerability testing.",
+        s5_li4: "Isolation of each client's AI agent environment to prevent cross-contamination.",
+        s5_p2: "While we strive to protect your data, no method of electronic transmission or storage is 100% secure. We encourage you to use strong passwords and to contact us immediately if you suspect unauthorized access.",
+        s6_title: "6. Data Retention",
+        s6_p1: "We retain your personal data only for as long as necessary to fulfill the purposes outlined in this policy, unless a longer retention period is required by law. When your data is no longer needed, we securely delete or anonymize it.",
+        s6_p2: "Your AI agent's operational memory (context, learned workflows, business rules) is retained for the duration of your subscription and can be exported or deleted upon request.",
+        s7_title: "7. Your Rights",
+        s7_p1: "Depending on your jurisdiction, you may have the following rights:",
+        s7_li1: "<strong>Access</strong> — request a copy of your personal data.",
+        s7_li2: "<strong>Correction</strong> — request corrections to inaccurate or incomplete data.",
+        s7_li3: "<strong>Deletion</strong> — request deletion of your personal data.",
+        s7_li4: "<strong>Portability</strong> — receive your data in a structured, machine-readable format.",
+        s7_li5: "<strong>Objection</strong> — object to certain processing activities.",
+        s7_li6: "<strong>Restriction</strong> — request that we limit the processing of your data.",
+        s7_p2: 'To exercise any of these rights, please contact us at <a href="mailto:hi@responin.com">hi@responin.com</a>.',
+        s8_title: "8. Cookies",
+        s8_p1: "Our website uses cookies and similar tracking technologies to enhance your browsing experience. These include essential cookies for site functionality and analytics cookies to understand how visitors interact with our site. You can manage your cookie preferences through your browser settings at any time.",
+        s9_title: "9. Third-Party Links",
+        s9_p1: "Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any third-party sites you visit.",
+        s10_title: "10. Children's Privacy",
+        s10_p1: "Our services are intended for businesses and professionals. We do not knowingly collect personal information from children under 16. If we discover that we have collected data from a child under 16, we will delete it promptly.",
+        s11_title: "11. International Data Transfers",
+        s11_p1: "Responin operates globally. Your data may be processed in countries other than your country of residence. We ensure that appropriate safeguards are in place, such as Standard Contractual Clauses, to protect your data in accordance with applicable regulations.",
+        s12_title: "12. Changes to This Policy",
+        s12_p1: 'We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy on our website and updating the "Last updated" date. Your continued use of our services after changes are posted constitutes your acceptance of the updated policy.',
+        s13_title: "13. Contact Us",
+        s13_p1: "If you have any questions about this Privacy Policy or our data practices, please contact us:",
+        s13_li1: '<strong>Email:</strong> <a href="mailto:hi@responin.com">hi@responin.com</a>',
+        s13_li2: '<strong>Website:</strong> <a href="https://responin.com">responin.com</a>',
+        footer_home: "Home",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms of Use"
+      },
+      id: {
+        page_title: "Kebijakan Privasi",
+        nav_back: "Beranda",
+        hero_title: "<span>Kebijakan Privasi</span>",
+        hero_desc: "Bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi Anda.",
+        last_updated: "Terakhir diperbarui: 26 April 2026",
+        s1_title: "1. Pendahuluan",
+        s1_p1: 'Responin ("kami," "kita," atau "kami") berkomitmen untuk melindungi privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, dan menjaga informasi Anda ketika Anda mengunjungi website kami <strong>responin.com</strong> dan menggunakan layanan agen AI kami.',
+        s1_p2: "Dengan mengakses atau menggunakan layanan kami, Anda menyetujui Kebijakan Privasi ini. Jika Anda tidak setuju, mohon untuk tidak menggunakan layanan kami.",
+        s2_title: "2. Informasi yang Kami Kumpulkan",
+        s2a_title: "a) Informasi yang Anda Berikan",
+        s2_li1: "<strong>Informasi kontak</strong> — nama, alamat email, nama perusahaan, dan industri ketika Anda bergabung dengan waitlist atau menghubungi kami.",
+        s2_li2: "<strong>Konteks bisnis</strong> — alur kerja, proses, dan detail operasional yang Anda bagikan selama onboarding dan konsultasi.",
+        s2_li3: "<strong>Data komunikasi</strong> — pesan, email, dan umpan balik yang Anda kirim kepada kami atau melalui agen AI kami.",
+        s2b_title: "b) Informasi yang Dikumpulkan Secara Otomatis",
+        s2_li4: "<strong>Data penggunaan</strong> — halaman yang dikunjungi, waktu yang dihabiskan, pola interaksi, dan penggunaan fitur dalam platform kami.",
+        s2_li5: "<strong>Informasi perangkat</strong> — jenis browser, sistem operasi, alamat IP, dan pengenal perangkat.",
+        s2_li6: "<strong>Cookie dan teknologi serupa</strong> — untuk meningkatkan pengalaman Anda dan menganalisis penggunaan layanan kami.",
+        s3_title: "3. Bagaimana Kami Menggunakan Informasi Anda",
+        s3_p1: "Kami menggunakan informasi Anda untuk:",
+        s3_li1: "Membangun, melatih, dan menyempurnakan agen AI personal Anda agar memahami konteks dan alur kerja bisnis spesifik Anda.",
+        s3_li2: "Menyediakan, memelihara, dan meningkatkan layanan kami, termasuk orkestrasi email otomatis, entri data, pemantauan keuangan, dan alur kerja CRM.",
+        s3_li3: "Berkomunikasi dengan Anda tentang pembaruan layanan, fitur baru, dan permintaan dukungan.",
+        s3_li4: "Menganalisis pola penggunaan untuk meningkatkan kinerja, keandalan, dan pengalaman pengguna.",
+        s3_li5: "Mematuhi kewajiban hukum dan menegakkan ketentuan kami.",
+        s3_note: "<strong>🛡️ Arsitektur Privacy-First:</strong> Agen AI personal Anda beroperasi di dalam infrastruktur Anda sendiri. Data bisnis Anda tidak pernah digunakan untuk melatih model publik atau dibagikan kepada pihak ketiga. Memori setiap agen terisolasi dan hanya milik Anda.",
+        s4_title: "4. Pembagian dan Pengungkapan Data",
+        s4_p1: 'Kami <strong>tidak</strong> menjual, menyewakan, atau memperdagangkan data pribadi Anda. Kami hanya dapat membagikan informasi Anda dalam keadaan berikut:',
+        s4_li1: "<strong>Penyedia layanan</strong> — pihak ketiga terpercaya yang membantu kami menyediakan layanan (misalnya, hosting cloud, pengiriman email), yang terikat oleh perjanjian perlindungan data yang ketat.",
+        s4_li2: "<strong>Persyaratan hukum</strong> — ketika diwajibkan oleh hukum, regulasi, atau proses hukum.",
+        s4_li3: "<strong>Transfer bisnis</strong> — sehubungan dengan merger, akuisisi, atau penjualan aset, dengan jaminan bahwa data Anda akan tetap terlindungi.",
+        s4_li4: "<strong>Dengan persetujuan Anda</strong> — ketika Anda secara eksplisit setuju untuk membagikan data Anda.",
+        s5_title: "5. Keamanan Data",
+        s5_p1: "Kami menerapkan langkah-langkah keamanan standar industri untuk melindungi data Anda, termasuk:",
+        s5_li1: "Enkripsi data dalam transit (TLS/SSL) dan saat diam (AES-256).",
+        s5_li2: "Kontrol akses yang memastikan hanya personel yang berwenang dapat mengakses data Anda.",
+        s5_li3: "Penilaian keamanan dan pengujian kerentanan secara berkala.",
+        s5_li4: "Isolasi lingkungan agen AI setiap klien untuk mencegah kontaminasi silang.",
+        s5_p2: "Meskipun kami berupaya melindungi data Anda, tidak ada metode transmisi elektronik atau penyimpanan yang 100% aman. Kami mendorong Anda untuk menggunakan kata sandi yang kuat dan segera menghubungi kami jika Anda menduga akses tidak sah.",
+        s6_title: "6. Penyimpanan Data",
+        s6_p1: "Kami menyimpan data pribadi Anda hanya selama yang diperlukan untuk memenuhi tujuan yang diuraikan dalam kebijakan ini, kecuali jika periode penyimpanan yang lebih lama diwajibkan oleh hukum. Ketika data Anda tidak lagi diperlukan, kami menghapus atau menganonimkan data tersebut secara aman.",
+        s6_p2: "Memori operasional agen AI Anda (konteks, alur kerja yang dipelajari, aturan bisnis) disimpan selama durasi langganan Anda dan dapat diekspor atau dihapus sesuai permintaan.",
+        s7_title: "7. Hak-Hak Anda",
+        s7_p1: "Bergantung pada yurisdiksi Anda, Anda mungkin memiliki hak-hak berikut:",
+        s7_li1: "<strong>Akses</strong> — meminta salinan data pribadi Anda.",
+        s7_li2: "<strong>Koreksi</strong> — meminta perbaikan data yang tidak akurat atau tidak lengkap.",
+        s7_li3: "<strong>Penghapusan</strong> — meminta penghapusan data pribadi Anda.",
+        s7_li4: "<strong>Portabilitas</strong> — menerima data Anda dalam format terstruktur yang dapat dibaca mesin.",
+        s7_li5: "<strong>Keberatan</strong> — menolak aktivitas pemrosesan tertentu.",
+        s7_li6: "<strong>Pembatasan</strong> — meminta kami membatasi pemrosesan data Anda.",
+        s7_p2: 'Untuk menggunakan salah satu hak ini, silakan hubungi kami di <a href="mailto:hi@responin.com">hi@responin.com</a>.',
+        s8_title: "8. Cookie",
+        s8_p1: "Website kami menggunakan cookie dan teknologi pelacakan serupa untuk meningkatkan pengalaman penjelajahan Anda. Ini termasuk cookie esensial untuk fungsi situs dan cookie analitik untuk memahami bagaimana pengunjung berinteraksi dengan situs kami. Anda dapat mengelola preferensi cookie melalui pengaturan browser Anda kapan saja.",
+        s9_title: "9. Tautan Pihak Ketiga",
+        s9_p1: "Website kami mungkin berisi tautan ke situs web pihak ketiga. Kami tidak bertanggung jawab atas praktik privasi atau konten situs eksternal ini. Kami mendorong Anda untuk meninjau kebijakan privasi dari situs pihak ketiga yang Anda kunjungi.",
+        s10_title: "10. Privasi Anak",
+        s10_p1: "Layanan kami ditujukan untuk bisnis dan profesional. Kami tidak dengan sengaja mengumpulkan informasi pribadi dari anak-anak di bawah usia 16 tahun. Jika kami menemukan bahwa kami telah mengumpulkan data dari anak di bawah 16 tahun, kami akan segera menghapusnya.",
+        s11_title: "11. Transfer Data Internasional",
+        s11_p1: "Responin beroperasi secara global. Data Anda mungkin diproses di negara selain negara tempat tinggal Anda. Kami memastikan bahwa perlindungan yang sesuai telah diterapkan, seperti Klausul Kontrak Standar, untuk melindungi data Anda sesuai dengan regulasi yang berlaku.",
+        s12_title: "12. Perubahan pada Kebijakan Ini",
+        s12_p1: "Kami mungkin memperbarui Kebijakan Privasi ini dari waktu ke waktu. Kami akan memberitahu Anda tentang perubahan material dengan memposting kebijakan baru di website kami dan memperbarui tanggal \"Terakhir diperbarui\". Penggunaan layanan kami yang berkelanjutan setelah perubahan diposting merupakan penerimaan Anda atas kebijakan yang diperbarui.",
+        s13_title: "13. Hubungi Kami",
+        s13_p1: "Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini atau praktik data kami, silakan hubungi kami:",
+        s13_li1: '<strong>Email:</strong> <a href="mailto:hi@responin.com">hi@responin.com</a>',
+        s13_li2: '<strong>Website:</strong> <a href="https://responin.com">responin.com</a>',
+        footer_home: "Beranda",
+        footer_privacy: "Kebijakan Privasi",
+        footer_terms: "Ketentuan Penggunaan"
+      }
+    };
+
+    let currentLang = 'id';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      const t = translations[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) {
+          if (el.hasAttribute('data-i18n-html')) {
+            el.innerHTML = t[key];
+          } else {
+            el.innerHTML = t[key];
+          }
+        }
+      });
+      document.title = lang === 'id'
+        ? 'Kebijakan Privasi — Responin'
+        : 'Privacy Policy — Responin';
+      document.querySelectorAll('.lang-btn-nav').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+    }
+
+    // Theme
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('responin-theme', theme);
+    }
+    const savedTheme = localStorage.getItem('responin-theme') || 'dark';
+    setTheme(savedTheme);
+
+    setLang('id');
+  </script>
+</body>
+</html>
