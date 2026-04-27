@@ -49,8 +49,8 @@ function setLang(lang) {
     }
   } else {
     document.title = lang === 'id'
-      ? 'Responin — Masa Depan Operasi Bisnis Otonom'
-      : 'Responin — The Future of Autonomous Business Operations';
+      ? 'Responin — Agen AI Personal untuk Otomasi Bisnis Anda'
+      : 'Responin — Your Personal AI Agent for Business Automation';
   }
 
   // Update lang buttons (main page)

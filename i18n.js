@@ -16,9 +16,9 @@ const translations = {
 
       // Hero
       hero_badge: "Your Personal AI Agent",
-      hero_title: 'The Future of <span>Autonomous Business Operations</span>',
-      hero_desc: "Not a generic AI tool. Responin builds you a dedicated AI agent — one that learns your workflows, remembers your context, and operates with intimate knowledge of how your business runs.",
-      hero_cta_primary: "Join the Waitlist",
+      hero_title: 'Your Business Shouldn\'t Need You for <span>Every Little Thing</span>',
+      hero_desc: "Imagine a team member who never forgets, never sleeps, and knows your business like you do. That's not ChatGPT — that's your personal Responin agent. Built for your workflows. Trained on your context. Operating on your behalf.",
+      hero_cta_primary: "Join the Waitlist — Free AI Consultation",
       hero_cta_secondary: "See How It Works",
 
       // Stats
@@ -26,6 +26,7 @@ const translations = {
       stat_2_label: "Routine tasks automated",
       stat_3_label: "Always-on operations",
       stat_4_label: "From command to action",
+      stats_footnote: "Based on early deployment data",
 
       // VS Generic AI
       vs_label: "Why Not Just ChatGPT?",
@@ -203,8 +204,8 @@ const translations = {
 
       // CTA
       cta_title: "Ready to Automate?",
-      cta_desc: "Join the waitlist for a personal AI agent consultation and take the first step toward autonomous operations.",
-      cta_btn: "Get Started Today",
+      cta_desc: "Join the waitlist for a free AI readiness consultation — and take the first step toward autonomous operations.",
+      cta_btn: "Get Your Free AI Consultation",
 
       // FAQ
       faq_label: "Frequently Asked Questions",
@@ -243,7 +244,7 @@ const translations = {
       foot_legal_2: "Terms of Use",
 
       // Sticky CTA
-      sticky_cta_text: "Join the Waitlist",
+      sticky_cta_text: "Join Waitlist — Free Consultation",
 
       // Theme messages
       chat_theme_dark: "Dark mode activated — easy on the eyes 🌙",
@@ -459,9 +460,9 @@ const translations = {
 
       // Hero
       hero_badge: "Agen AI Personal Anda",
-      hero_title: 'Masa Depan <span>Operasi Bisnis Otonom</span>',
-      hero_desc: "Bukan sekadar alat AI generik. Responin membangun agen AI khusus untuk Anda — yang mempelajari alur kerja Anda, mengingat konteks bisnis Anda, dan beroperasi dengan pengetahuan mendalam tentang cara bisnis Anda berjalan.",
-      hero_cta_primary: "Daftar Waitlist",
+      hero_title: 'Bisnis Anda Seharusnya Tidak Perlu Anda untuk <span>Setiap Hal Kecil</span>',
+      hero_desc: "Bayangkan anggota tim yang tidak pernah lupa, tidak pernah tidur, dan mengenal bisnis Anda seperti Anda sendiri. Itu bukan ChatGPT — itu agen Responin personal Anda. Dibangun untuk alur kerja Anda. Dilatih pada konteks Anda. Beroperasi atas nama Anda.",
+      hero_cta_primary: "Daftar Waitlist — Konsultasi AI Gratis",
       hero_cta_secondary: "Lihat Cara Kerja",
 
       // Stats
@@ -469,6 +470,7 @@ const translations = {
       stat_2_label: "Tugas rutin terotomasi",
       stat_3_label: "Operasi nonstop 24/7",
       stat_4_label: "Dari perintah ke aksi",
+      stats_footnote: "Berdasarkan data deployment awal",
 
       // VS Generic AI
       vs_label: "Kenapa Bukan ChatGPT Saja?",
@@ -646,8 +648,8 @@ const translations = {
 
       // CTA
       cta_title: "Siap Mengotomasi?",
-      cta_desc: "Bergabunglah dengan waitlist untuk konsultasi agen AI personal dan ambil langkah pertama menuju operasi otonom.",
-      cta_btn: "Mulai Sekarang",
+      cta_desc: "Bergabunglah dengan waitlist untuk konsultasi kesiapan AI gratis — dan ambil langkah pertama menuju operasi otonom.",
+      cta_btn: "Dapatkan Konsultasi AI Gratis",
 
       // FAQ
       faq_label: "Pertanyaan yang Sering Diajukan",
@@ -686,7 +688,7 @@ const translations = {
       foot_legal_2: "Ketentuan Penggunaan",
 
       // Sticky CTA
-      sticky_cta_text: "Daftar Waitlist",
+      sticky_cta_text: "Daftar Waitlist — Konsultasi Gratis",
 
       // Theme messages
       chat_theme_dark: "Mode gelap aktif — nyaman untuk mata 🌙",
