@@ -31,7 +31,7 @@ const translations = {
       // Social Proof
       proof_badge: "🚀 Early Access",
       proof_text: "Built by entrepreneurs, for entrepreneurs. Responin was born from firsthand frustration with operational bottlenecks — and designed to eliminate them.",
-      proof_credit: "— Founded by a BINUS Business Creation graduate, built on OpenClaw open-source technology",
+      proof_credit: "— Built on OpenClaw open-source technology",
 
       // VS Generic AI
       vs_label: "Why Not Just ChatGPT?",
@@ -506,7 +506,7 @@ const translations = {
       // Social Proof
       proof_badge: "🚀 Akses Awal",
       proof_text: "Dibangun oleh pengusaha, untuk pengusaha. Responin lahir dari frustrasi langsung dengan kemacetan operasional — dan dirancang untuk menghapusnya.",
-      proof_credit: "— Didirikan oleh lulusan BINUS Business Creation, dibangun di atas teknologi open-source OpenClaw",
+      proof_credit: "— Dibangun di atas teknologi open-source OpenClaw",
 
       // VS Generic AI
       vs_label: "Kenapa Bukan ChatGPT Saja?",
