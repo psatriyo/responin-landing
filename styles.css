@@ -271,6 +271,10 @@ nav .container {
   background-clip: text; margin-bottom: 4px;
 }
 .stat-label { font-size: 0.85rem; color: var(--text-muted); }
+.stats-footnote {
+  font-size: 0.75rem; color: var(--text-muted); opacity: 0.6;
+  margin-top: 16px; font-style: italic;
+}
 
 /* --- Problem Section --- */
 .problem-grid {
