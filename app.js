@@ -71,7 +71,7 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
 
@@ -83,6 +83,14 @@ document.querySelectorAll('.solution-card, .problem-card, .step, .sector-card, .
 // Initialize with saved or default language
 const savedLang = localStorage.getItem('responin-lang') || 'id';
 setLang(savedLang);
+
+// === Comparison Table Scroll Hint ===
+document.querySelectorAll('.comparison-wrapper').forEach(wrapper => {
+  wrapper.addEventListener('scroll', () => {
+    const atEnd = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 4;
+    wrapper.classList.toggle('scrolled-end', atEnd);
+  });
+});
 
 // === Settings Dropdown ===
 function toggleSettings() {
@@ -257,9 +265,13 @@ function toggleFaq(btn) {
   const wasOpen = item.classList.contains('open');
   // Close all others
   document.querySelectorAll('.faq-item.open').forEach(el => {
-    if (el !== item) el.classList.remove('open');
+    if (el !== item) {
+      el.classList.remove('open');
+      el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+    }
   });
   item.classList.toggle('open', !wasOpen);
+  btn.setAttribute('aria-expanded', !wasOpen);
 }
 
 // === Animated Stats Counter ===

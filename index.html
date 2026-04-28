@@ -20,13 +20,17 @@
   <meta name="twitter:title" content="Responin — Your Personal AI Agent for Business Automation" />
   <meta name="twitter:description" content="Your personal AI agent that learns your workflows, remembers your context, and operates your business on your behalf." />
   <meta name="theme-color" content="#6c5ce7" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- Nav -->
   <nav>
@@ -72,7 +76,7 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" id="main">
     <div class="container">
       <div class="hero-badge">
         <span class="dot"></span>
@@ -130,9 +134,9 @@
         <table class="comparison-table">
           <thead>
             <tr>
-              <th data-i18n="ui.vs_head_dim"></th>
-              <th data-i18n="ui.vs_head_gen">Generic AI</th>
-              <th data-i18n="ui.vs_head_resp">Responin</th>
+              <th scope="col" data-i18n="ui.vs_head_dim"></th>
+              <th scope="col" data-i18n="ui.vs_head_gen">Generic AI</th>
+              <th scope="col" data-i18n="ui.vs_head_resp">Responin</th>
             </tr>
           </thead>
           <tbody>
@@ -489,9 +493,9 @@
         <table class="comparison-table">
           <thead>
             <tr>
-              <th data-i18n="ui.cmp_head_dim">Dimension</th>
-              <th data-i18n="ui.cmp_head_trad">RPA / Zapier / Make</th>
-              <th data-i18n="ui.cmp_head_resp">Responin</th>
+              <th scope="col" data-i18n="ui.cmp_head_dim">Dimension</th>
+              <th scope="col" data-i18n="ui.cmp_head_trad">RPA / Zapier / Make</th>
+              <th scope="col" data-i18n="ui.cmp_head_resp">Responin</th>
             </tr>
           </thead>
           <tbody>
@@ -575,7 +579,7 @@
       </div>
       <div class="faq-list">
         <div class="faq-item fade-up">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             <span data-i18n="ui.faq_q1">Is my data safe with Responin?</span>
             <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
           </button>
@@ -584,7 +588,7 @@
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             <span data-i18n="ui.faq_q2">How long until I see results?</span>
             <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
           </button>
@@ -593,7 +597,7 @@
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             <span data-i18n="ui.faq_q3">What if I already use [tool]?</span>
             <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
           </button>
@@ -602,7 +606,7 @@
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             <span data-i18n="ui.faq_q4">How is this different from ChatGPT or other AI tools?</span>
             <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
           </button>
@@ -611,7 +615,7 @@
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             <span data-i18n="ui.faq_q5">What if something goes wrong — can the AI make mistakes?</span>
             <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
           </button>
@@ -620,7 +624,7 @@
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             <span data-i18n="ui.faq_q6">Do I need a technical team to set this up?</span>
             <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
           </button>

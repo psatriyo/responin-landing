@@ -1,5 +1,14 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* --- Skip Link (A11y) --- */
+.skip-link {
+  position: absolute; top: -100%; left: 16px; z-index: 9999;
+  padding: 12px 24px; background: var(--accent); color: #fff;
+  border-radius: 0 0 8px 8px; font-size: 0.9rem; font-weight: 600;
+  text-decoration: none; transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
 :root {
   scroll-behavior: smooth;
 }
@@ -58,10 +67,15 @@ body {
 /* --- Nav --- */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  background: rgba(10, 10, 15, 0.8);
+  background: rgba(10, 10, 15, 0.95);
   border-bottom: 1px solid var(--border);
   transition: background 0.3s, border-color 0.3s;
+}
+@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+  nav {
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 10, 15, 0.8);
+  }
 }
 nav .container {
   display: flex; align-items: center; justify-content: space-between;
@@ -402,7 +416,18 @@ nav .container {
 }
 
 /* --- Comparison --- */
-.comparison-wrapper { margin-top: 56px; overflow-x: auto; }
+.comparison-wrapper {
+  margin-top: 56px; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  position: relative;
+}
+.comparison-wrapper::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 40px;
+  background: linear-gradient(to right, transparent, var(--bg-card));
+  pointer-events: none; opacity: 1; transition: opacity 0.3s;
+}
+.comparison-wrapper.scrolled-end::after { opacity: 0; }
 .comparison-table {
   width: 100%; border-collapse: separate; border-spacing: 0;
   background: var(--bg-card); border: 1px solid var(--border);
@@ -683,7 +708,7 @@ footer .container {
   --border: rgba(0, 0, 0, 0.08);
   --border-hover: rgba(108, 92, 231, 0.35);
   --text: #1a1a2e;
-  --text-muted: #6b6b80;
+  --text-muted: #5c5c72;
   --accent: #6c5ce7;
   --accent-light: #5a4bd4;
   --accent-glow: rgba(108, 92, 231, 0.12);
@@ -866,6 +891,7 @@ footer .container {
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
+  body { padding-bottom: 72px; }
   .hero { padding-top: 96px; padding-bottom: 48px; }
   .hero h1 { font-size: 2.25rem; }
   .hero p { font-size: 1rem; }
