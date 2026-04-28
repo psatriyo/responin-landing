@@ -18,6 +18,13 @@ const evalContent = i18nContent
   .replace(/let currentLang\s*=\s*['"][^'"]*['"];/, '');
 eval(evalContent);
 
+// Load legal translations (split into i18n-legal.js for performance)
+const i18nLegalPath = path.join(__dirname, 'i18n-legal.js');
+if (fs.existsSync(i18nLegalPath)) {
+  const legalEvalContent = fs.readFileSync(i18nLegalPath, 'utf-8');
+  eval(legalEvalContent);
+}
+
 const namespaces = ['ui', 'chat', 'gc', 'legal'];
 const langs = ['en', 'id'];
 let errors = [];
