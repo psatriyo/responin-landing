@@ -348,7 +348,7 @@ const translations = {
       stat_1_label: "Respons dukungan 3× lebih cepat",
       stat_2_label: "80%+ tugas rutin berjalan otomatis",
       stat_3_label: "Operasi nonstop, tanpa lembur",
-      stat_4_label: "Dari chat ke aksi dalam hitungan detik",,
+      stat_4_label: "Dari chat ke aksi dalam hitungan detik",
       stats_footnote: "Berdasarkan data deployment awal",
 
       // Social Proof
@@ -392,11 +392,11 @@ const translations = {
       chat_ex_2: "📦 Lacak pengiriman dan surat jalan",
       chat_ex_3: "📊 Ringkas penjualan",
       chat_ex_4: "✉️ Buat & kirim email",
-      chat_ex_5: "🔍 Cek riwayat pelanggan dan faktur pajak",,
+      chat_ex_5: "🔍 Cek riwayat pelanggan dan faktur pajak",
 
       // Group Chat Demo UI labels
       gc_label: "Atau... Tambahkan ke Group Chat",
-      gc_title: 'Agen AI Anda bekerja bersama tim, seperti rekan kerja yang tidak pernah tidur.',,
+      gc_title: 'Agen AI Anda bekerja bersama tim, seperti rekan kerja yang tidak pernah tidur.',
       gc_desc: "Tambahkan Responin ke channel tim Anda. Dia memantau, merangkum, mengeskalasi, dan bertindak, jadi tim Anda lebih sedikit mengurus koordinasi, lebih banyak eksekusi.",
       gc_ex_1: "📋 Update status proyek",
       gc_ex_2: "🚨 Eskalasi pesanan",
@@ -472,7 +472,7 @@ const translations = {
       step_1_desc: "Kami pelajari mendalam alur kerja Anda, identifikasi peluang otomasi dengan ROI tertinggi, dan petakan setiap serah terima, kemacetan, dan pengecualian. Anda tidak perlu menyiapkan apa pun, cukup beri tahu kami apa yang membuat Anda terjaga malam.",
       step_2_title: "Agen Anda Dibangun",
       step_2_desc: "Kami rancang agen AI personal Anda: kemampuan, memori, pemicu otomatis, aturan eskalasi, dan integrasi. Setiap agen dibangun untuk logika bisnis spesifik Anda dan belajar cara kerja Anda. Tanpa template, tanpa solusi seragam.",
-      step_3_title: "Minggu 3: Mulai Kerja — Penghematan Langsung Terasa",,
+      step_3_title: "Minggu 3: Mulai Kerja — Penghematan Langsung Terasa",
       step_3_desc: "Kami luncurkan agen Anda ke produksi dengan pengaman human-in-the-loop. Agen langsung menangani volume, tim Anda menangani nuansa. Penghematan waktu terasa sejak minggu pertama.",
       step_4_title: "Makin Cerdas Seiring Waktu",
       step_4_desc: "Agen Anda belajar dari setiap interaksi. Kami terus menyempurnakan, perluas cakupan, dan tambah otomasi baru seiring pertumbuhan bisnis Anda, sehingga nilai operasi AI Anda terus meningkat.",
