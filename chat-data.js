@@ -11,12 +11,12 @@ const chatScenarios = {
       { role: 'agent', html: 'Done! I\'ve sent Mary a delivery reminder for <span class="highlight">April 29</span>. She\'ll receive it via email and WhatsApp. Want me to follow up if she doesn\'t confirm by tomorrow?' }
     ],
     id: [
-      { role: 'user', text: 'Hai, apakah John sudah membayar invoice #1042?' },
-      { role: 'agent', html: 'Ya — John membayar invoice #1042 pada <span class="highlight">18 April</span> melalui transfer bank. Pembayaran sebesar <span class="highlight">Rp 12.500.000</span> sudah direkonsiliasi di sistem akuntansi Anda.' },
-      { role: 'user', text: 'Berapa total pesanan Mary dengan kami kuartal ini?' },
-      { role: 'agent', html: 'Mary telah melakukan <span class="highlight">7 pesanan</span> kuartal ini dengan total <span class="highlight">Rp 48.200.000</span>. Pesanan terakhirnya pada 22 April. Dia juga memiliki satu pengiriman tertunda yang dijadwalkan pada 29 April.' },
-      { role: 'user', text: 'Kirimkan pengingat tentang pengiriman itu.' },
-      { role: 'agent', html: 'Selesai! Saya sudah mengirim pengingat pengiriman untuk <span class="highlight">29 April</span> ke Mary melalui email dan WhatsApp. Mau saya follow up kalau belum konfirmasi besok?' }
+      { role: 'user', text: 'Hai, John udah bayar invoice #1042 belum?' },
+      { role: 'agent', html: 'Udah — John bayar invoice #1042 tanggal <span class="highlight">18 April</span> via transfer bank. Pembayaran <span class="highlight">Rp 12.500.000</span> udah direkonsiliasi di sistem akuntansi Anda.' },
+      { role: 'user', text: 'Total pesanan Mary kuartal ini berapa?' },
+      { role: 'agent', html: 'Mary udah <span class="highlight">7 pesanan</span> kuartal ini, total <span class="highlight">Rp 48.200.000</span>. Pesanan terakhirnya 22 April. Dia juga punya satu pengiriman tertunda yang dijadwalkan 29 April.' },
+      { role: 'user', text: 'Kirim pengingat pengiriman itu dong.' },
+      { role: 'agent', html: 'Selesai! Pengingat pengiriman untuk <span class="highlight">29 April</span> udah dikirim ke Mary via email dan WhatsApp. Mau saya follow up kalau belum konfirmasi besok?' }
     ]
   },
   delivery: {
@@ -27,10 +27,10 @@ const chatScenarios = {
       { role: 'agent', html: 'Done! I\'ve sent a tracking update to <span class="highlight">Budi Santoso</span> via WhatsApp and email. He\'ll get a confirmation once it\'s delivered.' }
     ],
     id: [
-      { role: 'user', text: 'Di mana pesanan #8834 sekarang?' },
-      { role: 'agent', html: 'Pesanan #8834 saat ini <span class="highlight">dalam perjalanan</span> — terakhir dipindai di hub penyortiran Jakarta pukul <span class="highlight">14:45</span>. Estimasi pengiriman: besok pukul 17:00.' },
-      { role: 'user', text: 'Bisa beri tahu pelanggannya?' },
-      { role: 'agent', html: 'Selesai! Saya sudah mengirim pembaruan pelacakan ke <span class="highlight">Budi Santoso</span> melalui WhatsApp dan email. Dia akan menerima konfirmasi setelah pesanan diterima.' }
+      { role: 'user', text: 'Pesanan #8834 sekarang di mana?' },
+      { role: 'agent', html: 'Pesanan #8834 saat ini <span class="highlight">dalam perjalanan</span> — terakhir dipindai di hub sortir Jakarta pukul <span class="highlight">14:45</span>. Estimasi pengiriman: besok pukul 17:00.' },
+      { role: 'user', text: 'Bisa info pelanggannya?' },
+      { role: 'agent', html: 'Selesai! Update pelacakan udah dikirim ke <span class="highlight">Budi Santoso</span> via WhatsApp dan email. Dia bakal dapat konfirmasi setelah pesanan diterima.' }
     ]
   },
   sales: {
@@ -42,9 +42,9 @@ const chatScenarios = {
     ],
     id: [
       { role: 'user', text: 'Kasih ringkasan penjualan bulan ini.' },
-      { role: 'agent', html: 'Bulan ini: pendapatan <span class="highlight">Rp 2,4 miliar</span> dari <span class="highlight">342 transaksi</span>. Kategori teratas adalah Elektronik sebesar 38%. Pendapatan naik <span class="highlight">12%</span> dibanding bulan lalu. Pelanggan teratas: PT Mitra Abadi sebesar Rp 310 juta.' },
-      { role: 'user', text: 'Bagaimana perbandingannya dengan periode yang sama tahun lalu?' },
-      { role: 'agent', html: 'April tahun lalu <span class="highlight">Rp 1,9 miliar</span> — jadi naik <span class="highlight">26% YoY</span>. Pertumbuhan terutama didorong oleh Elektronik (+34%) dan Rumah & Hunian (+18%). Mau rincian lengkap per lini produk?' }
+      { role: 'agent', html: 'Bulan ini: pendapatan <span class="highlight">Rp 2,4 miliar</span> dari <span class="highlight">342 transaksi</span>. Kategori teratas Elektronik di 38%. Pendapatan naik <span class="highlight">12%</span> vs bulan lalu. Pelanggan teratas: PT Mitra Abadi sebesar Rp 310 juta.' },
+      { role: 'user', text: 'Bandingannya dengan periode yang sama tahun lalu gimana?' },
+      { role: 'agent', html: 'April tahun lalu <span class="highlight">Rp 1,9 miliar</span> — jadi naik <span class="highlight">26% YoY</span>. Pertumbuhan didorong terutama oleh Elektronik (+34%) dan Rumah & Hunian (+18%). Mau rincian lengkap per lini produk?' }
     ]
   },
   email: {
@@ -55,10 +55,10 @@ const chatScenarios = {
       { role: 'agent', html: 'Sent! The email has been delivered to <span class="highlight">hendri@sentsa.co.id</span> with the sales team CC\'d. I\'ll flag it if there\'s no reply within <span class="highlight">48 hours</span>.' }
     ],
     id: [
-      { role: 'user', text: 'Buat email tindak lanjut ke PT Sentosa tentang proposal yang tertunda.' },
-      { role: 'agent', html: 'Ini draft-nya:<br><br>Subjek: <span class="highlight">Tindak Lanjut: Proposal Kemitraan Responin</span><br><br>Halo Pak Hendri,<br><br>Saya ingin menindaklanjuti proposal yang kami kirim minggu lalu terkait kemitraan Responin. Kami senang bisa mendiskusikan pertanyaan atau penyesuaian. Apakah Kamis ini bisa untuk telepon singkat?<br><br>Salam hormat' },
-      { role: 'user', text: 'Kirim, dan CC tim sales.' },
-      { role: 'agent', html: 'Terkirim! Email telah dikirim ke <span class="highlight">hendri@sentsa.co.id</span> dengan CC ke tim sales. Saya akan menandai jika tidak ada balasan dalam <span class="highlight">48 jam</span>.' }
+      { role: 'user', text: 'Buat email follow-up ke PT Sentosa soal proposal yang belum dibales.' },
+      { role: 'agent', html: 'Ini draft-nya:<br><br>Subjek: <span class="highlight">Follow Up: Proposal Kemitraan Responin</span><br><br>Halo Pak Hendri,<br><br>Saya mau follow up proposal yang kami kirim minggu lalu terkait kemitraan Responin. Kami senang bisa diskusi kalau ada pertanyaan atau penyesuaian. Kamis ini bisa telepon singkat?<br><br>Salam hormat' },
+      { role: 'user', text: 'Kirim, CC tim sales juga.' },
+      { role: 'agent', html: 'Terkirim! Email udah sampai ke <span class="highlight">hendri@sentsa.co.id</span> dengan CC ke tim sales. Saya bakal tandai kalau nggak ada balasan dalam <span class="highlight">48 jam</span>.' }
     ]
   },
   customer: {
@@ -69,10 +69,10 @@ const chatScenarios = {
       { role: 'agent', html: 'One ticket from <span class="highlight">April 10</span> about a delayed shipment — resolved within 24 hours. They gave <span class="highlight">4.8/5</span> on the last satisfaction survey. Overall, a healthy account with no red flags.' }
     ],
     id: [
-      { role: 'user', text: 'Tampilkan profil lengkap PT Karya Mandiri.' },
-      { role: 'agent', html: 'PT Karya Mandiri — aktif sejak <span class="highlight">Maret 2023</span>. Nilai seumur hidup: <span class="highlight">Rp 1,2 miliar</span>. Total 42 pesanan, pesanan terakhir pada 15 April. Kontak utama: Ibu Rina (Pengadaan). Syarat pembayaran: Net 30. Tidak ada invoice yang tertunggak.' },
-      { role: 'user', text: 'Ada masalah atau keluhan dari mereka belakangan ini?' },
-      { role: 'agent', html: 'Satu tiket dari <span class="highlight">10 April</span> tentang pengiriman yang tertunda — diselesaikan dalam 24 jam. Mereka memberi skor <span class="highlight">4,8/5</span> pada survei kepuasan terakhir. Secara keseluruhan, akun sehat tanpa tanda bahaya.' }
+      { role: 'user', text: 'Tampilin profil lengkap PT Karya Mandiri.' },
+      { role: 'agent', html: 'PT Karya Mandiri — aktif sejak <span class="highlight">Maret 2023</span>. Nilai seumur hidup: <span class="highlight">Rp 1,2 miliar</span>. Total 42 pesanan, terakhir 15 April. Kontak utama: Ibu Rina (Pengadaan). Syarat pembayaran: Net 30. Nggak ada invoice tertunggak.' },
+      { role: 'user', text: 'Ada masalah atau keluhan dari mereka akhir-akhir ini?' },
+      { role: 'agent', html: 'Satu tiket dari <span class="highlight">10 April</span> soal pengiriman tertunda — resolved dalam 24 jam. Survei kepuasan terakhir skor <span class="highlight">4,8/5</span>. Secara keseluruhan, akun sehat tanpa red flag.' }
     ]
   }
 };
