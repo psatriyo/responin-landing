@@ -430,7 +430,7 @@ const translations = {
       why_p2_title: "Bertindak, Bukan Sekadar Ngasih Saran",
       why_p2_desc: "Bukan cuma \"ini yang sebaiknya kamu lakukan.\" Agen Responin Anda ngirim email, update CRM, eskalasi tiket, dan follow up, atas nama Anda, dengan konteks Anda.",
       why_p3_title: "Aman, Bukan Ceroboh",
-      why_p3_desc: "Pengaman human-in-the-loop artinya Anda yang approve hal penting. Agen nangani volume, Anda nangani nuansa. Data Anda tetap di lingkungan sendiri, nggak pernah dibagikan, nggak pernah dipakai melatih model publik.",
+      why_p3_desc: "Pengaman human-in-the-loop artinya Anda yang approve hal penting. Agen menangani volume, Anda menangani nuansa. Data Anda tetap di lingkungan sendiri, nggak pernah dibagikan, nggak pernah dipakai melatih model publik.",
 
       // Solutions
       solutions_label: "Solusi Utama",
@@ -446,7 +446,7 @@ const translations = {
       sol_3_desc: "Dari nyusun respons personal sampai ngirim update terjadwal dan naikkan eskalasi thread yang nggak dibales, AI kami kelola inbox Anda dengan presisi profesional. Email yang udah yakin dikirim otomatis; yang kompleks masuk review manusia.",
       sol_3_tag: "Eskalasi Cerdas",
       sol_4_title: "Pemetaan Proses Ujung-ke-Ujung",
-      sol_4_desc: "Bukan cuma tugas sederhana. Kami arsitek instance otomasi kustom yang disesuaikan dengan industri Anda. Dari rantai persetujuan multi-langkah sampai serah terima lintas departemen, agen Anda nangani setiap proses dengan memori dan konteks.",
+      sol_4_desc: "Bukan cuma tugas sederhana. Kami arsitek instance otomasi kustom yang disesuaikan dengan industri Anda. Dari rantai persetujuan multi-langkah sampai serah terima lintas departemen, agen Anda menangani setiap proses dengan memori dan konteks.",
       sol_4_tag: "Arsitektur Kustom",
       sol_5_title: "Pemantauan Keuangan & Peringatan",
       sol_5_desc: "Agen AI Anda nyambung ke sistem akuntansi dan perbankan, pantau posisi kas tiap hari, kirim peringatan kalau ambang batas tercapai, kelola invoice jatuh tempo dengan logika eskalasi, dan bikin proyeksi mingguan secara otonom.",
@@ -473,7 +473,7 @@ const translations = {
       step_2_title: "Agen Anda Dibangun",
       step_2_desc: "Kami rancang agen AI personal Anda: skill-nya, memori, pemicu, aturan eskalasi, dan integrasi. Setiap agen dibangun buat logika bisnis spesifik Anda dan belajar cara kerja Anda. Tanpa template, tanpa one-size-fits-all.",
       step_3_title: "Mulai Kerja dari Hari ke-1",
-      step_3_desc: "Kami luncurkan agen Anda ke produksi dengan pengaman human-in-the-loop. Agen langsung nangani volume, tim Anda nangani nuansa. Penghematan waktu kerasa dari minggu pertama.",
+      step_3_desc: "Kami luncurkan agen Anda ke produksi dengan pengaman human-in-the-loop. Agen langsung menangani volume, tim Anda menangani nuansa. Penghematan waktu kerasa dari minggu pertama.",
       step_4_title: "Makin Cerdas Seiring Waktu",
       step_4_desc: "Agen Anda belajar dari tiap interaksi. Kami terus refine, perluas cakupan, dan tambah otomasi baru seiring pertumbuhan bisnis Anda, jadi nilai operasi AI Anda berlipat ganda seiring waktu.",
 
@@ -573,9 +573,9 @@ const translations = {
       faq_q4: "Apa bedanya dengan ChatGPT atau alat AI lain?",
       faq_a4: "Alat AI generik lupa semuanya setiap kali sesi berakhir dan kasih jawaban yang sama ke semua orang. Responin bangun agen personal yang belajar alur kerja Anda, ingat konteks Anda, dan beneran bertindak atas nama Anda, bukan cuma saran, tapi eksekusi.",
       faq_q5: "Bagaimana kalau ada kesalahan, apakah AI bisa salah?",
-      faq_a5: "Setiap agen Responin di-deploy dengan pengaman human-in-the-loop. Tugas yang udah yakin jalan otomatis; keputusan yang ragu dirutekan ke Anda buat approval. Anda tetap kendali, agen nangani volume, Anda nangani nuansa.",
+      faq_a5: "Setiap agen Responin di-deploy dengan pengaman human-in-the-loop. Tugas yang udah yakin jalan otomatis; keputusan yang ragu dirutekan ke Anda buat approval. Anda tetap kendali, agen menangani volume, Anda menangani nuansa.",
       faq_q6: "Apakah saya butuh tim teknis buat setup?",
-      faq_a6: "Nggak perlu sama sekali. Kami yang nangani arsitektur, deployment, dan refinement berkelanjutan. Anda cuma perlu kasih tahu apa yang harus terjadi di bisnis Anda, kami bangun agen yang mewujudkannya. Nggak perlu coding dari pihak Anda.",
+      faq_a6: "Nggak perlu sama sekali. Kami yang menangani arsitektur, deployment, dan refinement berkelanjutan. Anda cuma perlu kasih tahu apa yang harus terjadi di bisnis Anda, kami bangun agen yang mewujudkannya. Nggak perlu coding dari pihak Anda.",
 
       // Footer
       footer_desc: "Konsultan dan agensi otomasi berbasis AI. Mengubah operasi bisnis melalui alur kerja cerdas dan otonom yang didukung OpenClaw.",
