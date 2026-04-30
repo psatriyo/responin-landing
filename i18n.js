@@ -342,7 +342,7 @@ const translations = {
       hero_title: 'Bisnis Anda Tidak Harus Bergantung pada Anda untuk <span>Setiap Hal Kecil</span>',
       hero_desc: "Otomasi bisnis tanpa kode: agen AI pribadi yang mengenal setiap proses, tim, dan preferensi Anda. Tidak pernah lupa, tidak pernah tidur, dan bekerja 24/7 — bukan cuma chatbot, tapi eksekutor. Didesain untuk cara kerja Anda. Dilatih dari konteks Anda. Bekerja atas nama Anda.",
       hero_cta_primary: "Daftar Waitlist · Konsultasi AI Gratis",
-      hero_cta_secondary: "Lihat Cara Kerjanya",
+      hero_cta_secondary: "Lihat Demo",
 
       // Stats
       stat_1_label: "Waktu respons dukungan lebih cepat",
@@ -353,7 +353,7 @@ const translations = {
 
       // Social Proof
       proof_badge: "🚀 Akses Awal",
-      proof_text: "Dibangun oleh pengusaha, untuk pengusaha. Responin lahir dari frustrasi nyata soal kemacetan operasional, dan dirancang untuk menghapusnya sama sekali.",
+      proof_text: "Dibangun oleh pengusaha, untuk pengusaha. Responin lahir dari frustrasi nyata soal kemacetan operasional, dan dirancang untuk menghilangkannya.",
       proof_credit: "Dibangun di atas teknologi open-source OpenClaw",
 
       // VS Generic AI
@@ -375,7 +375,7 @@ const translations = {
       vs_r4_c2: "Statis. Tidak belajar, tidak berkembang bersama Anda",
       vs_r4_c3: "Tumbuh bersama Anda, makin cerdas di setiap interaksi",
       vs_r5_c1: "Aksi",
-      vs_r5_c2: "Kasih saran doang, Anda yang kerja manual",
+      vs_r5_c2: "Hanya memberi saran, Anda yang mengerjakan manual",
       vs_r5_c3: "Bertindak atas nama Anda: kirim, cek, update, eskalasi",
       vs_r6_c1: "Integrasi",
       vs_r6_c2: "Kotak teks terisolasi, tidak terhubung ke alat Anda",
@@ -396,14 +396,14 @@ const translations = {
 
       // Group Chat Demo UI labels
       gc_label: "Atau... Tambahkan ke Group Chat",
-      gc_title: 'Agen AI Anda bekerja bareng tim, kayak rekan kerja yang tidak pernah tidur.',
+      gc_title: 'Agen AI Anda bekerja bersama tim, seperti rekan kerja yang tidak pernah tidur.',,
       gc_desc: "Tambahkan Responin ke channel tim Anda. Dia memantau, merangkum, mengeskalasi, dan bertindak, jadi tim Anda lebih sedikit mengurus koordinasi, lebih banyak eksekusi.",
       gc_ex_1: "📋 Update status proyek",
       gc_ex_2: "🚨 Eskalasi pesanan",
       gc_ex_3: "📊 Ringkasan mingguan",
       gc_group_name: "Marketing & Operasi",
       gc_group_status: "Rizal, Andi, Sari & Responin",
-      gc_placeholder: "Ketik pesan...",
+      gc_placeholder: "Tulis pesan Anda...",
 
       // Problem
       problem_label: "Masalahnya",
@@ -437,7 +437,7 @@ const translations = {
       solutions_title: "9 Cara Agen AI Menghemat 10+ Jam per Minggu untuk Bisnis Anda.",
       solutions_desc: "Setiap solusi disesuaikan dengan alur kerja spesifik Anda dan didukung oleh agen AI personal Anda. Bukan template generik, otomasi cerdas yang beneran ngerti bisnis Anda.",
       sol_1_title: "Pengingat Internal Cerdas",
-      sol_1_desc: "Satu pun tugas nggak boleh lolos. AI proaktif kami pantau timeline Anda dan pastikan tim Anda selalu selangkah di depan tenggat, bukan cuma ngingetin, tapi ngasih dorongan kontekstual dengan info yang tepat di waktu yang tepat.",
+      sol_1_desc: "Tidak satu pun tugas yang boleh terlewat. AI proaktif kami pantau timeline Anda dan pastikan tim Anda selalu selangkah di depan tenggat, bukan cuma mengingatkan, tapi memberikan dorongan kontekstual dengan informasi yang tepat di waktu yang tepat.",
       sol_1_tag: "Manajemen Tenggat",
       sol_2_title: "Entri Data Pakai Bahasa Alami",
       sol_2_desc: "Lupakan spreadsheet rumit dan formulir kaku. Update database bisnis Anda cukup dengan perintah suara atau teks dalam bahasa Inggris atau Bahasa Indonesia. Agen memahami konteks, langsung dipetakan ke bidang yang sesuai, dan dicatat dengan akurat.",
@@ -452,7 +452,7 @@ const translations = {
       sol_5_desc: "Agen AI Anda nyambung ke sistem akuntansi dan perbankan, pantau posisi kas tiap hari, kirim peringatan kalau ambang batas tercapai, kelola invoice jatuh tempo dengan logika eskalasi, dan bikin proyeksi mingguan secara otonom.",
       sol_5_tag: "Intelijen Arus Kas",
       sol_6_title: "Alur Kerja Penjualan & CRM",
-      sol_6_desc: "Auto-temukan kontak baru, catat notulensi rapat dari pesan suara singkat, dan dapat peringatan proaktif kalau deal mulai stagnan. Agen AI Anda mastiin nggak ada yang lolos, jadi tim sales fokus nutup deal, bukan ngurus administrasi.",
+      sol_6_desc: "Temukan kontak baru secara otomatis, catat notulensi rapat dari pesan suara singkat, dan dapatkan peringatan proaktif saat deal mulai stagnan. Agen AI Anda memastikan tidak ada yang terlewat, sehingga tim sales fokus menutup deal, bukan mengurus administrasi.",
       sol_6_tag: "Akselerasi Pipeline",
       sol_7_title: "Otomasi Dukungan Pelanggan",
       sol_7_desc: "Agen AI pantau saluran dukungan masuk, baca permintaan, konsultasi basis pengetahuan, dan susun respons. 60%+ ditangani otonom. Sisanya? Udah disusun dan siap review manusia satu klik.",
@@ -469,13 +469,13 @@ const translations = {
       how_title: "Dari Manual ke Otomatis dalam 4 Minggu — Tanpa Gangguan Operasi.",
       how_desc: "Kami nggak cuma pasang alat terus pergi. Kami arsitek, deploy, dan refine operasi AI yang jadi bagian dari cara bisnis Anda berjalan.",
       step_1_title: "Kami Pelajari Bisnis Anda",
-      step_1_desc: "Kami selami alur kerja Anda, identifikasi peluang otomasi dengan ROI tertinggi, dan petakan setiap serah terima, kemacetan, dan pengecualian. Anda nggak perlu siapin apa pun, cukup kasih tahu apa yang bikin Anda terjaga malam.",
+      step_1_desc: "Kami pelajari mendalam alur kerja Anda, identifikasi peluang otomasi dengan ROI tertinggi, dan petakan setiap serah terima, kemacetan, dan pengecualian. Anda tidak perlu menyiapkan apa pun, cukup beri tahu kami apa yang membuat Anda terjaga malam.",
       step_2_title: "Agen Anda Dibangun",
       step_2_desc: "Kami rancang agen AI personal Anda: kemampuan, memori, pemicu otomatis, aturan eskalasi, dan integrasi. Setiap agen dibangun untuk logika bisnis spesifik Anda dan belajar cara kerja Anda. Tanpa template, tanpa solusi seragam.",
       step_3_title: "Mulai Kerja dari Hari ke-1",
-      step_3_desc: "Kami luncurkan agen Anda ke produksi dengan pengaman human-in-the-loop. Agen langsung menangani volume, tim Anda menangani nuansa. Penghematan waktu kerasa dari minggu pertama.",
+      step_3_desc: "Kami luncurkan agen Anda ke produksi dengan pengaman human-in-the-loop. Agen langsung menangani volume, tim Anda menangani nuansa. Penghematan waktu terasa sejak minggu pertama.",
       step_4_title: "Makin Cerdas Seiring Waktu",
-      step_4_desc: "Agen Anda belajar dari tiap interaksi. Kami terus refine, perluas cakupan, dan tambah otomasi baru seiring pertumbuhan bisnis Anda, jadi nilai operasi AI Anda berlipat ganda seiring waktu.",
+      step_4_desc: "Agen Anda belajar dari setiap interaksi. Kami terus menyempurnakan, perluas cakupan, dan tambah otomasi baru seiring pertumbuhan bisnis Anda, sehingga nilai operasi AI Anda terus meningkat.",
 
       // Industries
       industries_label: "Industri",
@@ -491,7 +491,7 @@ const translations = {
       sec_finance_after_label: "Setelah Responin",
       sec_finance_after: "Agen Anda memantau transaksi real-time, menandai anomali otomatis, membuat laporan kepatuhan, dan mengelola invoice jatuh tempo dengan logika eskalasi cerdas.",
       sec_retail_title: "Retail & Perdagangan",
-      sec_retail_desc: "Auto-update inventaris, sinkron listing lintas platform, dan tangani pertanyaan pesanan instan, nggak ada yang lolos.",
+      sec_retail_desc: "Pembaruan inventaris otomatis, sinkronisasi listing lintas platform, dan tangani pertanyaan pesanan instan, tidak ada yang terlewat.",
       sec_retail_before_label: "Sebelumnya",
       sec_retail_before: "3 staf habiskan 4+ jam sehari buat pertanyaan pesanan, update inventaris, dan sinkronisasi listing lintas platform.",
       sec_retail_after_label: "Setelah Responin",
@@ -501,7 +501,7 @@ const translations = {
       sec_legal_title: "Hukum",
       sec_legal_desc: "Susun kontrak standar, lacak tenggat pengajuan, dan atur dokumen kasus secara otomatis. Kurangi waktu administrasi, tingkatkan fokus strategi.",
       sec_logistics_title: "Logistik & Rantai Pasok",
-      sec_logistics_desc: "Auto-rute pengiriman, sinkron status gudang, dan kirim update pengiriman proaktif, barang terus bergerak, klien terinformasi.",
+      sec_logistics_desc: "Penentuan rute pengiriman otomatis, sinkronisasi status gudang, dan kirim update pengiriman proaktif, barang terus bergerak, klien terinformasi.",
       sec_education_title: "Pendidikan",
       sec_education_desc: "Tangani pertanyaan pendaftaran, jadwalkan kelas, dan kirim notifikasi nilai, pendidik fokus mengajar, bukan ngurus administrasi.",
       sec_realestate_title: "Real Estate",
@@ -562,7 +562,7 @@ const translations = {
       cta_btn: "Dapatkan Konsultasi AI Gratis",
 
       // FAQ
-      faq_label: "Pertanyaan yang Sering Diajukan",
+      faq_label: "FAQ",
       faq_title: "Ada pertanyaan? Kami punya jawabannya.",
       faq_q1: "Apakah data saya aman dengan Responin?",
       faq_a1: "Pasti aman. Data Anda nggak pernah keluar dari lingkungan Anda. Agen Responin beroperasi di dalam infrastruktur sendiri, nggak ada yang dibagikan, nggak ada yang dipakai melatih model publik. Kami bangun arsitektur privacy-first di setiap deployment.",
@@ -570,7 +570,6 @@ const translations = {
       faq_a2: "Sebagian besar bisnis udah kerasa penghematan waktu yang terukur dalam minggu pertama deployment. Alur otomasi lengkap biasanya butuh 2-4 minggu buat diarsitek, di-deploy, dan di-refine. ROI kliatan dari hari pertama, dan makin besar dari sana.",
       faq_q3: "Bagaimana kalau saya sudah menggunakan software lain?",
       faq_a3: "Semakin baik, Responin bekerja bersama software yang sudah Anda gunakan, bukan melawannya. Kami integrasi dengan CRM, email, software akuntansi, manajemen proyek, dan lainnya. Agen Anda terhubung ke apa yang sudah ada dan membuat semuanya berjalan bersama dengan mulus.",
-      faq_a3: "Makin bagus, Responin kerja bareng alat yang udah Anda pakai, bukan melawannya. Kami integrasi dengan CRM, email, software akuntansi, manajemen proyek, dan lainnya. Agen Anda nyambung ke apa yang udah ada dan bikin semuanya jalan bareng dengan mulus.",
       faq_q4: "Apa bedanya dengan ChatGPT atau alat AI lain?",
       faq_a4: "Alat AI generik lupa semuanya setiap kali sesi berakhir dan kasih jawaban yang sama ke semua orang. Responin bangun agen personal yang belajar alur kerja Anda, ingat konteks Anda, dan beneran bertindak atas nama Anda, bukan cuma saran, tapi eksekusi.",
       faq_q5: "Bagaimana kalau ada kesalahan, apakah AI bisa salah?",
@@ -591,7 +590,7 @@ const translations = {
       foot_comp_1: "Tentang",
       foot_comp_2: "Cara Kerja",
       foot_comp_3: "Industri",
-      foot_comp_4: "Perbandingan",
+      foot_comp_4: "Bandingkan",
       foot_comp_5: "Kontak",
       foot_comp_6: "FAQ",
       footer_legal: "Legal",
@@ -599,7 +598,7 @@ const translations = {
       foot_legal_2: "Ketentuan Penggunaan",
 
       // Sticky CTA
-      sticky_cta_text: "Daftar Waitlist · Konsultasi AI Gratis",,
+      sticky_cta_text: "Daftar Waitlist · Konsultasi AI Gratis",
 
       // Theme messages
       chat_theme_dark: "Mode gelap aktif, nyaman buat mata 🌙",
