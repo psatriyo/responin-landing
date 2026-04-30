@@ -288,7 +288,7 @@ legal: {
       terms_s9_li1: 'Responin disediakan "sebagaimana adanya" dan "sebagaimana tersedia" tanpa jaminan apa pun, baik tersurat maupun tersirat.',
       terms_s9_li2: "Kami tidak bertanggung jawab atas kerugian tidak langsung, insidental, khusus, atau konsekuensial yang timbul dari penggunaan layanan Anda.",
       terms_s9_li3: "Total tanggung jawab kami atas klaim apa pun yang timbul dari ketentuan ini tidak boleh melebihi biaya yang Anda bayarkan kepada Responin dalam dua belas (12) bulan sebelum klaim.",
-      terms_s9_li4: "Kami tidak bertanggung jawab atas keputusan yang dibuat berdasarkan output yang dihasilkan AI. Anda bertanggung jawab untuk meninjau dan menyetujui semua tindakan agen.",
+      terms_s9_li4: "Anda tetap bertanggung jawab atas keputusan bisnis yang diambil berdasarkan rekomendasi agen. Kami menyarankan verifikasi untuk keputusan kritis sebelum eksekusi.",
       terms_s10_title: "10. Ganti Rugi",
       terms_s10_p1: "Anda setuju untuk mengganti kerugian dan membebaskan Responin, afiliasinya, pejabat, direktur, karyawan, dan agennya dari segala klaim, kerugian, kehilangan, atau pengeluaran (termasuk biaya hukum yang wajar) yang timbul dari penggunaan layanan Anda, pelanggaran ketentuan ini, atau pelanggaran hak pihak lain.",
       terms_s11_title: "11. Pengakhiran",
