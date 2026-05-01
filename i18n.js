@@ -36,7 +36,7 @@ const translations = {
       // VS Generic AI
       vs_label: "Why Not Just ChatGPT?",
       vs_title: "A personal AI agent is not the same as a generic chatbot.",
-      vs_head_dim: "",
+      vs_head_dim: "Dimension",
       vs_head_gen: "Generic AI",
       vs_head_resp: "Responin",
       vs_r1_c1: "Memory",
@@ -253,6 +253,8 @@ const translations = {
       faq_a5: "Every Responin agent deploys with human-in-the-loop safeguards. High-confidence tasks run automatically; uncertain decisions get routed to you for approval. You stay in control: the agent handles the volume, you handle the nuance.",
       faq_q6: "Do I need a technical team to set this up?",
       faq_a6: "Not at all. We handle the architecture, deployment, and ongoing refinement. You tell us what needs to happen in your business; we build the agent that makes it happen. No coding required on your end.",
+      faq_q7: "What kind of investment does Responin require?",
+      faq_a7: "We offer flexible subscription models tailored to your business size and workflow complexity. The initial consultation and automation-readiness analysis are completely free. After that, you can choose the plan that fits—no long-term lock-in required.",
 
       // Footer
       footer_desc: "AI-driven consultancy and automation agency. Transforming business operations through intelligent, autonomous workflows powered by OpenClaw.",
@@ -359,7 +361,7 @@ const translations = {
       // VS Generic AI
       vs_label: "Kenapa Bukan ChatGPT Saja?",
       vs_title: "Agen AI personal itu bukan chatbot generik.",
-      vs_head_dim: "",
+      vs_head_dim: "Dimensi",
       vs_head_gen: "AI Generik",
       vs_head_resp: "Responin",
       vs_r1_c1: "Memori",
