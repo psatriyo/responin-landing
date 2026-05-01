@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy · Responin</title>
+  <link rel="canonical" href="https://responin.com/privacy.html" />
   <meta name="description" content="Responin Privacy Policy: how we collect, use, and protect your data." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%236c5ce7'/%3E%3Cstop offset='100%25' stop-color='%2300cec9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' font-size='20' fill='white'%3ER%3C/text%3E%3C/svg%3E" />
@@ -15,15 +16,17 @@
   <link rel="stylesheet" href="legal.css" />
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <nav>
+  <header>
+    <nav>
     <div class="container">
       <a href="index.html" class="logo">Responin</a>
       <div class="nav-center">
         <span class="nav-page-title" data-i18n="legal.priv_page_title">Privacy Policy</span>
         <div class="lang-switch-nav">
-          <button class="lang-btn-nav" data-lang="en" onclick="setLang('en')">EN</button>
-          <button class="lang-btn-nav active" data-lang="id" onclick="setLang('id')">ID</button>
+          <button class="lang-btn-nav" data-lang="en" type="button">EN</button>
+          <button class="lang-btn-nav active" data-lang="id" type="button">ID</button>
         </div>
       </div>
       <a href="index.html" class="nav-back">
@@ -31,9 +34,11 @@
         <span data-i18n="legal.priv_nav_back">Home</span>
       </a>
     </div>
-  </nav>
+    </nav>
+  </header>
 
-  <section class="page-hero">
+  <main id="main">
+    <section class="page-hero">
     <div class="container">
       <div class="page-hero-icon">🔒</div>
       <h1 data-i18n="legal.priv_hero_title" data-i18n-html><span>Privacy Policy</span></h1>
@@ -179,8 +184,10 @@
     </div>
   </footer>
 
+  </main>
+
   <script src="i18n.js"></script>
   <script src="i18n-legal.js"></script>
-  <script src="app.js"></script>
+  <script src="legal.js"></script>
 </body>
 </html>

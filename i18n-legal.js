@@ -235,7 +235,7 @@ legal: {
       terms_last_updated: "Terakhir diperbarui: 26 April 2026",
       terms_s1_title: "1. Penerimaan Ketentuan",
       terms_s1_p1: "Dengan mengakses atau menggunakan website dan layanan Responin, Anda menyetujui untuk terikat oleh Ketentuan Penggunaan ini. Jika Anda tidak setuju dengan ketentuan ini, mohon untuk tidak menggunakan layanan kami. Ketentuan ini berlaku untuk semua pengunjung, pengguna, dan pihak lain yang mengakses atau menggunakan Responin.",
-      terms_s1_p2: 'Kami mungkin memperbarui Ketentuan ini dari waktu ke waktu. Kami akan memberitahu Anda tentang perubahan material dengan memposting ketentuan yang diperbarui di website kami. Jika Anda tidak setuju, harap berhenti menggunakan layanan kami.',,
+      terms_s1_p2: 'Kami mungkin memperbarui Ketentuan ini dari waktu ke waktu. Kami akan memberitahu Anda tentang perubahan material dengan memposting ketentuan yang diperbarui di website kami. Jika Anda tidak setuju, harap berhenti menggunakan layanan kami.',
       terms_s2_title: "2. Deskripsi Layanan",
       terms_s2_p1: "Responin menyediakan layanan otomasi bisnis berbasis AI, termasuk namun tidak terbatas pada:",
       terms_s2_li1: '<strong>Agen AI Personal:</strong> agen AI khusus yang mempelajari alur kerja Anda, mengingat konteks Anda, dan mengoperasikan proses bisnis Anda.',

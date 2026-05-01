@@ -1,419 +1,556 @@
-// === Language Change Event System ===
-// Replaces the previous monkey-patching pattern with a clean pub/sub system
-const _langChangeCallbacks = [];
-function onLangChange(cb) { _langChangeCallbacks.push(cb); }
+const AppConfig = {
+  bookingUrl: document.body?.dataset.bookingUrl || 'https://calendly.com/hi-responin/30min'
+};
 
-function setLang(lang) {
-  currentLang = lang;
-  localStorage.setItem('responin-lang', lang);
+const AppState = {
+  currentScenario: 'invoice',
+  currentGcScenario: 'project',
+  chatDataLoaded: false,
+  statsCounted: false,
+  reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  lastMenuTrigger: null
+};
+
+const langChangeCallbacks = [];
+const themeChangeCallbacks = [];
+
+function onLangChange(cb) {
+  langChangeCallbacks.push(cb);
+}
+
+function onThemeChange(cb) {
+  themeChangeCallbacks.push(cb);
+}
+
+function resolveTranslation(lang, key) {
+  const root = translations?.[lang];
+  if (!root) return undefined;
+  return key.split('.').reduce((acc, part) => {
+    if (acc && typeof acc === 'object' && part in acc) return acc[part];
+    return undefined;
+  }, root);
+}
+
+function applyTranslations(lang) {
   document.documentElement.lang = lang;
-  const t = translations[lang];
 
-  // Helper to traverse nested keys with dot notation
-  function getNestedTranslation(obj, key) {
-    const parts = key.split('.');
-    let val = obj;
-    for (const part of parts) {
-      if (val && typeof val === 'object' && part in val) {
-        val = val[part];
-      } else {
-        return undefined;
-      }
-    }
-    return val;
-  }
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.dataset.i18n;
+    const value = resolveTranslation(lang, key);
+    if (value === undefined) return;
 
-  // Update all data-i18n elements
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    const val = getNestedTranslation(t, key);
-    if (val !== undefined) {
-      if (el.hasAttribute('data-i18n-html')) {
-        el.innerHTML = val;
-      } else {
-        el.textContent = val;
-      }
-    }
+    if (el.hasAttribute('data-i18n-html')) el.innerHTML = value;
+    else el.textContent = value;
   });
 
-  // Update placeholders
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    const val = getNestedTranslation(t, key);
-    if (val !== undefined) {
-      el.placeholder = val;
-    }
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    const key = el.dataset.i18nPlaceholder;
+    const value = resolveTranslation(lang, key);
+    if (value !== undefined) el.setAttribute('placeholder', value);
   });
 
-  // Update title (page-specific)
   const titleKey = document.documentElement.dataset.pageTitle;
   if (titleKey) {
-    const val = getNestedTranslation(t, titleKey);
-    if (val) {
-      document.title = val;
-    }
+    const title = resolveTranslation(lang, titleKey);
+    if (title) document.title = title;
   } else {
     document.title = lang === 'id'
       ? 'Responin — Agen AI Personal untuk Otomasi Bisnis Anda'
       : 'Responin — Your Personal AI Agent for Business Automation';
   }
 
-  // Update lang buttons (main page)
-  document.querySelectorAll('.lang-btn').forEach(btn => {
+  document.querySelectorAll('[data-lang]').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
-  // Update lang buttons (legal pages)
-  document.querySelectorAll('.lang-btn-nav').forEach(btn => {
+  document.querySelectorAll('.lang-btn-nav').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
-
-  // Notify subscribers
-  _langChangeCallbacks.forEach(cb => cb(lang));
 }
 
-// === Scroll animations ===
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
-
-// Stagger cards
-document.querySelectorAll('.solution-card, .problem-card, .step, .sector-card, .faq-item').forEach((card, i) => {
-  card.style.transitionDelay = `${(i % 4) * 0.08}s`;
-});
-
-// Initialize with saved or default language
-const savedLang = localStorage.getItem('responin-lang') || 'id';
-setLang(savedLang);
-
-// === Comparison Table Scroll Hint ===
-document.querySelectorAll('.comparison-wrapper').forEach(wrapper => {
-  wrapper.addEventListener('scroll', () => {
-    const atEnd = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 4;
-    wrapper.classList.toggle('scrolled-end', atEnd);
-  });
-});
-
-// === Settings Dropdown ===
-function toggleSettings() {
-  const dd = document.getElementById('settingsDropdown');
-  dd.classList.toggle('open');
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('responin-lang', lang);
+  applyTranslations(lang);
+  langChangeCallbacks.forEach((cb) => cb(lang));
 }
 
-// === Mobile Menu ===
-function openMobileMenu() {
-  document.getElementById('mobileMenu').classList.add('open');
-  document.getElementById('mobileOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeMobileMenu() {
-  document.getElementById('mobileMenu').classList.remove('open');
-  document.getElementById('mobileOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-  const dd = document.getElementById('settingsDropdown');
-  const btn = document.querySelector('.settings-btn');
-  if (!dd.contains(e.target) && !btn.contains(e.target)) {
-    dd.classList.remove('open');
-  }
-});
-
-// === Theme Switcher ===
 function setTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('responin-theme', theme);
-  document.querySelectorAll('.theme-btn').forEach(btn => {
+  document.querySelectorAll('[data-theme-opt]').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.themeOpt === theme);
   });
-  // Update nav background for light mode
-  const nav = document.querySelector('nav');
-  if (theme === 'light') {
-    nav.style.background = 'rgba(247, 247, 250, 0.85)';
-  } else {
-    nav.style.background = '';
+  themeChangeCallbacks.forEach((cb) => cb(theme));
+}
+
+function openSettings() {
+  const dropdown = document.getElementById('settingsDropdown');
+  const button = document.querySelector('[data-action="toggle-settings"]');
+  if (!dropdown || !button) return;
+  dropdown.classList.add('open');
+  button.setAttribute('aria-expanded', 'true');
+}
+
+function closeSettings() {
+  const dropdown = document.getElementById('settingsDropdown');
+  const button = document.querySelector('[data-action="toggle-settings"]');
+  if (!dropdown || !button) return;
+  dropdown.classList.remove('open');
+  button.setAttribute('aria-expanded', 'false');
+}
+
+function toggleSettings() {
+  const dropdown = document.getElementById('settingsDropdown');
+  if (!dropdown) return;
+  if (dropdown.classList.contains('open')) closeSettings();
+  else openSettings();
+}
+
+function getFocusableElements(container) {
+  return Array.from(container.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+}
+
+function openMobileMenu(trigger) {
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('mobileOverlay');
+  const hamburger = document.querySelector('[data-action="open-mobile-menu"]');
+  if (!menu || !overlay || !hamburger) return;
+
+  AppState.lastMenuTrigger = trigger || document.activeElement;
+  menu.classList.add('open');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  hamburger.setAttribute('aria-expanded', 'true');
+
+  const focusables = getFocusableElements(menu);
+  if (focusables.length) focusables[0].focus();
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('mobileOverlay');
+  const hamburger = document.querySelector('[data-action="open-mobile-menu"]');
+  if (!menu || !overlay || !hamburger) return;
+
+  menu.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  hamburger.setAttribute('aria-expanded', 'false');
+  AppState.lastMenuTrigger?.focus?.();
+}
+
+function trapMenuFocus(event) {
+  const menu = document.getElementById('mobileMenu');
+  if (!menu || !menu.classList.contains('open') || event.key !== 'Tab') return;
+
+  const focusables = getFocusableElements(menu);
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
   }
 }
 
-// Load saved theme or default to dark
-const savedTheme = localStorage.getItem('responin-theme') || 'dark';
-setTheme(savedTheme);
+function initRevealAnimations() {
+  const fadeEls = document.querySelectorAll('.fade-up');
+  if (!fadeEls.length) return;
 
-// === Chat Demo Scenarios (lazy-loaded) ===
-// Chat data (chatScenarios, gcScenarios, gcAvatarColors, gcSenderAvatars)
-// is loaded from chat-data.js when the chat section enters the viewport.
+  if (AppState.reducedMotion || !('IntersectionObserver' in window)) {
+    fadeEls.forEach((el) => el.classList.add('visible'));
+    return;
+  }
 
-let currentScenario = 'invoice';
-let chatDataLoaded = false;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  fadeEls.forEach((el) => observer.observe(el));
+
+  document.querySelectorAll('.solution-card, .problem-card, .step, .faq-item, .industry-deep').forEach((card, i) => {
+    card.style.transitionDelay = `${(i % 4) * 0.08}s`;
+  });
+}
+
+function initComparisonWrappers() {
+  document.querySelectorAll('.comparison-wrapper').forEach((wrapper) => {
+    const table = wrapper.querySelector('.comparison-table');
+    if (table) {
+      const headers = Array.from(table.querySelectorAll('thead th')).map((th) => th.textContent.trim());
+      table.querySelectorAll('tbody tr').forEach((row) => {
+        const cells = row.querySelectorAll('td');
+        if (!cells.length) return;
+        cells[0].setAttribute('data-cell-role', 'row-heading');
+        if (cells[1]) cells[1].setAttribute('data-label', headers[1] || '');
+        if (cells[2]) cells[2].setAttribute('data-label', headers[2] || '');
+      });
+    }
+
+    const updateState = () => {
+      const atEnd = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 4;
+      wrapper.classList.toggle('scrolled-end', atEnd);
+    };
+    wrapper.addEventListener('scroll', updateState, { passive: true });
+    updateState();
+  });
+}
+
+function setBookingLinks() {
+  document.querySelectorAll('.booking-link').forEach((link) => {
+    link.setAttribute('href', AppConfig.bookingUrl);
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+  });
+}
+
+function renderChatMessages(container, messages, type) {
+  if (!container) return;
+  container.innerHTML = '';
+
+  messages.forEach((message, i) => {
+    const item = document.createElement('div');
+    item.className = `${type === 'group' ? 'gc-msg' : 'chat-msg'} ${message.role}`;
+    if (!AppState.reducedMotion) item.style.animationDelay = `${i * 0.3}s`;
+
+    const avatar = document.createElement('div');
+    avatar.className = 'chat-msg-avatar';
+
+    if (type === 'group') {
+      if (message.role === 'agent') {
+        avatar.textContent = 'R';
+        avatar.style.background = 'linear-gradient(135deg, var(--gradient-1), var(--gradient-2))';
+        avatar.style.color = '#fff';
+      } else {
+        const senderKey = message.sender;
+        const letter = gcSenderAvatars?.[senderKey] || senderKey?.charAt(0)?.toUpperCase() || 'R';
+        avatar.textContent = letter;
+        avatar.style.background = gcAvatarColors?.[letter] || 'rgba(255,255,255,0.1)';
+      }
+    } else {
+      avatar.textContent = message.role === 'user' ? 'Y' : 'R';
+    }
+
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-msg-bubble';
+
+    if (type === 'group' && message.role !== 'system') {
+      const sender = document.createElement('div');
+      sender.className = 'gc-sender';
+      sender.textContent = message.role === 'agent'
+        ? 'Responin'
+        : resolveTranslation(currentLang, `gc.${message.sender}`)
+          || resolveTranslation('en', `gc.${message.sender}`)
+          || message.sender;
+      bubble.appendChild(sender);
+    }
+
+    if (message.lines) {
+      const mainLine = document.createElement('div');
+      mainLine.innerHTML = resolveTranslation(currentLang, `gc.${message.html}`)
+        || resolveTranslation('en', `gc.${message.html}`)
+        || '';
+      bubble.appendChild(mainLine);
+      message.lines.forEach((lineKey) => {
+        const line = document.createElement('div');
+        line.innerHTML = resolveTranslation(currentLang, `gc.${lineKey}`)
+          || resolveTranslation('en', `gc.${lineKey}`)
+          || '';
+        bubble.appendChild(line);
+      });
+    } else if (message.html) {
+      const key = type === 'group' ? `gc.${message.html}` : null;
+      bubble.innerHTML += key
+        ? (resolveTranslation(currentLang, key) || resolveTranslation('en', key) || '')
+        : message.html;
+    } else {
+      const key = type === 'group' ? `gc.${message.text}` : null;
+      bubble.textContent = key
+        ? (resolveTranslation(currentLang, key) || resolveTranslation('en', key) || message.text)
+        : message.text;
+    }
+
+    item.appendChild(avatar);
+    item.appendChild(bubble);
+    container.appendChild(item);
+  });
+}
 
 function switchScenario(key) {
   if (typeof chatScenarios === 'undefined') return;
-  currentScenario = key;
-  const lang = currentLang;
-  const msgs = chatScenarios[key][lang] || chatScenarios[key]['en'];
-  const container = document.getElementById('chatMessages');
-  if (!container) return;
-  container.innerHTML = '';
-  msgs.forEach((m, i) => {
-    const div = document.createElement('div');
-    div.className = 'chat-msg ' + m.role;
-    div.style.animationDelay = (i * 0.3) + 's';
-    const avatar = document.createElement('div');
-    avatar.className = 'chat-msg-avatar';
-    avatar.textContent = m.role === 'user' ? 'Y' : 'R';
-    const bubble = document.createElement('div');
-    bubble.className = 'chat-msg-bubble';
-    if (m.html) bubble.innerHTML = m.html;
-    else bubble.textContent = m.text;
-    div.appendChild(avatar);
-    div.appendChild(bubble);
-    container.appendChild(div);
-  });
-  // Update active tab
-  document.querySelectorAll('.chat-tab').forEach(tab => {
+  AppState.currentScenario = key;
+  const messages = chatScenarios[key]?.[currentLang] || chatScenarios[key]?.en || [];
+  renderChatMessages(document.getElementById('chatMessages'), messages, 'single');
+
+  document.querySelectorAll('[data-chat-tabs="primary"] .chat-tab').forEach((tab) => {
     tab.classList.toggle('active', tab.dataset.scenario === key);
   });
 }
 
-// Subscribe chat demo to language changes
-onLangChange(function(lang) {
-  if (chatDataLoaded && currentScenario) switchScenario(currentScenario);
-});
+function switchGcScenario(key) {
+  if (typeof gcScenarios === 'undefined') return;
+  AppState.currentGcScenario = key;
+  const messages = gcScenarios[key]?.[currentLang] || gcScenarios[key]?.en || [];
+  renderChatMessages(document.getElementById('gcMessages'), messages, 'group');
 
-// Lazy-load chat data when chat section enters viewport
-function initChatDemo() {
-  if (chatDataLoaded) return;
+  document.querySelectorAll('[data-chat-tabs="group"] .chat-tab').forEach((tab) => {
+    tab.classList.toggle('active', tab.dataset.gcScenario === key);
+  });
+}
+
+function initChatData() {
+  if (AppState.chatDataLoaded) return;
   const script = document.createElement('script');
   script.src = 'chat-data.js';
   script.async = true;
   document.head.appendChild(script);
 }
 
-// Listen for chat data loaded event
-window.addEventListener('chatdataloaded', function() {
-  chatDataLoaded = true;
-  // Initialize both chat demos
-  if (document.getElementById('chatMessages')) switchScenario('invoice');
-  if (document.getElementById('gcMessages')) switchGcScenario('project');
-});
+function initChatObserver() {
+  const chatSection = document.querySelector('.chat-demo');
+  if (!chatSection) return;
 
-// Observe chat sections for lazy loading
-const chatSection = document.querySelector('.chat-demo') || document.querySelector('.chat');
-if (chatSection) {
-  const chatObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        initChatDemo();
-        chatObserver.unobserve(entry.target);
-      }
-    });
-  }, { rootMargin: '200px 0px' }); // Start loading 200px before visible
-  chatObserver.observe(chatSection);
-}
-
-// === FAQ Accordion ===
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const wasOpen = item.classList.contains('open');
-  // Close all others
-  document.querySelectorAll('.faq-item.open').forEach(el => {
-    if (el !== item) {
-      el.classList.remove('open');
-      el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-    }
-  });
-  item.classList.toggle('open', !wasOpen);
-  btn.setAttribute('aria-expanded', !wasOpen);
-}
-
-// === Animated Stats Counter ===
-const statsData = [
-  { end: 45, suffix: '%', prefix: '', selector: '.stat:nth-child(1) .stat-value' },
-  { end: 60, suffix: '%', prefix: '', selector: '.stat:nth-child(2) .stat-value' },
-  { end: 24, suffix: '/7', prefix: '', selector: '.stat:nth-child(3) .stat-value' },
-  { end: 30, suffix: 's', prefix: '<', selector: '.stat:nth-child(4) .stat-value' }
-];
-
-let statsCounted = false;
-function animateCounter(el, end, suffix, prefix, duration) {
-  const start = 0;
-  const startTime = performance.now();
-  function update(currentTime) {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    // Ease out cubic
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const current = Math.round(start + (end - start) * eased);
-    el.textContent = prefix + current + suffix;
-    if (progress < 1) requestAnimationFrame(update);
+  if (AppState.reducedMotion || !('IntersectionObserver' in window)) {
+    initChatData();
+    return;
   }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      initChatData();
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '200px 0px' });
+
+  observer.observe(chatSection);
+}
+
+function initFaq() {
+  document.querySelectorAll('.faq-item').forEach((item, index) => {
+    const button = item.querySelector('[data-faq-trigger]');
+    const answer = item.querySelector('.faq-answer');
+    if (!button || !answer) return;
+
+    const buttonId = `faq-trigger-${index + 1}`;
+    const panelId = `faq-panel-${index + 1}`;
+    button.id = buttonId;
+    button.setAttribute('aria-controls', panelId);
+    answer.id = panelId;
+    answer.setAttribute('role', 'region');
+    answer.setAttribute('aria-labelledby', buttonId);
+    answer.style.maxHeight = '0px';
+  });
+}
+
+function toggleFaq(button) {
+  const item = button.closest('.faq-item');
+  if (!item) return;
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+
+  document.querySelectorAll('.faq-item.open').forEach((openItem) => {
+    if (openItem === item) return;
+    openItem.classList.remove('open');
+    const openButton = openItem.querySelector('[data-faq-trigger]');
+    const openAnswer = openItem.querySelector('.faq-answer');
+    if (openButton) openButton.setAttribute('aria-expanded', 'false');
+    if (openAnswer) openAnswer.style.maxHeight = '0px';
+  });
+
+  item.classList.toggle('open', !isOpen);
+  button.setAttribute('aria-expanded', String(!isOpen));
+  if (answer) answer.style.maxHeight = !isOpen ? `${answer.scrollHeight}px` : '0px';
+}
+
+function animateCounter(el, end, suffix, prefix, duration) {
+  if (AppState.reducedMotion) {
+    el.textContent = `${prefix}${end}${suffix}`;
+    return;
+  }
+
+  const startTime = performance.now();
+  const update = (currentTime) => {
+    const progress = Math.min((currentTime - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(end * eased);
+    el.textContent = `${prefix}${current}${suffix}`;
+    if (progress < 1) requestAnimationFrame(update);
+  };
   requestAnimationFrame(update);
 }
 
-const statsBar = document.querySelector('.stats-bar');
-const statsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !statsCounted) {
-      statsCounted = true;
-      statsData.forEach((s, i) => {
-        const el = document.querySelector(s.selector);
-        if (el) {
-          setTimeout(() => animateCounter(el, s.end, s.suffix, s.prefix, 1500), i * 200);
-        }
-      });
-      statsObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.3 });
-if (statsBar) statsObserver.observe(statsBar);
+function initStatsCounter() {
+  const statsBar = document.querySelector('.stats-bar');
+  if (!statsBar) return;
 
-// === Theme Change Chat Message ===
-// Use event system instead of monkey-patching
-const _themeChangeCallbacks = [];
-function onThemeChange(cb) { _themeChangeCallbacks.push(cb); }
+  const statsData = [
+    { end: 45, suffix: '%', prefix: '', selector: '.stat:nth-child(1) .stat-value' },
+    { end: 60, suffix: '%', prefix: '', selector: '.stat:nth-child(2) .stat-value' },
+    { end: 24, suffix: '/7', prefix: '', selector: '.stat:nth-child(3) .stat-value' },
+    { end: 30, suffix: 's', prefix: '<', selector: '.stat:nth-child(4) .stat-value' }
+  ];
 
-const _origSetTheme = setTheme;
-setTheme = function(theme) {
-  _origSetTheme(theme);
-  _themeChangeCallbacks.forEach(cb => cb(theme));
-};
+  const run = () => {
+    if (AppState.statsCounted) return;
+    AppState.statsCounted = true;
+    statsData.forEach((stat, i) => {
+      const el = document.querySelector(stat.selector);
+      if (!el) return;
+      window.setTimeout(() => animateCounter(el, stat.end, stat.suffix, stat.prefix, 1500), i * 200);
+    });
+  };
 
-// Add chat system message on theme change
-onThemeChange(function(theme) {
-  const container = document.getElementById('chatMessages');
-  if (!container) return;
-  const key = theme === 'dark' ? 'chat_theme_dark' : 'chat_theme_light';
-  const msg = translations[currentLang].ui[key] || translations['en'].ui[key];
-  // Remove any existing system message
-  const existing = container.querySelector('.chat-msg.system');
-  if (existing) existing.remove();
-  // Create system message
-  const div = document.createElement('div');
-  div.className = 'chat-msg system';
-  div.innerHTML = '<div class="chat-msg-bubble" style="animation: chatFadeIn 0.35s ease forwards; opacity: 0;">' + msg + '</div>';
-  container.appendChild(div);
-  // Auto-dismiss after 4s
-  setTimeout(() => {
-    div.style.transition = 'opacity 0.4s ease';
-    div.style.opacity = '0';
-    setTimeout(() => div.remove(), 400);
-  }, 4000);
-});
+  if (AppState.reducedMotion || !('IntersectionObserver' in window)) {
+    run();
+    return;
+  }
 
-// === Sticky CTA on Mobile ===
-const stickyCta = document.getElementById('stickyCtaMobile');
-const heroSection = document.querySelector('.hero');
-if (stickyCta && heroSection) {
-  const stickyObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        stickyCta.classList.remove('visible');
-      } else {
-        // Only show on mobile
-        if (window.innerWidth <= 768) {
-          stickyCta.classList.add('visible');
-        }
-      }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      run();
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(statsBar);
+}
+
+function initStickyCta() {
+  const stickyCta = document.getElementById('stickyCtaMobile');
+  const heroSection = document.querySelector('.hero');
+  if (!stickyCta || !heroSection) return;
+
+  const onResize = () => {
+    if (window.innerWidth > 768) stickyCta.classList.remove('visible');
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    onResize();
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) stickyCta.classList.remove('visible');
+      else if (window.innerWidth <= 768) stickyCta.classList.add('visible');
     });
   }, { threshold: 0.1 });
-  stickyObserver.observe(heroSection);
-  // Also handle resize
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-      stickyCta.classList.remove('visible');
-    }
-  });
+
+  observer.observe(heroSection);
+  window.addEventListener('resize', onResize);
 }
 
-// Note: initial theme load does not trigger chat message (only user-initiated switches do)
+function initThemeMessage() {
+  onThemeChange((theme) => {
+    const container = document.getElementById('chatMessages');
+    if (!container) return;
 
+    const key = theme === 'dark' ? 'ui.chat_theme_dark' : 'ui.chat_theme_light';
+    const msg = resolveTranslation(currentLang, key) || resolveTranslation('en', key);
+    if (!msg) return;
 
-// === Group Chat Demo Scenarios ===
-
-
-// === Group Chat Demo Scenarios (lazy-loaded with chat data) ===
-
-let currentGcScenario = 'project';
-
-function switchGcScenario(key) {
-  if (typeof gcScenarios === 'undefined') return;
-  currentGcScenario = key;
-  const lang = currentLang;
-  const msgs = gcScenarios[key][lang] || gcScenarios[key]['en'];
-  const container = document.getElementById('gcMessages');
-  if (!container) return;
-  container.innerHTML = '';
-
-  msgs.forEach((m, i) => {
+    container.querySelector('.chat-msg.system')?.remove();
     const div = document.createElement('div');
-    div.className = 'gc-msg ' + m.role;
-    div.style.animationDelay = (i * 0.3) + 's';
-
-    const avatar = document.createElement('div');
-    avatar.className = 'chat-msg-avatar';
-    if (m.role === 'agent') {
-      avatar.textContent = 'R';
-      avatar.style.background = 'linear-gradient(135deg, var(--gradient-1), var(--gradient-2))';
-      avatar.style.color = '#fff';
-    } else {
-      const senderKey = m.sender;
-      const letter = gcSenderAvatars[senderKey] || senderKey.charAt(0).toUpperCase();
-      avatar.textContent = letter;
-      avatar.style.background = gcAvatarColors[letter] || 'rgba(255,255,255,0.1)';
-    }
-
-    const bubble = document.createElement('div');
-    bubble.className = 'chat-msg-bubble';
-
-    if (m.role !== 'system') {
-      const senderName = document.createElement('div');
-      senderName.className = 'gc-sender';
-      senderName.textContent = m.role === 'agent' ? 'Responin' : (translations[lang].gc[m.sender] || translations['en'].gc[m.sender] || m.sender);
-      bubble.appendChild(senderName);
-    }
-
-    if (m.lines) {
-      const mainLine = document.createElement('div');
-      mainLine.innerHTML = translations[lang].gc[m.html] || translations['en'].gc[m.html];
-      bubble.appendChild(mainLine);
-      m.lines.forEach(lineKey => {
-        const line = document.createElement('div');
-        line.innerHTML = translations[lang].gc[lineKey] || translations['en'].gc[lineKey];
-        bubble.appendChild(line);
-      });
-    } else if (m.html) {
-      bubble.innerHTML += translations[lang].gc[m.html] || translations['en'].gc[m.html];
-    } else {
-      bubble.textContent = translations[lang].gc[m.text] || translations['en'].gc[m.text] || m.text;
-    }
-
-    div.appendChild(avatar);
-    div.appendChild(bubble);
+    div.className = 'chat-msg system';
+    div.innerHTML = `<div class="chat-msg-bubble">${msg}</div>`;
     container.appendChild(div);
 
-    // Fallback: ensure message is visible even if animation doesn't trigger (mobile)
-    setTimeout(() => {
-      if (div.style.opacity === '0' || getComputedStyle(div).opacity === '0') {
-        div.style.opacity = '1';
-        div.style.transform = 'none';
-      }
-    }, (i * 300) + 500);
-  });
-
-  document.querySelectorAll('[data-gc-scenario]').forEach(tab => {
-    tab.classList.toggle('active', tab.dataset.gcScenario === key);
+    window.setTimeout(() => {
+      div.style.opacity = '0';
+      window.setTimeout(() => div.remove(), 400);
+    }, 4000);
   });
 }
 
-// Subscribe group chat demo to language changes
-onLangChange(function(lang) {
-  if (chatDataLoaded && currentGcScenario) switchGcScenario(currentGcScenario);
+function handleDocumentClick(event) {
+  const actionEl = event.target.closest('[data-action]');
+  const langEl = event.target.closest('[data-lang]');
+  const themeEl = event.target.closest('[data-theme-opt]');
+  const scenarioEl = event.target.closest('[data-scenario]');
+  const gcScenarioEl = event.target.closest('[data-gc-scenario]');
+  const faqEl = event.target.closest('[data-faq-trigger]');
+  const mobileCloseEl = event.target.closest('[data-mobile-close]');
+  const bookingEl = event.target.closest('.booking-link');
+
+  if (bookingEl) {
+    bookingEl.setAttribute('href', AppConfig.bookingUrl);
+  }
+
+  if (actionEl) {
+    const { action } = actionEl.dataset;
+    if (action === 'toggle-settings') toggleSettings();
+    if (action === 'open-mobile-menu') openMobileMenu(actionEl);
+    if (action === 'close-mobile-menu') closeMobileMenu();
+  }
+
+  if (langEl) setLang(langEl.dataset.lang);
+  if (themeEl) setTheme(themeEl.dataset.themeOpt);
+  if (scenarioEl) switchScenario(scenarioEl.dataset.scenario);
+  if (gcScenarioEl) switchGcScenario(gcScenarioEl.dataset.gcScenario);
+  if (faqEl) toggleFaq(faqEl);
+  if (mobileCloseEl) closeMobileMenu();
+
+  const dropdown = document.getElementById('settingsDropdown');
+  const settingsButton = document.querySelector('[data-action="toggle-settings"]');
+  if (dropdown && settingsButton) {
+    const clickedInsideSettings = dropdown.contains(event.target) || settingsButton.contains(event.target);
+    if (!clickedInsideSettings) closeSettings();
+  }
+}
+
+function handleDocumentKeydown(event) {
+  if (event.key === 'Escape') {
+    closeSettings();
+    closeMobileMenu();
+  }
+  trapMenuFocus(event);
+}
+
+window.addEventListener('chatdataloaded', () => {
+  AppState.chatDataLoaded = true;
+  if (document.getElementById('chatMessages')) switchScenario(AppState.currentScenario);
+  if (document.getElementById('gcMessages')) switchGcScenario(AppState.currentGcScenario);
 });
+
+onLangChange(() => {
+  if (AppState.chatDataLoaded) {
+    switchScenario(AppState.currentScenario);
+    switchGcScenario(AppState.currentGcScenario);
+  }
+
+  document.querySelectorAll('.faq-item.open .faq-answer').forEach((answer) => {
+    answer.style.maxHeight = `${answer.scrollHeight}px`;
+  });
+});
+
+function initApp() {
+  setBookingLinks();
+  initRevealAnimations();
+  initComparisonWrappers();
+  initFaq();
+  initChatObserver();
+  initStatsCounter();
+  initStickyCta();
+  initThemeMessage();
+
+  document.addEventListener('click', handleDocumentClick);
+  document.addEventListener('keydown', handleDocumentKeydown);
+
+  const savedLang = localStorage.getItem('responin-lang') || document.documentElement.lang || 'id';
+  setLang(savedLang);
+
+  const savedTheme = localStorage.getItem('responin-theme') || 'dark';
+  setTheme(savedTheme);
+}
+
+initApp();
