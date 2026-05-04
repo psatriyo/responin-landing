@@ -281,6 +281,8 @@ function renderChatMessages(container, messages, type) {
     item.appendChild(avatar);
     item.appendChild(bubble);
     container.appendChild(item);
+    // Force reflow to ensure CSS animation triggers for dynamically added elements
+    void item.offsetWidth;
   });
 }
 
