@@ -306,6 +306,40 @@ function switchGcScenario(key) {
   });
 }
 
+function switchChatMode(mode) {
+  const isGroup = mode === 'group';
+
+  document.querySelectorAll('[data-chat-mode]').forEach((tab) => {
+    tab.classList.toggle('active', tab.dataset.chatMode === mode);
+  });
+
+  const dmHeader = document.getElementById('dm-header');
+  const gcHeader = document.getElementById('gc-header');
+  const dmTabs = document.getElementById('dm-tabs');
+  const gcTabs = document.getElementById('gc-tabs');
+  const dmWindow = document.getElementById('dm-window');
+  const gcWindow = document.getElementById('gc-window');
+
+  if (dmHeader) dmHeader.style.display = isGroup ? 'none' : '';
+  if (gcHeader) gcHeader.style.display = isGroup ? '' : 'none';
+  if (dmTabs) dmTabs.style.display = isGroup ? 'none' : '';
+  if (gcTabs) gcTabs.style.display = isGroup ? '' : 'none';
+  if (dmWindow) dmWindow.style.display = isGroup ? 'none' : '';
+  if (gcWindow) gcWindow.style.display = isGroup ? '' : 'none';
+
+  if (isGroup) {
+    if (AppState.chatDataLoaded) {
+      switchGcScenario(AppState.currentGcScenario);
+    } else {
+      initChatData();
+    }
+  } else {
+    if (AppState.chatDataLoaded) {
+      switchScenario(AppState.currentScenario);
+    }
+  }
+}
+
 function initChatData() {
   if (AppState.chatDataLoaded) return;
   const script = document.createElement('script');
@@ -481,6 +515,7 @@ function handleDocumentClick(event) {
   const faqEl = event.target.closest('[data-faq-trigger]');
   const mobileCloseEl = event.target.closest('[data-mobile-close]');
   const bookingEl = event.target.closest('.booking-link');
+  const chatModeEl = event.target.closest('[data-chat-mode]');
 
   if (bookingEl) {
     bookingEl.setAttribute('href', AppConfig.bookingUrl);
@@ -497,6 +532,7 @@ function handleDocumentClick(event) {
   if (themeEl) setTheme(themeEl.dataset.themeOpt);
   if (scenarioEl) switchScenario(scenarioEl.dataset.scenario);
   if (gcScenarioEl) switchGcScenario(gcScenarioEl.dataset.gcScenario);
+  if (chatModeEl) switchChatMode(chatModeEl.dataset.chatMode);
   if (faqEl) toggleFaq(faqEl);
   if (mobileCloseEl) closeMobileMenu();
 

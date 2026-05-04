@@ -9,6 +9,12 @@ const translations = {
       nav_industries: "Industries",
       nav_compare: "Compare",
       nav_faq: "FAQ",
+      nav_more: "Learn More",
+      nav_home: "Home",
+
+      // Chat Mode Tabs
+      chat_mode_dm: "Direct Message",
+      chat_mode_gc: "Group Chat",
 
       // Settings
       settings_language: "Language",
@@ -334,6 +340,12 @@ const translations = {
       nav_industries: "Industri",
       nav_compare: "Perbandingan",
       nav_faq: "FAQ",
+      nav_more: "Selengkapnya",
+      nav_home: "Beranda",
+
+      // Chat Mode Tabs
+      chat_mode_dm: "Pesan Langsung",
+      chat_mode_gc: "Grup Chat",
 
       // Settings
       settings_language: "Bahasa",
