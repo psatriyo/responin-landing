@@ -839,6 +839,44 @@ footer .container {
   scroll-snap-align: start;
 }
 .chat-tab:hover { border-color: var(--border-hover); color: var(--accent-light); }
+
+/* --- Chat Mode Tabs (DM vs Group Chat) --- */
+.chat-mode-tabs {
+  display: flex; justify-content: center; gap: 8px;
+  margin-bottom: 48px; flex-wrap: wrap;
+}
+.chat-mode-tab {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--bg-card);
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; font-family: inherit;
+}
+.chat-mode-tab:hover { border-color: var(--border-hover); color: var(--text); }
+.chat-mode-tab.active {
+  background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+  color: #fff; border-color: transparent;
+}
+.chat-mode-tab svg { width: 16px; height: 16px; }
+
+/* Group Chat topbar avatars */
+.group-chat-topbar { gap: 12px; }
+.gc-avatars {
+  display: flex; align-items: center;
+}
+.gc-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700;
+  border: 2px solid var(--bg-elevated); margin-left: -8px;
+}
+.gc-avatar:first-child { margin-left: 0; }
+
+/* Hide/show helpers */
+.chat-window.hidden, .chat-tabs.hidden, .chat-demo-header.hidden {
+  display: none !important;
+}
+
 .chat-tab.active {
   background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
   color: #fff; border-color: transparent;
