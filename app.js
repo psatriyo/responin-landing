@@ -357,6 +357,12 @@ function switchChatMode(mode) {
 
 function initChatData() {
   if (AppState.chatDataLoaded) return;
+  // If chat-data.js was already loaded synchronously in HTML
+  if (typeof chatScenarios !== 'undefined' && typeof gcScenarios !== 'undefined') {
+    AppState.chatDataLoaded = true;
+    window.dispatchEvent(new Event('chatdataloaded'));
+    return;
+  }
   const script = document.createElement('script');
   script.src = 'chat-data.js';
   script.async = true;
@@ -602,6 +608,13 @@ function initApp() {
 
   const savedTheme = localStorage.getItem('responin-theme') || 'dark';
   setTheme(savedTheme);
+
+  // Ensure chat data is initialized if already loaded via synchronous script
+  if (typeof chatScenarios !== 'undefined' && typeof gcScenarios !== 'undefined' && !AppState.chatDataLoaded) {
+    AppState.chatDataLoaded = true;
+    switchScenario(AppState.currentScenario);
+    switchGcScenario(AppState.currentGcScenario);
+  }
 }
 
 initApp();
