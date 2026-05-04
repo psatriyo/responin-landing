@@ -219,7 +219,8 @@ function renderChatMessages(container, messages, type) {
   messages.forEach((message, i) => {
     const item = document.createElement('div');
     item.className = `${type === 'group' ? 'gc-msg' : 'chat-msg'} ${message.role}`;
-    if (!AppState.reducedMotion) item.style.animationDelay = `${i * 0.3}s`;
+    // Store animation delay for later application to ensure animation triggers
+    if (!AppState.reducedMotion) item.dataset.animationDelay = `${i * 0.3}s`;
 
     const avatar = document.createElement('div');
     avatar.className = 'chat-msg-avatar';
@@ -281,9 +282,21 @@ function renderChatMessages(container, messages, type) {
     item.appendChild(avatar);
     item.appendChild(bubble);
     container.appendChild(item);
-    // Force reflow to ensure CSS animation triggers for dynamically added elements
-    void item.offsetWidth;
   });
+
+  // Apply animation after DOM is fully rendered to ensure it triggers properly
+  if (!AppState.reducedMotion) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        container.querySelectorAll('.chat-msg, .gc-msg').forEach((msg) => {
+          if (msg.dataset.animationDelay) {
+            msg.style.animationDelay = msg.dataset.animationDelay;
+            delete msg.dataset.animationDelay;
+          }
+        });
+      });
+    });
+  }
 }
 
 function switchScenario(key) {
