@@ -2,6 +2,7 @@ const AppConfig = {
   bookingUrl: document.body?.dataset.bookingUrl || 'https://calendly.com/hi-responin/30min',
   defaultLang: document.documentElement.lang || 'id',
   defaultTheme: 'dark',
+  calmMode: true,
   chatDataSrc: 'chat-data.js',
   mobileBreakpoint: 768,
   animationBaseDelaySec: 0.3,
@@ -32,7 +33,8 @@ const AppState = {
   chatDataLoaded: false,
   chatDataLoading: false,
   statsCounted: false,
-  reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  calmMode: AppConfig.calmMode,
+  reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches || AppConfig.calmMode,
   lastMenuTrigger: null
 };
 
@@ -623,6 +625,8 @@ onLangChange(() => {
 });
 
 function initApp() {
+  document.documentElement.classList.toggle('calm-mode', AppState.calmMode);
+
   setBookingLinks();
   initRevealAnimations();
   initComparisonWrappers();
