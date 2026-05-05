@@ -12,6 +12,24 @@ const translations = {
       nav_more: "Learn More",
       nav_home: "Home",
 
+      // Learn More Bridge
+      bridge_label: "Next Step",
+      bridge_title: "Want the full picture before booking?",
+      bridge_desc: "Explore detailed solutions, industry examples, and a side-by-side comparison so the consultation can focus on your exact workflow.",
+      bridge_card_1_title: "Core Solutions",
+      bridge_card_1_desc: "See the concrete workflows Responin can run across reminders, inboxes, CRM, reporting, and support.",
+      bridge_card_2_title: "Industry Playbooks",
+      bridge_card_2_desc: "Review before/after scenarios for retail, finance, startup teams, and other operational contexts.",
+      bridge_card_3_title: "Responin vs Generic AI",
+      bridge_card_3_desc: "Understand the difference between one-off chat tools and a persistent, action-taking personal agent.",
+      bridge_cta: "Explore the full Learn More page",
+      lm_step_label: "Step 2 of 2",
+      lm_step_title: "This page is your deeper dive after the main landing page.",
+      lm_step_desc: "Use this to evaluate fit. When you're ready, book a workflow audit and we'll map your highest-ROI automation path.",
+      lm_back_overview: "Back to Overview",
+      lm_back_prompt: "Prefer a quick recap first?",
+      lm_back_landing: "Return to main landing page",
+
       // Chat Mode Tabs
       chat_mode_dm: "Direct Message",
       chat_mode_gc: "Group Chat",
@@ -342,6 +360,24 @@ const translations = {
       nav_faq: "FAQ",
       nav_more: "Selengkapnya",
       nav_home: "Beranda",
+
+      // Learn More Bridge
+      bridge_label: "Langkah Berikutnya",
+      bridge_title: "Ingin gambaran lengkap sebelum booking?",
+      bridge_desc: "Eksplor solusi detail, contoh industri, dan perbandingan berdampingan agar sesi konsultasi fokus ke workflow Anda.",
+      bridge_card_1_title: "Solusi Inti",
+      bridge_card_1_desc: "Lihat workflow konkret yang bisa dijalankan Responin: reminder, inbox, CRM, reporting, dan support.",
+      bridge_card_2_title: "Playbook Industri",
+      bridge_card_2_desc: "Tinjau skenario before/after untuk retail, finance, startup team, dan konteks operasional lainnya.",
+      bridge_card_3_title: "Responin vs AI Generik",
+      bridge_card_3_desc: "Pahami bedanya tools chat sekali pakai dengan agen personal persisten yang benar-benar bertindak.",
+      bridge_cta: "Lihat halaman Learn More lengkap",
+      lm_step_label: "Langkah 2 dari 2",
+      lm_step_title: "Halaman ini adalah pendalaman setelah landing page utama.",
+      lm_step_desc: "Gunakan halaman ini untuk evaluasi kecocokan. Saat siap, booking workflow audit dan kita petakan automasi dengan ROI tertinggi.",
+      lm_back_overview: "Kembali ke Ringkasan",
+      lm_back_prompt: "Butuh ringkasan cepat dulu?",
+      lm_back_landing: "Kembali ke landing page utama",
 
       // Chat Mode Tabs
       chat_mode_dm: "Pesan Langsung",
