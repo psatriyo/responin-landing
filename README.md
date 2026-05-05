@@ -58,7 +58,7 @@ Responin builds dedicated AI agents that learn your workflows, remember your con
 ### UI/UX
 - ⚙️ **Settings Panel** — Language and theme controls in a dropdown (desktop) and mobile menu
 - 🎭 **Scroll Animations** — Fade-up animations with staggered card reveals via `IntersectionObserver`
-- 📲 **Sticky Mobile CTA** — Email CTA that appears on scroll past hero (mobile only)
+- 📲 **Sticky Mobile CTA** — Booking CTA that appears on scroll past hero (mobile only)
 - 🔍 **SEO & Social** — Open Graph meta tags, Twitter Card, favicon, and theme-color
 
 ---
@@ -67,13 +67,17 @@ Responin builds dedicated AI agents that learn your workflows, remember your con
 
 ```
 responin-landing/
-├── index.html          # Main landing page (703 lines)
-├── privacy.html        # Privacy Policy page (152 lines)
-├── termsofuse.html     # Terms of Use page (172 lines)
-├── styles.css          # All styles, dark/light themes (984 lines)
-├── i18n.js             # EN/ID translations, namespaced (889 lines)
-├── app.js              # All interactive logic (500 lines)
-├── validate-i18n.js   # i18n validation script (161 lines)
+├── index.html          # Main landing page
+├── learnmore.html      # Deep-dive page for solutions, industries, comparison, FAQ
+├── privacy.html        # Privacy Policy page
+├── termsofuse.html     # Terms of Use page
+├── styles.css          # Shared styles, themes, responsive layouts, animation utilities
+├── i18n.js             # EN/ID translations, namespaced
+├── chat-data.js        # Lazy-loaded chat demo scenarios
+├── app.js              # Shared landing/deep-dive interactions
+├── validate-i18n.js    # i18n validation script
+├── validate-site.js    # structural validation script
+├── tests/              # architecture regression checks
 ├── CNAME               # Custom domain: responin.com
 ├── .gitignore          # Ignores .DS_Store
 └── README.md           # This file
@@ -83,13 +87,16 @@ responin-landing/
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Single-page landing site — hero, comparison tables, chat demos, solutions, industries, FAQ, CTA, footer |
-| `privacy.html` | Privacy policy with bilingual toggle, shares `styles.css` and `i18n.js` with main page |
-| `termsofuse.html` | Terms of use with same shared architecture as privacy page |
-| `styles.css` | Full CSS including dark/light themes, responsive breakpoints, animations, chat UI, FAQ accordion |
-| `i18n.js` | All translations in 4 namespaces: `ui`, `chat`, `gc` (group chat), `legal`. Supports dot-notation key resolution |
-| `app.js` | Language/theme switching, chat demos (1:1 + group), FAQ accordion, scroll animations, stats counter, sticky CTA |
-| `validate-i18n.js` | Node.js script that validates EN↔ID key parity, duplicate detection, and HTML `data-i18n` attribute coverage |
+| `index.html` | Conversion-focused main landing site — hero, proof strip, chat demos, problem, why, how, bridge, CTA, footer |
+| `learnmore.html` | Deep-dive page for solutions, industries, generic-AI comparison, ROI, FAQ, and return path |
+| `privacy.html` | Privacy policy with bilingual toggle, shares `legal.css`, `i18n-legal.js`, and `legal.js` |
+| `termsofuse.html` | Terms of use with same legal-page architecture as privacy page |
+| `styles.css` | Shared CSS including themes, responsive breakpoints, chat UI, FAQ accordion, content-visibility utilities |
+| `i18n.js` | UI translations for landing and learn-more pages. Supports dot-notation key resolution |
+| `chat-data.js` | Lazy-loaded 1:1 and group-chat demo scenarios |
+| `app.js` | Language/theme switching, chat demos, FAQ accordion, scroll animations, stats counter, sticky CTA, a11y state management |
+| `validate-i18n.js` | Node.js script that validates EN↔ID key parity, duplicate detection, and HTML `data-i18n` coverage |
+| `tests/validate-landing-architecture.js` | Regression checks for layout, lazy loading, accessibility semantics, and comparison key correctness |
 
 ---
 
@@ -106,7 +113,9 @@ Key resolution uses **dot notation** (`data-i18n="ui.hero_title"`) with `data-i1
 
 Run validation:
 ```bash
+node validate-site.js
 node validate-i18n.js
+node tests/validate-landing-architecture.js
 ```
 
 ---
