@@ -4,7 +4,7 @@ const chatScenarios = {
   invoice: {
     en: [
       { role: 'user', text: 'Hi, has John paid invoice #1042 yet?' },
-      { role: 'agent', html: 'Yes — John paid invoice #1042 on <span class="highlight">April 18</span> via bank transfer. The payment of <span class="highlight">Rp 12,500,000</span> has been reconciled in your accounting system.' },
+      { role: 'agent', html: 'Yes - John paid invoice #1042 on <span class="highlight">April 18</span> via bank transfer. The payment of <span class="highlight">Rp 12,500,000</span> has been reconciled in your accounting system.' },
       { role: 'user', text: "What's Mary's total orders with us this quarter?" },
       { role: 'agent', html: 'Mary has placed <span class="highlight">7 orders</span> this quarter totaling <span class="highlight">Rp 48,200,000</span>. Her most recent order was on April 22. She also has one pending delivery scheduled for April 29.' },
       { role: 'user', text: 'Send her a reminder about that delivery.' },
@@ -12,7 +12,7 @@ const chatScenarios = {
     ],
     id: [
       { role: 'user', text: 'Hai, John udah bayar invoice #1042 belum?' },
-      { role: 'agent', html: 'Udah — John bayar invoice #1042 tanggal <span class="highlight">18 April</span> via transfer bank. Pembayaran <span class="highlight">Rp 12.500.000</span> udah direkonsiliasi di sistem akuntansi Anda.' },
+      { role: 'agent', html: 'Udah - John bayar invoice #1042 tanggal <span class="highlight">18 April</span> via transfer bank. Pembayaran <span class="highlight">Rp 12.500.000</span> udah direkonsiliasi di sistem akuntansi Anda.' },
       { role: 'user', text: 'Total pesanan Mary kuartal ini berapa?' },
       { role: 'agent', html: 'Mary udah <span class="highlight">7 pesanan</span> kuartal ini, total <span class="highlight">Rp 48.200.000</span>. Pesanan terakhirnya 22 April. Dia juga punya satu pengiriman tertunda yang dijadwalkan 29 April.' },
       { role: 'user', text: 'Kirim pengingat pengiriman itu dong.' },
@@ -22,13 +22,13 @@ const chatScenarios = {
   delivery: {
     en: [
       { role: 'user', text: 'Where is order #8834 right now?' },
-      { role: 'agent', html: 'Order #8834 is currently <span class="highlight">in transit</span> — last scanned at the Jakarta sorting hub at <span class="highlight">2:45 PM</span>. Estimated delivery: tomorrow by 5 PM.' },
+      { role: 'agent', html: 'Order #8834 is currently <span class="highlight">in transit</span> - last scanned at the Jakarta sorting hub at <span class="highlight">2:45 PM</span>. Estimated delivery: tomorrow by 5 PM.' },
       { role: 'user', text: 'Can you notify the customer?' },
       { role: 'agent', html: 'Done! I\'ve sent a tracking update to <span class="highlight">Budi Santoso</span> via WhatsApp and email. He\'ll get a confirmation once it\'s delivered.' }
     ],
     id: [
       { role: 'user', text: 'Pesanan #8834 sekarang di mana?' },
-      { role: 'agent', html: 'Pesanan #8834 saat ini <span class="highlight">dalam perjalanan</span> — terakhir dipindai di hub sortir Jakarta pukul <span class="highlight">14:45</span>. Estimasi pengiriman: besok pukul 17:00.' },
+      { role: 'agent', html: 'Pesanan #8834 saat ini <span class="highlight">dalam perjalanan</span> - terakhir dipindai di hub sortir Jakarta pukul <span class="highlight">14:45</span>. Estimasi pengiriman: besok pukul 17:00.' },
       { role: 'user', text: 'Bisa info pelanggannya?' },
       { role: 'agent', html: 'Selesai! Update pelacakan udah dikirim ke <span class="highlight">Budi Santoso</span> via WhatsApp dan email. Dia bakal dapat konfirmasi setelah pesanan diterima.' }
     ]
@@ -38,13 +38,13 @@ const chatScenarios = {
       { role: 'user', text: 'Give me a sales summary for this month.' },
       { role: 'agent', html: 'This month: <span class="highlight">Rp 2.4B</span> in revenue across <span class="highlight">342 transactions</span>. Top category is Electronics at 38%. Revenue is up <span class="highlight">12%</span> vs. last month. Top customer: PT Mitra Abadi at Rp 310M.' },
       { role: 'user', text: 'How does that compare to the same period last year?' },
-      { role: 'agent', html: 'April last year was <span class="highlight">Rp 1.9B</span> — so you\'re up <span class="highlight">26% YoY</span>. The growth is mostly driven by Electronics (+34%) and Home & Living (+18%). Want a detailed breakdown by product line?' }
+      { role: 'agent', html: 'April last year was <span class="highlight">Rp 1.9B</span> - so you\'re up <span class="highlight">26% YoY</span>. The growth is mostly driven by Electronics (+34%) and Home & Living (+18%). Want a detailed breakdown by product line?' }
     ],
     id: [
       { role: 'user', text: 'Kasih ringkasan penjualan bulan ini.' },
       { role: 'agent', html: 'Bulan ini: pendapatan <span class="highlight">Rp 2,4 miliar</span> dari <span class="highlight">342 transaksi</span>. Kategori teratas Elektronik di 38%. Pendapatan naik <span class="highlight">12%</span> vs bulan lalu. Pelanggan teratas: PT Mitra Abadi sebesar Rp 310 juta.' },
       { role: 'user', text: 'Bandingannya dengan periode yang sama tahun lalu gimana?' },
-      { role: 'agent', html: 'April tahun lalu <span class="highlight">Rp 1,9 miliar</span> — jadi naik <span class="highlight">26% YoY</span>. Pertumbuhan didorong terutama oleh Elektronik (+34%) dan Rumah & Hunian (+18%). Mau rincian lengkap per lini produk?' }
+      { role: 'agent', html: 'April tahun lalu <span class="highlight">Rp 1,9 miliar</span> - jadi naik <span class="highlight">26% YoY</span>. Pertumbuhan didorong terutama oleh Elektronik (+34%) dan Rumah & Hunian (+18%). Mau rincian lengkap per lini produk?' }
     ]
   },
   email: {
@@ -64,15 +64,15 @@ const chatScenarios = {
   customer: {
     en: [
       { role: 'user', text: 'Pull up the full profile for PT Karya Mandiri.' },
-      { role: 'agent', html: 'PT Karya Mandiri — active since <span class="highlight">March 2023</span>. Lifetime value: <span class="highlight">Rp 1.2B</span>. 42 orders total, last order on April 15. Primary contact: Ibu Rina (Procurement). Payment terms: Net 30. No overdue invoices.' },
+      { role: 'agent', html: 'PT Karya Mandiri - active since <span class="highlight">March 2023</span>. Lifetime value: <span class="highlight">Rp 1.2B</span>. 42 orders total, last order on April 15. Primary contact: Ibu Rina (Procurement). Payment terms: Net 30. No overdue invoices.' },
       { role: 'user', text: 'Any issues or complaints from them recently?' },
-      { role: 'agent', html: 'One ticket from <span class="highlight">April 10</span> about a delayed shipment — resolved within 24 hours. They gave <span class="highlight">4.8/5</span> on the last satisfaction survey. Overall, a healthy account with no red flags.' }
+      { role: 'agent', html: 'One ticket from <span class="highlight">April 10</span> about a delayed shipment - resolved within 24 hours. They gave <span class="highlight">4.8/5</span> on the last satisfaction survey. Overall, a healthy account with no red flags.' }
     ],
     id: [
       { role: 'user', text: 'Tampilin profil lengkap PT Karya Mandiri.' },
-      { role: 'agent', html: 'PT Karya Mandiri — aktif sejak <span class="highlight">Maret 2023</span>. Nilai seumur hidup: <span class="highlight">Rp 1,2 miliar</span>. Total 42 pesanan, terakhir 15 April. Kontak utama: Ibu Rina (Pengadaan). Syarat pembayaran: Net 30. Nggak ada invoice tertunggak.' },
+      { role: 'agent', html: 'PT Karya Mandiri - aktif sejak <span class="highlight">Maret 2023</span>. Nilai seumur hidup: <span class="highlight">Rp 1,2 miliar</span>. Total 42 pesanan, terakhir 15 April. Kontak utama: Ibu Rina (Pengadaan). Syarat pembayaran: Net 30. Nggak ada invoice tertunggak.' },
       { role: 'user', text: 'Ada masalah atau keluhan dari mereka akhir-akhir ini?' },
-      { role: 'agent', html: 'Satu tiket dari <span class="highlight">10 April</span> soal pengiriman tertunda — resolved dalam 24 jam. Survei kepuasan terakhir skor <span class="highlight">4,8/5</span>. Secara keseluruhan, akun sehat tanpa red flag.' }
+      { role: 'agent', html: 'Satu tiket dari <span class="highlight">10 April</span> soal pengiriman tertunda - resolved dalam 24 jam. Survei kepuasan terakhir skor <span class="highlight">4,8/5</span>. Secara keseluruhan, akun sehat tanpa red flag.' }
     ]
   }
 };

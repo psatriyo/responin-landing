@@ -55,8 +55,8 @@ function applyTranslations(lang) {
     if (title) document.title = title;
   } else {
     document.title = lang === 'id'
-      ? 'Responin — Agen AI Personal untuk Otomasi Bisnis Anda'
-      : 'Responin — Your Personal AI Agent for Business Automation';
+      ? 'Responin - Agen AI Personal untuk Otomasi Bisnis Anda'
+      : 'Responin - Your Personal AI Agent for Business Automation';
   }
 
   document.querySelectorAll('[data-lang]').forEach((btn) => {
