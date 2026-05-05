@@ -1036,6 +1036,11 @@ footer .container {
 }
 .fade-up.visible { opacity: 1; transform: translateY(0) scale(1); }
 
+/* Calm mode: keep content immediately visible and remove entrance animations */
+.calm-mode .fade-up { opacity: 1; transform: none; transition: none; }
+.calm-mode .chat-msg,
+.calm-mode .gc-msg { animation: none; opacity: 1; }
+
 /* --- Group Chat Demo --- */
 .group-chat-demo { padding: 40px 0 80px; }
 .group-chat-demo .chat-demo-header { margin-bottom: 48px; }
