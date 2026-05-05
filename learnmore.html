@@ -71,7 +71,7 @@
 
   <main id="main">
     <!-- Social Proof / Early Access -->
-    <section class="social-proof-section" style="margin-top: 80px;">
+    <section class="social-proof-section learnmore-proof-offset">
       <div class="container fade-up">
         <div class="social-proof-inner">
           <div class="social-proof-badge" data-i18n="ui.proof_badge">🚀 Early Access</div>
@@ -84,12 +84,12 @@
     </section>
 
     <!-- Journey Context -->
-    <section class="section" id="journey-context" style="padding-top: 24px; padding-bottom: 24px;">
-      <div class="container fade-up" style="text-align: center;">
+    <section class="section section-compact" id="journey-context">
+      <div class="container fade-up text-center">
         <p class="section-label" data-i18n="ui.lm_step_label">Step 2 of 2</p>
-        <h2 class="section-title" style="font-size: clamp(1.6rem, 3vw, 2.2rem);" data-i18n="ui.lm_step_title">This page is your deeper dive after the main landing page.</h2>
-        <p class="section-desc" style="max-width: 780px; margin: 0 auto 16px;" data-i18n="ui.lm_step_desc">Use this to evaluate fit. When you're ready, book a workflow audit and we'll map your highest-ROI automation path.</p>
-        <div class="hero-actions" style="justify-content: center;">
+        <h2 class="section-title learnmore-step-title" data-i18n="ui.lm_step_title">This page is your deeper dive after the main landing page.</h2>
+        <p class="section-desc section-desc-wide" data-i18n="ui.lm_step_desc">Use this to evaluate fit. When you're ready, book a workflow audit and we'll map your highest-ROI automation path.</p>
+        <div class="hero-actions justify-center">
           <a href="index.html#how" class="btn-secondary" data-i18n="ui.lm_back_overview">Back to Overview</a>
           <a href="https://calendly.com/hi-responin/30min" class="btn-primary booking-link" target="_blank" rel="noopener noreferrer" data-i18n="ui.hero_cta_primary">Book Free Workflow Audit</a>
         </div>
@@ -97,7 +97,7 @@
     </section>
 
     <!-- Core Solutions -->
-    <section class="section" id="solutions">
+    <section class="section content-auto" id="solutions">
       <div class="container">
         <div class="fade-up">
           <p class="section-label" data-i18n="ui.solutions_label">Core Solutions</p>
@@ -164,7 +164,7 @@
     </section>
 
     <!-- Industries -->
-    <section class="section" id="industries">
+    <section class="section content-auto" id="industries">
       <div class="container">
         <div class="fade-up">
           <p class="section-label" data-i18n="ui.industries_label">Industries</p>
@@ -230,7 +230,7 @@
     </section>
 
     <!-- Responin vs Generic AI -->
-    <section class="section" id="vs-generic">
+    <section class="section content-auto" id="vs-generic">
       <div class="container">
         <div class="fade-up">
           <p class="section-label" data-i18n="ui.vs_label">Why Not Just ChatGPT?</p>
@@ -252,7 +252,7 @@
                 <td data-i18n="ui.vs_r1_c3">Remembers your business, people, and processes, forever</td>
               </tr>
               <tr>
-                <td data-i18n="ui.vs_r1_c1">Personalization</td>
+                <td data-i18n="ui.vs_r2_c1">Personalization</td>
                 <td data-i18n="ui.vs_r2_c2">Same answers for everyone, no context about you</td>
                 <td data-i18n="ui.vs_r2_c3">Knows your team, your systems, your terminology</td>
               </tr>
@@ -308,11 +308,11 @@
     </section>
 
     <!-- FAQ -->
-    <section class="section faq-section" id="faq">
+    <section class="section faq-section content-auto" id="faq">
       <div class="container">
-        <div class="fade-up" style="text-align: center;">
+        <div class="fade-up text-center">
           <p class="section-label" data-i18n="ui.faq_label">Frequently Asked Questions</p>
-          <h2 class="section-title" style="max-width: 100%;" data-i18n="ui.faq_title">Got questions? We've got answers.</h2>
+          <h2 class="section-title max-width-full" data-i18n="ui.faq_title">Got questions? We've got answers.</h2>
         </div>
         <div class="faq-list">
           <div class="faq-item fade-up">
@@ -374,9 +374,9 @@
     </section>
 
     <!-- Return Path -->
-    <section class="section" id="return-path" style="padding-top: 0;">
-      <div class="container fade-up" style="text-align: center;">
-        <p class="section-desc" style="margin-bottom: 14px;" data-i18n="ui.lm_back_prompt">Prefer a quick recap first?</p>
+    <section class="section pt-0" id="return-path">
+      <div class="container fade-up text-center">
+        <p class="section-desc mb-14" data-i18n="ui.lm_back_prompt">Prefer a quick recap first?</p>
         <a href="index.html#hero" class="btn-secondary" data-i18n="ui.lm_back_landing">Return to main landing page</a>
       </div>
     </section>
@@ -455,7 +455,7 @@
     </div>
     <div class="mobile-menu-settings">
       <div class="settings-group-label" data-i18n="ui.settings_language">Language</div>
-      <div class="lang-switch" style="margin-bottom: 12px;">
+      <div class="lang-switch mb-12">
         <button class="lang-btn" data-lang="en" type="button">EN</button>
         <button class="lang-btn active" data-lang="id" type="button">ID</button>
       </div>
@@ -481,7 +481,7 @@
     </a>
   </div>
 
-  <script src="i18n.js"></script>
-  <script src="app.js"></script>
+  <script src="i18n.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 </html>

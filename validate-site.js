@@ -29,6 +29,19 @@ function validateIndex() {
   assert(!/mailto:/i.test(html), 'index.html still contains mailto links');
 }
 
+function validateLearnMore() {
+  const html = read('learnmore.html');
+  assert(/<header>[\s\S]*<nav>/i.test(html), 'learnmore.html is missing header/nav landmarks');
+  assert(/<main id="main">/i.test(html), 'learnmore.html is missing <main id="main">');
+  assert(/href="#main" class="skip-link"/i.test(html), 'learnmore.html skip link is missing');
+  assert(!/onclick=/i.test(html), 'learnmore.html still contains inline onclick handlers');
+  assert(!/style="/i.test(html), 'learnmore.html should not rely on inline layout styles');
+  assert(!/<script src="chat-data\.js"/i.test(html), 'learnmore.html should not load chat-data.js');
+  assert(/<script src="i18n\.js" defer><\/script>/i.test(html), 'learnmore.html should defer i18n.js');
+  assert(/<script src="app\.js" defer><\/script>/i.test(html), 'learnmore.html should defer app.js');
+  assert(/data-i18n="ui\.vs_r2_c1">Personalization/i.test(html), 'learnmore.html comparison personalization row uses the wrong i18n key');
+}
+
 function validateLegal(file) {
   const html = read(file);
   assert(/<main id="main">/i.test(html), `${file} is missing <main id="main">`);
@@ -40,6 +53,7 @@ function validateLegal(file) {
 
 try {
   validateIndex();
+  validateLearnMore();
   validateLegal('privacy.html');
   validateLegal('termsofuse.html');
   console.log('site structure OK');

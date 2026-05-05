@@ -145,7 +145,7 @@ function checkPageTitles() {
 
 console.log('\n=== i18n Validation ===\n');
 
-const htmlFiles = ['index.html', 'privacy.html', 'termsofuse.html'];
+const htmlFiles = ['index.html', 'learnmore.html', 'privacy.html', 'termsofuse.html'];
 for (const f of htmlFiles) {
   if (fs.existsSync(f)) checkHtmlFile(f);
 }
