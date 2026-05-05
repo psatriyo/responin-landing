@@ -1,11 +1,36 @@
 const AppConfig = {
-  bookingUrl: document.body?.dataset.bookingUrl || 'https://calendly.com/hi-responin/30min'
+  bookingUrl: document.body?.dataset.bookingUrl || 'https://calendly.com/hi-responin/30min',
+  defaultLang: document.documentElement.lang || 'id',
+  defaultTheme: 'dark',
+  chatDataSrc: 'chat-data.js',
+  mobileBreakpoint: 768,
+  animationBaseDelaySec: 0.3,
+  cardStaggerDelaySec: 0.08,
+  counterDurationMs: 1500,
+  counterStaggerMs: 200,
+  themeMessageDurationMs: 4000,
+  themeMessageFadeMs: 400,
+  observer: {
+    revealThreshold: 0.15,
+    revealRootMargin: '0px 0px -40px 0px',
+    chatRootMargin: '200px 0px',
+    statsThreshold: 0.3,
+    stickyThreshold: 0.1
+  }
+};
+
+const CssClass = {
+  active: 'active',
+  hidden: 'is-hidden',
+  open: 'open',
+  visible: 'visible'
 };
 
 const AppState = {
   currentScenario: 'invoice',
   currentGcScenario: 'project',
   chatDataLoaded: false,
+  chatDataLoading: false,
   statsCounted: false,
   reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   lastMenuTrigger: null
@@ -23,7 +48,7 @@ function onThemeChange(cb) {
 }
 
 function resolveTranslation(lang, key) {
-  const root = translations?.[lang];
+  const root = window.translations?.[lang] || translations?.[lang];
   if (!root) return undefined;
   return key.split('.').reduce((acc, part) => {
     if (acc && typeof acc === 'object' && part in acc) return acc[part];
@@ -71,6 +96,7 @@ function setLang(lang) {
   currentLang = lang;
   localStorage.setItem('responin-lang', lang);
   applyTranslations(lang);
+  updateComparisonLabels();
   langChangeCallbacks.forEach((cb) => cb(lang));
 }
 
@@ -87,7 +113,7 @@ function openSettings() {
   const dropdown = document.getElementById('settingsDropdown');
   const button = document.querySelector('[data-action="toggle-settings"]');
   if (!dropdown || !button) return;
-  dropdown.classList.add('open');
+  dropdown.classList.add(CssClass.open);
   button.setAttribute('aria-expanded', 'true');
 }
 
@@ -95,14 +121,14 @@ function closeSettings() {
   const dropdown = document.getElementById('settingsDropdown');
   const button = document.querySelector('[data-action="toggle-settings"]');
   if (!dropdown || !button) return;
-  dropdown.classList.remove('open');
+  dropdown.classList.remove(CssClass.open);
   button.setAttribute('aria-expanded', 'false');
 }
 
 function toggleSettings() {
   const dropdown = document.getElementById('settingsDropdown');
   if (!dropdown) return;
-  if (dropdown.classList.contains('open')) closeSettings();
+  if (dropdown.classList.contains(CssClass.open)) closeSettings();
   else openSettings();
 }
 
@@ -117,8 +143,10 @@ function openMobileMenu(trigger) {
   if (!menu || !overlay || !hamburger) return;
 
   AppState.lastMenuTrigger = trigger || document.activeElement;
-  menu.classList.add('open');
-  overlay.classList.add('open');
+  menu.classList.add(CssClass.open);
+  overlay.classList.add(CssClass.open);
+  menu.setAttribute('aria-hidden', 'false');
+  overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
   hamburger.setAttribute('aria-expanded', 'true');
 
@@ -132,8 +160,10 @@ function closeMobileMenu() {
   const hamburger = document.querySelector('[data-action="open-mobile-menu"]');
   if (!menu || !overlay || !hamburger) return;
 
-  menu.classList.remove('open');
-  overlay.classList.remove('open');
+  menu.classList.remove(CssClass.open);
+  overlay.classList.remove(CssClass.open);
+  menu.setAttribute('aria-hidden', 'true');
+  overlay.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   hamburger.setAttribute('aria-expanded', 'false');
   AppState.lastMenuTrigger?.focus?.();
@@ -141,7 +171,7 @@ function closeMobileMenu() {
 
 function trapMenuFocus(event) {
   const menu = document.getElementById('mobileMenu');
-  if (!menu || !menu.classList.contains('open') || event.key !== 'Tab') return;
+  if (!menu || !menu.classList.contains(CssClass.open) || event.key !== 'Tab') return;
 
   const focusables = getFocusableElements(menu);
   if (!focusables.length) return;
@@ -172,29 +202,30 @@ function initRevealAnimations() {
       entry.target.classList.add('visible');
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: AppConfig.observer.revealThreshold, rootMargin: AppConfig.observer.revealRootMargin });
 
   fadeEls.forEach((el) => observer.observe(el));
 
-  document.querySelectorAll('.solution-card, .problem-card, .step, .faq-item, .industry-deep').forEach((card, i) => {
-    card.style.transitionDelay = `${(i % 4) * 0.08}s`;
+  document.querySelectorAll('.solution-card, .problem-card, .navigation-card, .step, .faq-item, .industry-deep').forEach((card, i) => {
+    card.style.transitionDelay = `${(i % 4) * AppConfig.cardStaggerDelaySec}s`;
+  });
+}
+
+function updateComparisonLabels() {
+  document.querySelectorAll('.comparison-table').forEach((table) => {
+    const headers = Array.from(table.querySelectorAll('thead th')).map((th) => th.textContent.trim());
+    table.querySelectorAll('tbody tr').forEach((row) => {
+      const cells = row.querySelectorAll('td');
+      if (!cells.length) return;
+      cells[0].setAttribute('data-cell-role', 'row-heading');
+      if (cells[1]) cells[1].setAttribute('data-label', headers[1] || '');
+      if (cells[2]) cells[2].setAttribute('data-label', headers[2] || '');
+    });
   });
 }
 
 function initComparisonWrappers() {
   document.querySelectorAll('.comparison-wrapper').forEach((wrapper) => {
-    const table = wrapper.querySelector('.comparison-table');
-    if (table) {
-      const headers = Array.from(table.querySelectorAll('thead th')).map((th) => th.textContent.trim());
-      table.querySelectorAll('tbody tr').forEach((row) => {
-        const cells = row.querySelectorAll('td');
-        if (!cells.length) return;
-        cells[0].setAttribute('data-cell-role', 'row-heading');
-        if (cells[1]) cells[1].setAttribute('data-label', headers[1] || '');
-        if (cells[2]) cells[2].setAttribute('data-label', headers[2] || '');
-      });
-    }
-
     const updateState = () => {
       const atEnd = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 4;
       wrapper.classList.toggle('scrolled-end', atEnd);
@@ -202,6 +233,8 @@ function initComparisonWrappers() {
     wrapper.addEventListener('scroll', updateState, { passive: true });
     updateState();
   });
+
+  updateComparisonLabels();
 }
 
 function setBookingLinks() {
@@ -220,7 +253,7 @@ function renderChatMessages(container, messages, type) {
     const item = document.createElement('div');
     item.className = `${type === 'group' ? 'gc-msg' : 'chat-msg'} ${message.role}`;
     // Store animation delay for later application to ensure animation triggers
-    if (!AppState.reducedMotion) item.dataset.animationDelay = `${i * 0.3}s`;
+    if (!AppState.reducedMotion) item.dataset.animationDelay = `${i * AppConfig.animationBaseDelaySec}s`;
 
     const avatar = document.createElement('div');
     avatar.className = 'chat-msg-avatar';
@@ -306,7 +339,9 @@ function switchScenario(key) {
   renderChatMessages(document.getElementById('chatMessages'), messages, 'single');
 
   document.querySelectorAll('[data-chat-tabs="primary"] .chat-tab').forEach((tab) => {
-    tab.classList.toggle('active', tab.dataset.scenario === key);
+    const selected = tab.dataset.scenario === key;
+    tab.classList.toggle(CssClass.active, selected);
+    tab.setAttribute('aria-selected', String(selected));
   });
 }
 
@@ -317,55 +352,52 @@ function switchGcScenario(key) {
   renderChatMessages(document.getElementById('gcMessages'), messages, 'group');
 
   document.querySelectorAll('[data-chat-tabs="group"] .chat-tab').forEach((tab) => {
-    tab.classList.toggle('active', tab.dataset.gcScenario === key);
+    const selected = tab.dataset.gcScenario === key;
+    tab.classList.toggle(CssClass.active, selected);
+    tab.setAttribute('aria-selected', String(selected));
   });
+}
+
+function setPanelVisibility(panel, visible) {
+  if (!panel) return;
+  panel.classList.toggle(CssClass.hidden, !visible);
+  panel.setAttribute('aria-hidden', String(!visible));
 }
 
 function switchChatMode(mode) {
   const isGroup = mode === 'group';
 
   document.querySelectorAll('[data-chat-mode]').forEach((tab) => {
-    tab.classList.toggle('active', tab.dataset.chatMode === mode);
+    const selected = tab.dataset.chatMode === mode;
+    tab.classList.toggle(CssClass.active, selected);
+    tab.setAttribute('aria-selected', String(selected));
   });
 
-  const dmHeader = document.getElementById('dm-header');
-  const gcHeader = document.getElementById('gc-header');
-  const dmTabs = document.getElementById('dm-tabs');
-  const gcTabs = document.getElementById('gc-tabs');
-  const dmWindow = document.getElementById('dm-window');
-  const gcWindow = document.getElementById('gc-window');
-
-  if (dmHeader) dmHeader.style.display = isGroup ? 'none' : '';
-  if (gcHeader) gcHeader.style.display = isGroup ? '' : 'none';
-  if (dmTabs) dmTabs.style.display = isGroup ? 'none' : '';
-  if (gcTabs) gcTabs.style.display = isGroup ? '' : 'none';
-  if (dmWindow) dmWindow.style.display = isGroup ? 'none' : '';
-  if (gcWindow) gcWindow.style.display = isGroup ? '' : 'none';
+  setPanelVisibility(document.getElementById('dm-panel'), !isGroup);
+  setPanelVisibility(document.getElementById('gc-panel'), isGroup);
 
   if (isGroup) {
-    if (AppState.chatDataLoaded) {
-      switchGcScenario(AppState.currentGcScenario);
-    } else {
-      initChatData();
-    }
-  } else {
-    if (AppState.chatDataLoaded) {
-      switchScenario(AppState.currentScenario);
-    }
+    if (AppState.chatDataLoaded) switchGcScenario(AppState.currentGcScenario);
+    else initChatData();
+  } else if (AppState.chatDataLoaded) {
+    switchScenario(AppState.currentScenario);
   }
 }
 
 function initChatData() {
-  if (AppState.chatDataLoaded) return;
-  // If chat-data.js was already loaded synchronously in HTML
+  if (AppState.chatDataLoaded || AppState.chatDataLoading) return;
   if (typeof chatScenarios !== 'undefined' && typeof gcScenarios !== 'undefined') {
     AppState.chatDataLoaded = true;
     window.dispatchEvent(new Event('chatdataloaded'));
     return;
   }
+
+  AppState.chatDataLoading = true;
   const script = document.createElement('script');
-  script.src = 'chat-data.js';
+  script.src = AppConfig.chatDataSrc;
   script.async = true;
+  script.onload = () => { AppState.chatDataLoading = false; };
+  script.onerror = () => { AppState.chatDataLoading = false; };
   document.head.appendChild(script);
 }
 
@@ -384,7 +416,7 @@ function initChatObserver() {
       initChatData();
       observer.unobserve(entry.target);
     });
-  }, { rootMargin: '200px 0px' });
+  }, { rootMargin: AppConfig.observer.chatRootMargin });
 
   observer.observe(chatSection);
 }
@@ -410,18 +442,18 @@ function toggleFaq(button) {
   const item = button.closest('.faq-item');
   if (!item) return;
   const answer = item.querySelector('.faq-answer');
-  const isOpen = item.classList.contains('open');
+  const isOpen = item.classList.contains(CssClass.open);
 
   document.querySelectorAll('.faq-item.open').forEach((openItem) => {
     if (openItem === item) return;
-    openItem.classList.remove('open');
+    openItem.classList.remove(CssClass.open);
     const openButton = openItem.querySelector('[data-faq-trigger]');
     const openAnswer = openItem.querySelector('.faq-answer');
     if (openButton) openButton.setAttribute('aria-expanded', 'false');
     if (openAnswer) openAnswer.style.maxHeight = '0px';
   });
 
-  item.classList.toggle('open', !isOpen);
+  item.classList.toggle(CssClass.open, !isOpen);
   button.setAttribute('aria-expanded', String(!isOpen));
   if (answer) answer.style.maxHeight = !isOpen ? `${answer.scrollHeight}px` : '0px';
 }
@@ -460,7 +492,7 @@ function initStatsCounter() {
     statsData.forEach((stat, i) => {
       const el = document.querySelector(stat.selector);
       if (!el) return;
-      window.setTimeout(() => animateCounter(el, stat.end, stat.suffix, stat.prefix, 1500), i * 200);
+      window.setTimeout(() => animateCounter(el, stat.end, stat.suffix, stat.prefix, AppConfig.counterDurationMs), i * AppConfig.counterStaggerMs);
     });
   };
 
@@ -475,7 +507,7 @@ function initStatsCounter() {
       run();
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.3 });
+  }, { threshold: AppConfig.observer.statsThreshold });
 
   observer.observe(statsBar);
 }
@@ -486,7 +518,7 @@ function initStickyCta() {
   if (!stickyCta || !heroSection) return;
 
   const onResize = () => {
-    if (window.innerWidth > 768) stickyCta.classList.remove('visible');
+    if (window.innerWidth > AppConfig.mobileBreakpoint) stickyCta.classList.remove(CssClass.visible);
   };
 
   if (!('IntersectionObserver' in window)) {
@@ -496,10 +528,10 @@ function initStickyCta() {
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) stickyCta.classList.remove('visible');
-      else if (window.innerWidth <= 768) stickyCta.classList.add('visible');
+      if (entry.isIntersecting) stickyCta.classList.remove(CssClass.visible);
+      else if (window.innerWidth <= AppConfig.mobileBreakpoint) stickyCta.classList.add(CssClass.visible);
     });
-  }, { threshold: 0.1 });
+  }, { threshold: AppConfig.observer.stickyThreshold });
 
   observer.observe(heroSection);
   window.addEventListener('resize', onResize);
@@ -522,8 +554,8 @@ function initThemeMessage() {
 
     window.setTimeout(() => {
       div.style.opacity = '0';
-      window.setTimeout(() => div.remove(), 400);
-    }, 4000);
+      window.setTimeout(() => div.remove(), AppConfig.themeMessageFadeMs);
+    }, AppConfig.themeMessageDurationMs);
   });
 }
 
@@ -603,10 +635,10 @@ function initApp() {
   document.addEventListener('click', handleDocumentClick);
   document.addEventListener('keydown', handleDocumentKeydown);
 
-  const savedLang = localStorage.getItem('responin-lang') || document.documentElement.lang || 'id';
+  const savedLang = localStorage.getItem('responin-lang') || AppConfig.defaultLang;
   setLang(savedLang);
 
-  const savedTheme = localStorage.getItem('responin-theme') || 'dark';
+  const savedTheme = localStorage.getItem('responin-theme') || AppConfig.defaultTheme;
   setTheme(savedTheme);
 
   // Ensure chat data is initialized if already loaded via synchronous script
