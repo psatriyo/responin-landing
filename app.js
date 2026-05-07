@@ -545,16 +545,16 @@ const PricingConfig = {
     small: 0,
     corporate: 999000,
   },
-  setup: { firstAgent: 2999000, additionalAgent: 2499000 },
+  setup: { firstAgent: 1999000, additionalAgent: 1499000 },
   support: {
-    monitoring: { firstAgent: 2199000, additionalAgent: 1599000 },
-    maintenance: { firstAgent: 999000, additionalAgent: 499000 },
+    monitoring: { firstAgent: 1699000, additionalAgent: 1199000 },
+    maintenance: { firstAgent: 799000, additionalAgent: 399000 },
     none: { firstAgent: 0, additionalAgent: 0 },
   },
-  serverMonthly: 399000,
+  serverMonthly: 299000,
   aiUsageMonthly: {
     basic: 399000,
-    smart: 1999000,
+    smart: 1899000,
   },
   commitmentDiscounts: {
     sixMonths: { threshold: 6, rate: 0.1 },

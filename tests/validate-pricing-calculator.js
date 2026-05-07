@@ -58,9 +58,9 @@ const {
   formatDiscount,
 } = context.module.exports;
 
-assert(PricingConfig.support.monitoring.firstAgent === 2199000, 'monitoring first-agent monthly support should be Rp2.199.000');
-assert(PricingConfig.support.maintenance.firstAgent === 999000, 'maintenance first-agent monthly support should be Rp999.000');
-assert(PricingConfig.aiUsageMonthly.smart === 1999000, 'smart AI usage should be Rp1.999.000');
+assert(PricingConfig.support.monitoring.firstAgent === 1699000, 'monitoring first-agent monthly support should be Rp1.699.000');
+assert(PricingConfig.support.maintenance.firstAgent === 799000, 'maintenance first-agent monthly support should be Rp799.000');
+assert(PricingConfig.aiUsageMonthly.smart === 1899000, 'smart AI usage should be Rp1.899.000');
 
 assert(PricingConfig.commitmentDiscounts.sixMonths.threshold === 6, '6-month discount threshold should be centralized at 6 months');
 assert(PricingConfig.commitmentDiscounts.sixMonths.rate === 0.1, '6-month commitment should apply 10% discount');
@@ -73,13 +73,13 @@ assert(calculateCommitmentDiscountRate(6) === 0.1, '6 months should receive 10% 
 assert(calculateCommitmentDiscountRate(11) === 0.1, '11 months should keep 10% discount');
 assert(calculateCommitmentDiscountRate(12) === 0.2, '12 months should receive 20% discount');
 
-assert(calculateTieredMonthly(1, PricingConfig.setup) === 2999000, 'first agent setup should be Rp2.999.000');
-assert(calculateTieredMonthly(3, PricingConfig.setup) === 7997000, 'third agent setup should include two additional-agent fees');
+assert(calculateTieredMonthly(1, PricingConfig.setup) === 1999000, 'first agent setup should be Rp1.999.000');
+assert(calculateTieredMonthly(3, PricingConfig.setup) === 4997000, 'third agent setup should include two additional-agent fees');
 assert(calculateSharedUsageCount(1) === 1, '1 agent should need 1 shared usage');
 assert(calculateSharedUsageCount(2) === 1, '2 agents should need 1 shared usage');
 assert(calculateSharedUsageCount(3) === 2, '3 agents should need 2 shared usages');
 assert(formatMonthCount(1) === '1 month', 'singular month label should be localized');
 assert(formatMonthCount(6) === '6 months', 'plural month label should be localized');
-assert(formatDiscount(0.1, 579600) === '10% · Rp579.600 saved', 'discount label should include localized savings amount');
+assert(formatDiscount(0.1, 479600) === '10% · Rp479.600 saved', 'discount label should include localized savings amount');
 
 console.log('pricing calculator OK');
