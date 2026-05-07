@@ -540,8 +540,31 @@ function initStickyCta() {
 }
 
 
+const PricingRoiConfig = {
+  weeksPerMonth: 4.333,
+  minimumPaybackSavings: 1,
+  defaultPlan: 'starter',
+  plans: {
+    starter: { setup: 2999000, monthly: 2900000 },
+    growth: { setup: 9900000, monthly: 6900000 },
+    corporate: { setup: 25000000, monthly: 12000000 },
+  },
+};
+
 function formatIdr(value) {
-  return `IDR ${Math.max(0, Math.round(value)).toLocaleString('en-US')}`;
+  return `Rp${Math.max(0, Math.round(value)).toLocaleString('id-ID')}`;
+}
+
+function formatSignedIdr(value) {
+  const rounded = Math.round(value);
+  const prefix = rounded < 0 ? '-' : '';
+  return `${prefix}${formatIdr(Math.abs(rounded))}`;
+}
+
+function formatMonths(value) {
+  if (!Number.isFinite(value)) return 'Not yet positive';
+  if (value < 1) return '<1 month';
+  return `${value.toFixed(1)} months`;
 }
 
 function initPricingCalculator() {
@@ -552,35 +575,35 @@ function initPricingCalculator() {
   if (!form) return;
 
   const result = (key) => calculator.querySelector(`[data-price-result="${key}"]`);
+  const setResult = (key, value) => {
+    const element = result(key);
+    if (element) element.textContent = value;
+  };
   const getNumber = (name, fallback) => {
     const value = Number(form.elements[name]?.value);
     return Number.isFinite(value) ? value : fallback;
   };
 
   const calculate = () => {
-    const step1 = form.elements.step1Type?.value === 'corporate' ? 999000 : 0;
-    const step2 = Math.max(2999000, getNumber('step2Fee', 2999000));
-    const bots = Math.max(1, Math.floor(getNumber('botCount', 1)));
-    const licenses = Math.max(1, Math.floor(getNumber('licenseCount', 1)));
+    const planKey = form.elements.packagePlan?.value || PricingRoiConfig.defaultPlan;
+    const plan = PricingRoiConfig.plans[planKey] || PricingRoiConfig.plans[PricingRoiConfig.defaultPlan];
+    const people = Math.max(1, Math.floor(getNumber('peopleCount', 1)));
+    const weeklyHours = Math.max(0, getNumber('hoursSavedWeekly', 0));
+    const hourlyCost = Math.max(0, getNumber('hourlyCost', 0));
 
-    let support = 0;
-    const supportPlan = form.elements.supportPlan?.value;
-    if (supportPlan === 'monitoring') support = 1999000 + Math.max(0, bots - 1) * 1599000;
-    if (supportPlan === 'maintenance') support = 399000 + Math.max(0, bots - 1) * 299000;
+    const monthlyRecoveredHours = people * weeklyHours * PricingRoiConfig.weeksPerMonth;
+    const monthlySavings = monthlyRecoveredHours * hourlyCost;
+    const netImpact = monthlySavings - plan.monthly;
+    const payback = netImpact >= PricingRoiConfig.minimumPaybackSavings
+      ? plan.setup / netImpact
+      : Number.POSITIVE_INFINITY;
 
-    const server = form.elements.server?.checked ? 399000 : 0;
-    const aiUnit = form.elements.aiPlan?.value === 'smart' ? 899000 : 399000;
-    const ai = aiUnit * licenses;
-    const oneTime = step1 + step2;
-    const monthly = support + server + ai;
-
-    result('oneTime').textContent = formatIdr(oneTime);
-    result('monthly').textContent = formatIdr(monthly);
-    result('step1').textContent = formatIdr(step1);
-    result('step2').textContent = formatIdr(step2);
-    result('support').textContent = formatIdr(support);
-    result('server').textContent = formatIdr(server);
-    result('ai').textContent = formatIdr(ai);
+    setResult('oneTime', formatIdr(plan.setup));
+    setResult('monthlySavings', formatIdr(monthlySavings));
+    setResult('monthlyCost', formatIdr(plan.monthly));
+    setResult('hoursRecovered', `${Math.round(monthlyRecoveredHours)} hours`);
+    setResult('netImpact', formatSignedIdr(netImpact));
+    setResult('paybackPeriod', formatMonths(payback));
   };
 
   form.addEventListener('input', calculate);

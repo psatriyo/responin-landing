@@ -48,6 +48,11 @@ function validatePricing() {
   assert(/<main id="main">/i.test(html), 'pricing.html is missing <main id="main">');
   assert(/href="#main" class="skip-link"/i.test(html), 'pricing.html skip link is missing');
   assert(/data-pricing-calculator/i.test(html), 'pricing.html is missing pricing calculator markup');
+  assert(/id="packages"/i.test(html), 'pricing.html is missing bundled package section');
+  assert(/Starter Pilot/i.test(html) && /Growth Ops/i.test(html) && /Business \/ Corporate/i.test(html), 'pricing.html is missing the bundled package tiers');
+  assert(/ROI Calculator/i.test(html), 'pricing.html should frame the calculator around ROI');
+  assert(/hosting, AI usage allowance, monitoring, and maintenance/i.test(html), 'pricing.html should bundle infrastructure and AI costs into package inclusions');
+  assert(!/First Section|Second Section/i.test(html), 'pricing.html should not expose placeholder section labels');
   assert(/href="pricing\.html" class="nav-link"/i.test(html), 'pricing.html should link to itself in desktop nav');
   assert(/<script src="i18n\.js" defer><\/script>/i.test(html), 'pricing.html should defer i18n.js');
   assert(/<script src="app\.js" defer><\/script>/i.test(html), 'pricing.html should defer app.js');

@@ -11,6 +11,7 @@ const index = read('index.html');
 const learnMore = read('learnmore.html');
 const app = read('app.js');
 const css = read('styles.css');
+const pricing = read('pricing.html');
 
 assert(/class="container hero-grid"/.test(index), 'Hero must use the two-column hero-grid layout');
 assert(/class="proof-strip"/.test(index), 'Landing page must expose proof metrics immediately after hero');
@@ -30,5 +31,13 @@ assert(/const AppConfig =/.test(app) && /mobileBreakpoint/.test(app), 'app.js sh
 assert(/AppConfig\.chatDataSrc/.test(app), 'chat data source should be configurable');
 assert(/\.content-auto/.test(css), 'CSS should include content-visibility helper');
 assert(/\.hero-grid/.test(css), 'CSS should include optimized hero-grid styles');
+
+
+assert(/id="packages"/.test(pricing), 'Pricing page should expose bundled packages before calculator');
+assert(/Starter Pilot/.test(pricing) && /Growth Ops/.test(pricing) && /Business \/ Corporate/.test(pricing), 'Pricing page should include three bundled package tiers');
+assert(/data-price-result="monthlySavings"/.test(pricing), 'Pricing calculator should output monthly savings');
+assert(/const PricingRoiConfig =/.test(app), 'Pricing ROI assumptions should be centralized in PricingRoiConfig');
+assert(/weeksPerMonth/.test(app), 'Pricing ROI calculator should centralize weeks-per-month assumption');
+assert(/\.pricing-package-grid/.test(css), 'CSS should include package grid styles');
 
 console.log('landing architecture OK');

@@ -1442,6 +1442,70 @@ header, main { display: block; }
   padding: 20px;
 }
 
+
+.pricing-package-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 44px;
+}
+
+.pricing-package-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.pricing-package-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-hover);
+}
+
+.pricing-package-card-featured {
+  border-color: rgba(0, 206, 201, 0.55);
+  box-shadow: 0 24px 70px rgba(0, 206, 201, 0.12);
+}
+
+.price-line-secondary {
+  font-size: 1.05rem;
+  color: var(--accent-light);
+}
+
+.pricing-feature-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+  padding-left: 18px;
+  color: var(--text-muted);
+}
+
+.pricing-feature-list li::marker {
+  color: var(--accent-light);
+}
+
+.pricing-detail-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+  gap: 24px;
+  align-items: center;
+  margin-top: 24px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(108, 92, 231, 0.14), rgba(0, 206, 201, 0.08));
+}
+
+.pricing-detail-card h3 {
+  font-size: 1.25rem;
+}
+
+.pricing-detail-card p {
+  color: var(--text-muted);
+}
+
 .pricing-calculator-section {
   background: linear-gradient(180deg, var(--bg), rgba(108, 92, 231, 0.06));
 }
@@ -1548,6 +1612,7 @@ header, main { display: block; }
 
 [data-theme="light"] .pricing-summary-card,
 [data-theme="light"] .pricing-step-card,
+[data-theme="light"] .pricing-package-card,
 [data-theme="light"] .pricing-form,
 [data-theme="light"] .pricing-results,
 [data-theme="light"] .pricing-options-grid > div,
@@ -1560,6 +1625,8 @@ header, main { display: block; }
 @media (max-width: 768px) {
   .pricing-steps-grid,
   .pricing-options-grid,
+  .pricing-package-grid,
+  .pricing-detail-card,
   .pricing-calculator {
     grid-template-columns: 1fr;
   }
@@ -1568,5 +1635,7 @@ header, main { display: block; }
   .pricing-form,
   .pricing-results,
   .pricing-step-card,
+  .pricing-package-card,
+  .pricing-detail-card,
   .pricing-summary-card { padding: 22px; }
 }
