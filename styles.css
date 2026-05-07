@@ -1331,11 +1331,13 @@ header, main { display: block; }
 
 /* --- Learn More layout utilities --- */
 .learnmore-proof-offset { margin-top: 80px; }
-.learnmore-step-title {
+#journey-context .section-title.learnmore-step-title {
+  display: block;
+  width: 100%;
+  max-width: 780px;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  margin: 0 auto 20px;
+  text-align: center !important;
 }
 .section-desc-wide { max-width: 780px; margin: 0 auto 16px; }
 .max-width-full { max-width: 100% !important; }
