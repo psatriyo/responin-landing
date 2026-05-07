@@ -123,7 +123,8 @@ function checkHtmlFile(filePath) {
 function checkPageTitles() {
   const files = {
     'privacy.html': 'legal.priv_page_title',
-    'termsofuse.html': 'legal.terms_page_title'
+    'termsofuse.html': 'legal.terms_page_title',
+    'pricing.html': 'ui.pricing_page_title'
   };
   for (const [file, expectedKey] of Object.entries(files)) {
     if (!fs.existsSync(file)) continue;
@@ -145,7 +146,7 @@ function checkPageTitles() {
 
 console.log('\n=== i18n Validation ===\n');
 
-const htmlFiles = ['index.html', 'learnmore.html', 'privacy.html', 'termsofuse.html'];
+const htmlFiles = ['index.html', 'learnmore.html', 'pricing.html', 'privacy.html', 'termsofuse.html'];
 for (const f of htmlFiles) {
   if (fs.existsSync(f)) checkHtmlFile(f);
 }
