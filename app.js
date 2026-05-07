@@ -540,8 +540,37 @@ function initStickyCta() {
 }
 
 
+const PricingConfig = {
+  workflowMapping: {
+    small: 0,
+    corporate: 999000,
+  },
+  minimumSetupFee: 2999000,
+  support: {
+    monitoring: { firstBot: 1999000, additionalBot: 1599000 },
+    maintenance: { firstBot: 399000, additionalBot: 299000 },
+    none: { firstBot: 0, additionalBot: 0 },
+  },
+  serverMonthly: 399000,
+  aiUsageMonthly: {
+    basic: 399000,
+    smart: 899000,
+  },
+};
+
 function formatIdr(value) {
-  return `IDR ${Math.max(0, Math.round(value)).toLocaleString('en-US')}`;
+  return `Rp${Math.max(0, Math.round(value)).toLocaleString('id-ID')}`;
+}
+
+function calculateTieredMonthly(count, tier) {
+  const normalizedCount = Math.max(1, Math.floor(count));
+  return tier.firstBot + Math.max(0, normalizedCount - 1) * tier.additionalBot;
+}
+
+function formatStaffComparison(monthlyCost, monthlyStaffCost) {
+  if (!monthlyStaffCost || monthlyStaffCost <= 0) return 'Add staff cost to compare';
+  const percentage = Math.round((monthlyCost / monthlyStaffCost) * 100);
+  return `${percentage}% of monthly cost`;
 }
 
 function initPricingCalculator() {
@@ -552,35 +581,41 @@ function initPricingCalculator() {
   if (!form) return;
 
   const result = (key) => calculator.querySelector(`[data-price-result="${key}"]`);
+  const setResult = (key, value) => {
+    const element = result(key);
+    if (element) element.textContent = value;
+  };
   const getNumber = (name, fallback) => {
     const value = Number(form.elements[name]?.value);
     return Number.isFinite(value) ? value : fallback;
   };
 
   const calculate = () => {
-    const step1 = form.elements.step1Type?.value === 'corporate' ? 999000 : 0;
-    const step2 = Math.max(2999000, getNumber('step2Fee', 2999000));
+    const step1Type = form.elements.step1Type?.value || 'small';
+    const step1 = PricingConfig.workflowMapping[step1Type] ?? PricingConfig.workflowMapping.small;
+    const step2 = Math.max(PricingConfig.minimumSetupFee, getNumber('step2Fee', PricingConfig.minimumSetupFee));
     const bots = Math.max(1, Math.floor(getNumber('botCount', 1)));
     const licenses = Math.max(1, Math.floor(getNumber('licenseCount', 1)));
+    const monthlyStaffCost = Math.max(0, getNumber('monthlyStaffCost', 0));
 
-    let support = 0;
-    const supportPlan = form.elements.supportPlan?.value;
-    if (supportPlan === 'monitoring') support = 1999000 + Math.max(0, bots - 1) * 1599000;
-    if (supportPlan === 'maintenance') support = 399000 + Math.max(0, bots - 1) * 299000;
-
-    const server = form.elements.server?.checked ? 399000 : 0;
-    const aiUnit = form.elements.aiPlan?.value === 'smart' ? 899000 : 399000;
+    const supportPlan = form.elements.supportPlan?.value || 'monitoring';
+    const supportTier = PricingConfig.support[supportPlan] || PricingConfig.support.monitoring;
+    const support = calculateTieredMonthly(bots, supportTier);
+    const server = form.elements.server?.checked ? PricingConfig.serverMonthly : 0;
+    const aiPlan = form.elements.aiPlan?.value || 'basic';
+    const aiUnit = PricingConfig.aiUsageMonthly[aiPlan] || PricingConfig.aiUsageMonthly.basic;
     const ai = aiUnit * licenses;
     const oneTime = step1 + step2;
     const monthly = support + server + ai;
 
-    result('oneTime').textContent = formatIdr(oneTime);
-    result('monthly').textContent = formatIdr(monthly);
-    result('step1').textContent = formatIdr(step1);
-    result('step2').textContent = formatIdr(step2);
-    result('support').textContent = formatIdr(support);
-    result('server').textContent = formatIdr(server);
-    result('ai').textContent = formatIdr(ai);
+    setResult('oneTime', formatIdr(oneTime));
+    setResult('monthly', formatIdr(monthly));
+    setResult('step1', formatIdr(step1));
+    setResult('step2', formatIdr(step2));
+    setResult('support', formatIdr(support));
+    setResult('server', formatIdr(server));
+    setResult('ai', formatIdr(ai));
+    setResult('staffComparison', formatStaffComparison(monthly, monthlyStaffCost));
   };
 
   form.addEventListener('input', calculate);

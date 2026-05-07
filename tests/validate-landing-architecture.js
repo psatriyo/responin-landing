@@ -11,6 +11,7 @@ const index = read('index.html');
 const learnMore = read('learnmore.html');
 const app = read('app.js');
 const css = read('styles.css');
+const pricing = read('pricing.html');
 
 assert(/class="container hero-grid"/.test(index), 'Hero must use the two-column hero-grid layout');
 assert(/class="proof-strip"/.test(index), 'Landing page must expose proof metrics immediately after hero');
@@ -30,5 +31,13 @@ assert(/const AppConfig =/.test(app) && /mobileBreakpoint/.test(app), 'app.js sh
 assert(/AppConfig\.chatDataSrc/.test(app), 'chat data source should be configurable');
 assert(/\.content-auto/.test(css), 'CSS should include content-visibility helper');
 assert(/\.hero-grid/.test(css), 'CSS should include optimized hero-grid styles');
+
+
+assert(/id="pricing-story"/.test(pricing), 'Pricing page should expose an Indonesia-relatable pricing story');
+assert(/id="pricing-structure"/.test(pricing), 'Pricing page should retain modular pricing structure');
+assert(/data-price-result="staffComparison"/.test(pricing), 'Pricing calculator should compare monthly cost against admin/coordinator cost');
+assert(/const PricingConfig =/.test(app), 'Pricing assumptions should be centralized in PricingConfig');
+assert(/calculateTieredMonthly/.test(app), 'Pricing calculator should use reusable tiered monthly calculation');
+assert(/\.pricing-story-grid/.test(css), 'CSS should include pricing story grid styles');
 
 console.log('landing architecture OK');

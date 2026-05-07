@@ -48,6 +48,12 @@ function validatePricing() {
   assert(/<main id="main">/i.test(html), 'pricing.html is missing <main id="main">');
   assert(/href="#main" class="skip-link"/i.test(html), 'pricing.html skip link is missing');
   assert(/data-pricing-calculator/i.test(html), 'pricing.html is missing pricing calculator markup');
+  assert(/id="pricing-story"/i.test(html), 'pricing.html is missing Indonesia-relatable pricing story section');
+  assert(/id="pricing-structure"/i.test(html), 'pricing.html is missing modular pricing structure section');
+  assert(/Monthly Cost Estimator/i.test(html), 'pricing.html should use modular monthly cost framing');
+  assert(/admin\/coordinator/i.test(html), 'pricing.html should compare monthly pricing against relatable staff cost');
+  assert(/Server<\/h4>/i.test(html) && /AI usage<\/h4>/i.test(html), 'pricing.html should keep server and AI usage as modular components');
+  assert(!/First Section|Second Section|hours saved per person|hourly/i.test(html), 'pricing.html should not expose placeholder labels or hourly-rate ROI framing');
   assert(/href="pricing\.html" class="nav-link"/i.test(html), 'pricing.html should link to itself in desktop nav');
   assert(/<script src="i18n\.js" defer><\/script>/i.test(html), 'pricing.html should defer i18n.js');
   assert(/<script src="app\.js" defer><\/script>/i.test(html), 'pricing.html should defer app.js');
