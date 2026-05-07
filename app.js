@@ -571,15 +571,19 @@ function calculateSharedUsageCount(botCount) {
   return Math.max(1, Math.ceil(Math.max(1, Math.floor(botCount)) / 2));
 }
 
-function formatUsagePrice(total, usageCount, singularLabel = 'usage') {
-  const label = usageCount === 1 ? singularLabel : `${singularLabel}s`;
+function formatUsagePrice(total, usageCount) {
+  const key = usageCount === 1 ? 'ui.pricing_usage_singular' : 'ui.pricing_usage_plural';
+  const label = resolveTranslation(currentLang, key) || resolveTranslation('en', key) || 'usage';
   return `${formatIdr(total)} · ${usageCount} ${label}`;
 }
 
 function formatStaffComparison(monthlyCost, monthlyStaffCost) {
-  if (!monthlyStaffCost || monthlyStaffCost <= 0) return 'Add staff cost to compare';
+  if (!monthlyStaffCost || monthlyStaffCost <= 0) {
+    return resolveTranslation(currentLang, 'ui.pricing_staff_missing') || resolveTranslation('en', 'ui.pricing_staff_missing') || 'Add staff cost to compare';
+  }
   const percentage = Math.round((monthlyCost / monthlyStaffCost) * 100);
-  return `${percentage}% of monthly cost`;
+  const suffix = resolveTranslation(currentLang, 'ui.pricing_staff_comparison') || resolveTranslation('en', 'ui.pricing_staff_comparison') || '% of monthly cost';
+  return `${percentage}${suffix}`;
 }
 
 function initPricingCalculator() {
@@ -641,6 +645,7 @@ function initPricingCalculator() {
 
   form.addEventListener('input', calculate);
   form.addEventListener('change', calculate);
+  onLangChange(calculate);
   calculate();
 }
 
