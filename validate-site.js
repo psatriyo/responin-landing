@@ -42,6 +42,19 @@ function validateLearnMore() {
   assert(/data-i18n="ui\.vs_r2_c1">Personalization/i.test(html), 'learnmore.html comparison personalization row uses the wrong i18n key');
 }
 
+function validatePricing() {
+  const html = read('pricing.html');
+  assert(/<header>[\s\S]*<nav>/i.test(html), 'pricing.html is missing header/nav landmarks');
+  assert(/<main id="main">/i.test(html), 'pricing.html is missing <main id="main">');
+  assert(/href="#main" class="skip-link"/i.test(html), 'pricing.html skip link is missing');
+  assert(/data-pricing-calculator/i.test(html), 'pricing.html is missing pricing calculator markup');
+  assert(/href="pricing\.html" class="nav-link"/i.test(html), 'pricing.html should link to itself in desktop nav');
+  assert(/<script src="i18n\.js" defer><\/script>/i.test(html), 'pricing.html should defer i18n.js');
+  assert(/<script src="app\.js" defer><\/script>/i.test(html), 'pricing.html should defer app.js');
+  assert(!/onclick=/i.test(html), 'pricing.html still contains inline onclick handlers');
+  assert(!/style="/i.test(html), 'pricing.html should not rely on inline layout styles');
+}
+
 function validateLegal(file) {
   const html = read(file);
   assert(/<main id="main">/i.test(html), `${file} is missing <main id="main">`);
@@ -54,6 +67,7 @@ function validateLegal(file) {
 try {
   validateIndex();
   validateLearnMore();
+  validatePricing();
   validateLegal('privacy.html');
   validateLegal('termsofuse.html');
   console.log('site structure OK');

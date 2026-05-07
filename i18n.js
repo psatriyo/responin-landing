@@ -11,6 +11,8 @@ const translations = {
       nav_faq: "FAQ",
       nav_more: "Learn More",
       nav_home: "Home",
+      nav_pricing: "Pricing",
+      pricing_page_title: "Pricing · Responin",
 
       // Learn More Bridge
       bridge_label: "Next Step",
@@ -360,6 +362,8 @@ const translations = {
       nav_faq: "FAQ",
       nav_more: "Selengkapnya",
       nav_home: "Beranda",
+      nav_pricing: "Harga",
+      pricing_page_title: "Harga · Responin",
 
       // Learn More Bridge
       bridge_label: "Langkah Berikutnya",
