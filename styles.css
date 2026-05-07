@@ -1442,7 +1442,19 @@ header, main { display: block; }
   padding: 20px;
 }
 
+.pricing-agent-definition {
+  max-width: 860px;
+  margin: 36px auto 0;
+  padding: 22px 24px;
+  border: 1px solid rgba(0, 206, 201, 0.28);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(108, 92, 231, 0.12), rgba(0, 206, 201, 0.08));
+}
 
+.pricing-agent-definition p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
 
 .pricing-story-grid {
   display: grid;
@@ -1595,13 +1607,13 @@ header, main { display: block; }
   line-height: 1.5;
 }
 
-.bot-count-control {
+.agent-count-control {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr) 44px;
   gap: 8px;
 }
 
-.bot-count-btn {
+.agent-count-btn {
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--bg-elevated);
@@ -1613,14 +1625,14 @@ header, main { display: block; }
   transition: border-color var(--transition-fast), transform var(--transition-fast), background var(--transition-fast);
 }
 
-.bot-count-btn:hover,
-.bot-count-btn:focus-visible {
+.agent-count-btn:hover,
+.agent-count-btn:focus-visible {
   border-color: var(--accent-light);
   background: rgba(108, 92, 231, 0.14);
   outline: none;
 }
 
-.bot-count-btn:active { transform: translateY(1px); }
+.agent-count-btn:active { transform: translateY(1px); }
 
 .pricing-auto-note {
   display: grid;
@@ -1636,6 +1648,23 @@ header, main { display: block; }
 
 .pricing-auto-note strong {
   color: var(--text);
+}
+
+.pricing-range-field > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pricing-range-field strong {
+  color: var(--accent-light);
+  white-space: nowrap;
+}
+
+.pricing-field input[type="range"] {
+  accent-color: var(--accent-light);
+  padding: 0;
 }
 
 .pricing-field input:focus,
@@ -1691,6 +1720,7 @@ header, main { display: block; }
 }
 
 [data-theme="light"] .pricing-summary-card,
+[data-theme="light"] .pricing-agent-definition,
 [data-theme="light"] .pricing-story-card,
 [data-theme="light"] .pricing-step-card,
 [data-theme="light"] .pricing-package-card,
@@ -1716,6 +1746,7 @@ header, main { display: block; }
   .pricing-step-card-wide { grid-column: auto; }
   .pricing-form,
   .pricing-results,
+  .pricing-agent-definition,
   .pricing-story-card,
   .pricing-step-card,
   .pricing-package-card,

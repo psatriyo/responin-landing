@@ -545,16 +545,20 @@ const PricingConfig = {
     small: 0,
     corporate: 999000,
   },
-  setup: { firstBot: 2999000, additionalBot: 2499000 },
+  setup: { firstAgent: 2999000, additionalAgent: 2499000 },
   support: {
-    monitoring: { firstBot: 1999000, additionalBot: 1599000 },
-    maintenance: { firstBot: 899000, additionalBot: 499000 },
-    none: { firstBot: 0, additionalBot: 0 },
+    monitoring: { firstAgent: 1999000, additionalAgent: 1599000 },
+    maintenance: { firstAgent: 899000, additionalAgent: 499000 },
+    none: { firstAgent: 0, additionalAgent: 0 },
   },
   serverMonthly: 399000,
   aiUsageMonthly: {
     basic: 399000,
     smart: 899000,
+  },
+  commitmentDiscounts: {
+    sixMonths: { threshold: 6, rate: 0.1 },
+    twelveMonths: { threshold: 12, rate: 0.2 },
   },
 };
 
@@ -564,11 +568,11 @@ function formatIdr(value) {
 
 function calculateTieredMonthly(count, tier) {
   const normalizedCount = Math.max(1, Math.floor(count));
-  return tier.firstBot + Math.max(0, normalizedCount - 1) * tier.additionalBot;
+  return tier.firstAgent + Math.max(0, normalizedCount - 1) * tier.additionalAgent;
 }
 
-function calculateSharedUsageCount(botCount) {
-  return Math.max(1, Math.ceil(Math.max(1, Math.floor(botCount)) / 2));
+function calculateSharedUsageCount(agentCount) {
+  return Math.max(1, Math.ceil(Math.max(1, Math.floor(agentCount)) / 2));
 }
 
 function formatUsagePrice(total, usageCount) {
@@ -577,13 +581,24 @@ function formatUsagePrice(total, usageCount) {
   return `${formatIdr(total)} · ${usageCount} ${label}`;
 }
 
-function formatStaffComparison(monthlyCost, monthlyStaffCost) {
-  if (!monthlyStaffCost || monthlyStaffCost <= 0) {
-    return resolveTranslation(currentLang, 'ui.pricing_staff_missing') || resolveTranslation('en', 'ui.pricing_staff_missing') || 'Add staff cost to compare';
-  }
-  const percentage = Math.round((monthlyCost / monthlyStaffCost) * 100);
-  const suffix = resolveTranslation(currentLang, 'ui.pricing_staff_comparison') || resolveTranslation('en', 'ui.pricing_staff_comparison') || '% of monthly cost';
-  return `${percentage}${suffix}`;
+function calculateCommitmentDiscountRate(months) {
+  const normalizedMonths = Math.max(1, Math.floor(months));
+  const { sixMonths, twelveMonths } = PricingConfig.commitmentDiscounts;
+  if (normalizedMonths >= twelveMonths.threshold) return twelveMonths.rate;
+  if (normalizedMonths >= sixMonths.threshold) return sixMonths.rate;
+  return 0;
+}
+
+function formatMonthCount(months) {
+  const normalizedMonths = Math.max(1, Math.floor(months));
+  const key = normalizedMonths === 1 ? 'ui.pricing_month_singular' : 'ui.pricing_month_plural';
+  const label = resolveTranslation(currentLang, key) || resolveTranslation('en', key) || 'months';
+  return `${normalizedMonths} ${label}`;
+}
+
+function formatDiscount(rate, amount) {
+  const savedLabel = resolveTranslation(currentLang, 'ui.pricing_discount_saved') || resolveTranslation('en', 'ui.pricing_discount_saved') || 'saved';
+  return rate > 0 ? `${Math.round(rate * 100)}% · ${formatIdr(amount)} ${savedLabel}` : '0%';
 }
 
 function initPricingCalculator() {
@@ -606,38 +621,49 @@ function initPricingCalculator() {
   const calculate = () => {
     const step1Type = form.elements.step1Type?.value || 'small';
     const step1 = PricingConfig.workflowMapping[step1Type] ?? PricingConfig.workflowMapping.small;
-    const bots = Math.max(1, Math.floor(getNumber('botCount', 1)));
-    if (form.elements.botCount) form.elements.botCount.value = bots;
-    const step2 = calculateTieredMonthly(bots, PricingConfig.setup);
-    const sharedUsageCount = calculateSharedUsageCount(bots);
-    const monthlyStaffCost = Math.max(0, getNumber('monthlyStaffCost', 0));
+    const agents = Math.max(1, Math.floor(getNumber('agentCount', 1)));
+    if (form.elements.agentCount) form.elements.agentCount.value = agents;
+    const step2 = calculateTieredMonthly(agents, PricingConfig.setup);
+    const sharedUsageCount = calculateSharedUsageCount(agents);
+    const commitmentMonths = Math.max(1, Math.floor(getNumber('commitmentMonths', 1)));
+    if (form.elements.commitmentMonths) form.elements.commitmentMonths.value = commitmentMonths;
 
     const supportPlan = form.elements.supportPlan?.value || 'monitoring';
     const supportTier = PricingConfig.support[supportPlan] || PricingConfig.support.monitoring;
-    const support = calculateTieredMonthly(bots, supportTier);
+    const support = calculateTieredMonthly(agents, supportTier);
     const server = PricingConfig.serverMonthly * sharedUsageCount;
     const aiPlan = form.elements.aiPlan?.value || 'basic';
     const aiUnit = PricingConfig.aiUsageMonthly[aiPlan] || PricingConfig.aiUsageMonthly.basic;
     const ai = aiUnit * sharedUsageCount;
     const oneTime = step1 + step2;
     const monthly = support + server + ai;
+    const discountRate = calculateCommitmentDiscountRate(commitmentMonths);
+    const commitmentSubtotal = oneTime + (monthly * commitmentMonths);
+    const discountAmount = commitmentSubtotal * discountRate;
+    const commitmentTotal = commitmentSubtotal - discountAmount;
+    const discountedOneTime = oneTime * (1 - discountRate);
+    const discountedMonthly = monthly * (1 - discountRate);
+    const monthsLabel = formatMonthCount(commitmentMonths);
 
-    setResult('oneTime', formatIdr(oneTime));
-    setResult('monthly', formatIdr(monthly));
+    setResult('oneTime', formatIdr(discountedOneTime));
+    setResult('monthly', formatIdr(discountedMonthly));
     setResult('step1', formatIdr(step1));
     setResult('step2', formatIdr(step2));
     setResult('support', formatIdr(support));
     setResult('server', formatUsagePrice(server, sharedUsageCount));
     setResult('ai', formatUsagePrice(ai, sharedUsageCount));
-    setResult('staffComparison', formatStaffComparison(monthly, monthlyStaffCost));
+    setResult('months', monthsLabel);
+    setResult('monthsLabel', monthsLabel);
+    setResult('discount', formatDiscount(discountRate, discountAmount));
+    setResult('commitmentTotal', formatIdr(commitmentTotal));
   };
 
-  calculator.querySelectorAll('[data-bot-count-action]').forEach((button) => {
+  calculator.querySelectorAll('[data-agent-count-action]').forEach((button) => {
     button.addEventListener('click', () => {
-      const input = form.elements.botCount;
+      const input = form.elements.agentCount;
       if (!input) return;
       const current = Math.max(1, Math.floor(Number(input.value) || 1));
-      const direction = button.dataset.botCountAction === 'increase' ? 1 : -1;
+      const direction = button.dataset.agentCountAction === 'increase' ? 1 : -1;
       input.value = Math.max(1, current + direction);
       input.dispatchEvent(new Event('input', { bubbles: true }));
     });

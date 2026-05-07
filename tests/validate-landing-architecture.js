@@ -35,9 +35,15 @@ assert(/\.hero-grid/.test(css), 'CSS should include optimized hero-grid styles')
 
 assert(/id="pricing-story"/.test(pricing), 'Pricing page should expose an Indonesia-relatable pricing story');
 assert(/id="pricing-structure"/.test(pricing), 'Pricing page should retain modular pricing structure');
-assert(/data-price-result="staffComparison"/.test(pricing), 'Pricing calculator should compare monthly cost against admin/coordinator cost');
+assert(/pricing_agent_definition_desc/.test(pricing), 'Pricing page should define one agent with concrete team/workflow examples');
+assert(/name="commitmentMonths"/.test(pricing), 'Pricing calculator should include a commitment length control');
+assert(/data-price-result="commitmentTotal"/.test(pricing), 'Pricing calculator should show all-in total after commitment discount');
+assert(!/admin\/coordinator|staffComparison/.test(pricing), 'Pricing calculator should remove admin/coordinator comparison UI');
+assert(!/\bbots?\b/i.test(pricing), 'Pricing page customer-facing copy should use agents, not bots');
 assert(/const PricingConfig =/.test(app), 'Pricing assumptions should be centralized in PricingConfig');
+assert(/commitmentDiscounts/.test(app), 'Commitment discount thresholds should be centralized in PricingConfig');
 assert(/calculateTieredMonthly/.test(app), 'Pricing calculator should use reusable tiered monthly calculation');
+assert(/calculateCommitmentDiscountRate/.test(app), 'Pricing calculator should use reusable commitment discount calculation');
 assert(/\.pricing-story-grid/.test(css), 'CSS should include pricing story grid styles');
 
 console.log('landing architecture OK');
