@@ -545,10 +545,10 @@ const PricingConfig = {
     small: 0,
     corporate: 999000,
   },
-  minimumSetupFee: 2999000,
+  setup: { firstBot: 2999000, additionalBot: 2499000 },
   support: {
     monitoring: { firstBot: 1999000, additionalBot: 1599000 },
-    maintenance: { firstBot: 399000, additionalBot: 299000 },
+    maintenance: { firstBot: 899000, additionalBot: 499000 },
     none: { firstBot: 0, additionalBot: 0 },
   },
   serverMonthly: 399000,
@@ -565,6 +565,15 @@ function formatIdr(value) {
 function calculateTieredMonthly(count, tier) {
   const normalizedCount = Math.max(1, Math.floor(count));
   return tier.firstBot + Math.max(0, normalizedCount - 1) * tier.additionalBot;
+}
+
+function calculateSharedUsageCount(botCount) {
+  return Math.max(1, Math.ceil(Math.max(1, Math.floor(botCount)) / 2));
+}
+
+function formatUsagePrice(total, usageCount, singularLabel = 'usage') {
+  const label = usageCount === 1 ? singularLabel : `${singularLabel}s`;
+  return `${formatIdr(total)} · ${usageCount} ${label}`;
 }
 
 function formatStaffComparison(monthlyCost, monthlyStaffCost) {
@@ -593,18 +602,19 @@ function initPricingCalculator() {
   const calculate = () => {
     const step1Type = form.elements.step1Type?.value || 'small';
     const step1 = PricingConfig.workflowMapping[step1Type] ?? PricingConfig.workflowMapping.small;
-    const step2 = Math.max(PricingConfig.minimumSetupFee, getNumber('step2Fee', PricingConfig.minimumSetupFee));
     const bots = Math.max(1, Math.floor(getNumber('botCount', 1)));
-    const licenses = Math.max(1, Math.floor(getNumber('licenseCount', 1)));
+    if (form.elements.botCount) form.elements.botCount.value = bots;
+    const step2 = calculateTieredMonthly(bots, PricingConfig.setup);
+    const sharedUsageCount = calculateSharedUsageCount(bots);
     const monthlyStaffCost = Math.max(0, getNumber('monthlyStaffCost', 0));
 
     const supportPlan = form.elements.supportPlan?.value || 'monitoring';
     const supportTier = PricingConfig.support[supportPlan] || PricingConfig.support.monitoring;
     const support = calculateTieredMonthly(bots, supportTier);
-    const server = form.elements.server?.checked ? PricingConfig.serverMonthly : 0;
+    const server = PricingConfig.serverMonthly * sharedUsageCount;
     const aiPlan = form.elements.aiPlan?.value || 'basic';
     const aiUnit = PricingConfig.aiUsageMonthly[aiPlan] || PricingConfig.aiUsageMonthly.basic;
-    const ai = aiUnit * licenses;
+    const ai = aiUnit * sharedUsageCount;
     const oneTime = step1 + step2;
     const monthly = support + server + ai;
 
@@ -613,10 +623,21 @@ function initPricingCalculator() {
     setResult('step1', formatIdr(step1));
     setResult('step2', formatIdr(step2));
     setResult('support', formatIdr(support));
-    setResult('server', formatIdr(server));
-    setResult('ai', formatIdr(ai));
+    setResult('server', formatUsagePrice(server, sharedUsageCount));
+    setResult('ai', formatUsagePrice(ai, sharedUsageCount));
     setResult('staffComparison', formatStaffComparison(monthly, monthlyStaffCost));
   };
+
+  calculator.querySelectorAll('[data-bot-count-action]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const input = form.elements.botCount;
+      if (!input) return;
+      const current = Math.max(1, Math.floor(Number(input.value) || 1));
+      const direction = button.dataset.botCountAction === 'increase' ? 1 : -1;
+      input.value = Math.max(1, current + direction);
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  });
 
   form.addEventListener('input', calculate);
   form.addEventListener('change', calculate);

@@ -75,9 +75,10 @@
         </div>
         <aside class="pricing-summary-card fade-up" aria-label="Pricing summary">
           <div class="pricing-summary-row"><span>Workflow mapping</span><strong>Free or Rp999.000</strong></div>
-          <div class="pricing-summary-row"><span>Agent setup</span><strong>From Rp2.999.000</strong></div>
-          <div class="pricing-summary-row"><span>Monthly support</span><strong>From Rp399.000/bot</strong></div>
-          <div class="pricing-summary-row"><span>System cost</span><strong>Hosting + AI usage</strong></div>
+          <div class="pricing-summary-row"><span>Agent setup</span><strong>Rp2.999.000 first bot</strong></div>
+          <div class="pricing-summary-row"><span>Additional setup</span><strong>Rp2.499.000/bot</strong></div>
+          <div class="pricing-summary-row"><span>Monthly support</span><strong>From Rp899.000 first bot</strong></div>
+          <div class="pricing-summary-row"><span>System cost</span><strong>1 server + AI usage / 2 bots</strong></div>
         </aside>
       </div>
     </section>
@@ -129,8 +130,9 @@
           <article class="pricing-step-card fade-up">
             <div class="pricing-step-kicker">Step 2 · Agent configuration</div>
             <h3>Configure Your Personal AI Agent</h3>
-            <div class="price-line">From Rp2.999.000 <span>limited early-access setup</span></div>
-            <p>Final configuration cost depends on workflow complexity, approval rules, and integration scope.</p>
+            <div class="price-line">Rp2.999.000 <span>fixed setup for the first bot</span></div>
+            <div class="price-line">Rp2.499.000 <span>fixed setup for the second bot and beyond</span></div>
+            <p>Configuration pricing is fixed per bot, so expansion stays predictable as you add more workflows.</p>
           </article>
 
           <article class="pricing-step-card pricing-step-card-wide fade-up">
@@ -145,8 +147,8 @@
               </div>
               <div>
                 <h4>Maintenance only</h4>
-                <p>Rp399.000/month for the first bot.</p>
-                <p>Rp299.000/month for the second bot and beyond.</p>
+                <p>Rp899.000/month for the first bot.</p>
+                <p>Rp499.000/month for the second bot and beyond.</p>
                 <span class="pricing-note">Best when the workflow is stable and only needs light upkeep.</span>
               </div>
             </div>
@@ -158,12 +160,14 @@
             <div class="pricing-options-grid">
               <div>
                 <h4>Server</h4>
-                <p>Rp399.000/month to keep the agent running privately and reliably.</p>
+                <p>Rp399.000/month per server usage.</p>
+                <p>Server usage is calculated automatically: every two bots need one server usage.</p>
               </div>
               <div>
                 <h4>AI usage</h4>
-                <p>Rp399.000/month for Basic AI.</p>
-                <p>Rp899.000/month for Smart AI.</p>
+                <p>Rp399.000/month for Basic AI usage.</p>
+                <p>Rp899.000/month for Smart AI usage.</p>
+                <p>AI usage is calculated automatically: every two bots need one AI usage.</p>
               </div>
             </div>
           </article>
@@ -176,7 +180,7 @@
         <div class="fade-up">
           <p class="section-label">Monthly Cost Estimator</p>
           <h2 class="section-title">Calculate your modular Responin estimate.</h2>
-          <p class="section-desc">Adjust the setup and monthly operating pieces, then compare the result with the monthly cost of adding another admin or coordinator.</p>
+          <p class="section-desc">Choose the number of bots and support level. Setup, server usage, and AI usage are calculated automatically: every two bots count as one server usage and one AI usage.</p>
         </div>
 
         <div class="pricing-calculator fade-up" data-pricing-calculator>
@@ -190,13 +194,13 @@
             </label>
 
             <label class="pricing-field">
-              <span>Agent configuration fee</span>
-              <input type="number" name="step2Fee" min="2999000" step="100000" value="2999000" />
-            </label>
-
-            <label class="pricing-field">
               <span>Number of bots</span>
-              <input type="number" name="botCount" min="1" step="1" value="1" />
+              <div class="bot-count-control">
+                <button type="button" class="bot-count-btn" data-bot-count-action="decrease" aria-label="Reduce number of bots">−</button>
+                <input type="number" name="botCount" min="1" step="1" value="1" inputmode="numeric" />
+                <button type="button" class="bot-count-btn" data-bot-count-action="increase" aria-label="Add number of bots">+</button>
+              </div>
+              <small>Setup is Rp2.999.000 for the first bot, then Rp2.499.000 for each additional bot.</small>
             </label>
 
             <label class="pricing-field">
@@ -208,22 +212,17 @@
               </select>
             </label>
 
-            <label class="pricing-checkbox">
-              <input type="checkbox" name="server" checked />
-              <span>Include server · Rp399.000/month</span>
-            </label>
+            <div class="pricing-auto-note">
+              <strong>Server and AI usage are automatic.</strong>
+              <span>Every two bots count as one server usage and one AI usage. For example: 1-2 bots = 1 usage, 3-4 bots = 2 usages.</span>
+            </div>
 
             <label class="pricing-field">
               <span>AI usage type</span>
               <select name="aiPlan">
-                <option value="basic">Basic AI · Rp399.000/month</option>
-                <option value="smart">Smart AI · Rp899.000/month</option>
+                <option value="basic">Basic AI · Rp399.000/usage/month</option>
+                <option value="smart">Smart AI · Rp899.000/usage/month</option>
               </select>
-            </label>
-
-            <label class="pricing-field">
-              <span>AI usage seats / agents</span>
-              <input type="number" name="licenseCount" min="1" step="1" value="1" />
             </label>
 
             <label class="pricing-field">
@@ -245,8 +244,8 @@
               <div><dt>Workflow mapping</dt><dd data-price-result="step1">Rp0</dd></div>
               <div><dt>Agent configuration</dt><dd data-price-result="step2">Rp2.999.000</dd></div>
               <div><dt>Monthly support</dt><dd data-price-result="support">Rp1.999.000</dd></div>
-              <div><dt>Server</dt><dd data-price-result="server">Rp399.000</dd></div>
-              <div><dt>AI usage</dt><dd data-price-result="ai">Rp399.000</dd></div>
+              <div><dt>Server</dt><dd data-price-result="server">Rp399.000 · 1 usage</dd></div>
+              <div><dt>AI usage</dt><dd data-price-result="ai">Rp399.000 · 1 usage</dd></div>
               <div><dt>Vs one admin/coordinator</dt><dd data-price-result="staffComparison">49% of monthly cost</dd></div>
             </dl>
             <p class="pricing-disclaimer">This calculator is an estimate. Final scope can vary after the workflow audit, especially when integrations, approval gates, or AI usage volume increase.</p>
