@@ -540,14 +540,21 @@ function initStickyCta() {
 }
 
 
-const PricingRoiConfig = {
-  weeksPerMonth: 4.333,
-  minimumPaybackSavings: 1,
-  defaultPlan: 'starter',
-  plans: {
-    starter: { setup: 2999000, monthly: 2900000 },
-    growth: { setup: 9900000, monthly: 6900000 },
-    corporate: { setup: 25000000, monthly: 12000000 },
+const PricingConfig = {
+  workflowMapping: {
+    small: 0,
+    corporate: 999000,
+  },
+  minimumSetupFee: 2999000,
+  support: {
+    monitoring: { firstBot: 1999000, additionalBot: 1599000 },
+    maintenance: { firstBot: 399000, additionalBot: 299000 },
+    none: { firstBot: 0, additionalBot: 0 },
+  },
+  serverMonthly: 399000,
+  aiUsageMonthly: {
+    basic: 399000,
+    smart: 899000,
   },
 };
 
@@ -555,16 +562,15 @@ function formatIdr(value) {
   return `Rp${Math.max(0, Math.round(value)).toLocaleString('id-ID')}`;
 }
 
-function formatSignedIdr(value) {
-  const rounded = Math.round(value);
-  const prefix = rounded < 0 ? '-' : '';
-  return `${prefix}${formatIdr(Math.abs(rounded))}`;
+function calculateTieredMonthly(count, tier) {
+  const normalizedCount = Math.max(1, Math.floor(count));
+  return tier.firstBot + Math.max(0, normalizedCount - 1) * tier.additionalBot;
 }
 
-function formatMonths(value) {
-  if (!Number.isFinite(value)) return 'Not yet positive';
-  if (value < 1) return '<1 month';
-  return `${value.toFixed(1)} months`;
+function formatStaffComparison(monthlyCost, monthlyStaffCost) {
+  if (!monthlyStaffCost || monthlyStaffCost <= 0) return 'Add staff cost to compare';
+  const percentage = Math.round((monthlyCost / monthlyStaffCost) * 100);
+  return `${percentage}% of monthly cost`;
 }
 
 function initPricingCalculator() {
@@ -585,25 +591,31 @@ function initPricingCalculator() {
   };
 
   const calculate = () => {
-    const planKey = form.elements.packagePlan?.value || PricingRoiConfig.defaultPlan;
-    const plan = PricingRoiConfig.plans[planKey] || PricingRoiConfig.plans[PricingRoiConfig.defaultPlan];
-    const people = Math.max(1, Math.floor(getNumber('peopleCount', 1)));
-    const weeklyHours = Math.max(0, getNumber('hoursSavedWeekly', 0));
-    const hourlyCost = Math.max(0, getNumber('hourlyCost', 0));
+    const step1Type = form.elements.step1Type?.value || 'small';
+    const step1 = PricingConfig.workflowMapping[step1Type] ?? PricingConfig.workflowMapping.small;
+    const step2 = Math.max(PricingConfig.minimumSetupFee, getNumber('step2Fee', PricingConfig.minimumSetupFee));
+    const bots = Math.max(1, Math.floor(getNumber('botCount', 1)));
+    const licenses = Math.max(1, Math.floor(getNumber('licenseCount', 1)));
+    const monthlyStaffCost = Math.max(0, getNumber('monthlyStaffCost', 0));
 
-    const monthlyRecoveredHours = people * weeklyHours * PricingRoiConfig.weeksPerMonth;
-    const monthlySavings = monthlyRecoveredHours * hourlyCost;
-    const netImpact = monthlySavings - plan.monthly;
-    const payback = netImpact >= PricingRoiConfig.minimumPaybackSavings
-      ? plan.setup / netImpact
-      : Number.POSITIVE_INFINITY;
+    const supportPlan = form.elements.supportPlan?.value || 'monitoring';
+    const supportTier = PricingConfig.support[supportPlan] || PricingConfig.support.monitoring;
+    const support = calculateTieredMonthly(bots, supportTier);
+    const server = form.elements.server?.checked ? PricingConfig.serverMonthly : 0;
+    const aiPlan = form.elements.aiPlan?.value || 'basic';
+    const aiUnit = PricingConfig.aiUsageMonthly[aiPlan] || PricingConfig.aiUsageMonthly.basic;
+    const ai = aiUnit * licenses;
+    const oneTime = step1 + step2;
+    const monthly = support + server + ai;
 
-    setResult('oneTime', formatIdr(plan.setup));
-    setResult('monthlySavings', formatIdr(monthlySavings));
-    setResult('monthlyCost', formatIdr(plan.monthly));
-    setResult('hoursRecovered', `${Math.round(monthlyRecoveredHours)} hours`);
-    setResult('netImpact', formatSignedIdr(netImpact));
-    setResult('paybackPeriod', formatMonths(payback));
+    setResult('oneTime', formatIdr(oneTime));
+    setResult('monthly', formatIdr(monthly));
+    setResult('step1', formatIdr(step1));
+    setResult('step2', formatIdr(step2));
+    setResult('support', formatIdr(support));
+    setResult('server', formatIdr(server));
+    setResult('ai', formatIdr(ai));
+    setResult('staffComparison', formatStaffComparison(monthly, monthlyStaffCost));
   };
 
   form.addEventListener('input', calculate);

@@ -33,11 +33,11 @@ assert(/\.content-auto/.test(css), 'CSS should include content-visibility helper
 assert(/\.hero-grid/.test(css), 'CSS should include optimized hero-grid styles');
 
 
-assert(/id="packages"/.test(pricing), 'Pricing page should expose bundled packages before calculator');
-assert(/Starter Pilot/.test(pricing) && /Growth Ops/.test(pricing) && /Business \/ Corporate/.test(pricing), 'Pricing page should include three bundled package tiers');
-assert(/data-price-result="monthlySavings"/.test(pricing), 'Pricing calculator should output monthly savings');
-assert(/const PricingRoiConfig =/.test(app), 'Pricing ROI assumptions should be centralized in PricingRoiConfig');
-assert(/weeksPerMonth/.test(app), 'Pricing ROI calculator should centralize weeks-per-month assumption');
-assert(/\.pricing-package-grid/.test(css), 'CSS should include package grid styles');
+assert(/id="pricing-story"/.test(pricing), 'Pricing page should expose an Indonesia-relatable pricing story');
+assert(/id="pricing-structure"/.test(pricing), 'Pricing page should retain modular pricing structure');
+assert(/data-price-result="staffComparison"/.test(pricing), 'Pricing calculator should compare monthly cost against admin/coordinator cost');
+assert(/const PricingConfig =/.test(app), 'Pricing assumptions should be centralized in PricingConfig');
+assert(/calculateTieredMonthly/.test(app), 'Pricing calculator should use reusable tiered monthly calculation');
+assert(/\.pricing-story-grid/.test(css), 'CSS should include pricing story grid styles');
 
 console.log('landing architecture OK');
