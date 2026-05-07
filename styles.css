@@ -1331,7 +1331,12 @@ header, main { display: block; }
 
 /* --- Learn More layout utilities --- */
 .learnmore-proof-offset { margin-top: 80px; }
-.learnmore-step-title { font-size: clamp(1.6rem, 3vw, 2.2rem); text-align: center; }
+.learnmore-step-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 .section-desc-wide { max-width: 780px; margin: 0 auto 16px; }
 .max-width-full { max-width: 100% !important; }
 .pt-0 { padding-top: 0 !important; }
