@@ -58,6 +58,10 @@ const {
   formatDiscount,
 } = context.module.exports;
 
+assert(PricingConfig.support.monitoring.firstAgent === 2199000, 'monitoring first-agent monthly support should be Rp2.199.000');
+assert(PricingConfig.support.maintenance.firstAgent === 999000, 'maintenance first-agent monthly support should be Rp999.000');
+assert(PricingConfig.aiUsageMonthly.smart === 1999000, 'smart AI usage should be Rp1.999.000');
+
 assert(PricingConfig.commitmentDiscounts.sixMonths.threshold === 6, '6-month discount threshold should be centralized at 6 months');
 assert(PricingConfig.commitmentDiscounts.sixMonths.rate === 0.1, '6-month commitment should apply 10% discount');
 assert(PricingConfig.commitmentDiscounts.twelveMonths.threshold === 12, '12-month discount threshold should be centralized at 12 months');
