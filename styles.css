@@ -1713,6 +1713,38 @@ header, main { display: block; }
 .pricing-breakdown dt { color: var(--text-muted); }
 .pricing-breakdown dd { font-weight: 700; text-align: right; }
 
+.pricing-breakdown .pricing-breakdown-highlight {
+  align-items: center;
+  margin: 12px -10px 0;
+  padding: 16px 10px;
+  border: 1px solid rgba(0, 206, 201, 0.22);
+  border-radius: 14px;
+  background: rgba(0, 206, 201, 0.07);
+}
+
+.pricing-breakdown .pricing-breakdown-highlight dt {
+  color: var(--text);
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-weight: 700;
+}
+
+.pricing-breakdown .pricing-breakdown-highlight dd {
+  color: var(--accent-light);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  font-weight: 800;
+}
+
+.pricing-breakdown .pricing-breakdown-highlight-total {
+  background: linear-gradient(135deg, rgba(108, 92, 231, 0.22), rgba(0, 206, 201, 0.16));
+  border-color: rgba(0, 206, 201, 0.38);
+  box-shadow: 0 14px 36px rgba(0, 206, 201, 0.12);
+}
+
+.pricing-breakdown .pricing-breakdown-highlight-total dd {
+  color: var(--text);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+}
+
 .pricing-disclaimer {
   color: var(--text-muted);
   font-size: 0.9rem;
