@@ -52,7 +52,7 @@ const translations = {
       pricing_step1_free: "Free",
       pricing_step1_free_note: "one-time cost for small businesses and early pilots",
       pricing_step1_corporate: "Rp999.000",
-      pricing_step1_corporate_note: "one-time corporate workflow audit",
+      pricing_step1_corporate_note: "one-time corporate operations audit",
       pricing_step2_kicker: "Step 2 · Agent configuration · One-time cost",
       pricing_step2_title: "Configure Your Personal AI Agent",
       pricing_step2_first: "Rp1.999.000",
@@ -109,7 +109,7 @@ const translations = {
       pricing_breakdown_discount: "Commitment discount",
       pricing_breakdown_total: "All-in total after discount",
       pricing_discount_saved: "saved",
-      pricing_disclaimer: "This calculator is an estimate. Final scope can vary after the workflow audit, especially when integrations, approval gates, or AI usage volume increase.",
+      pricing_disclaimer: "This calculator is an estimate. Final scope can vary after the operations audit, especially when integrations, approval gates, or AI usage volume increase.",
       pricing_month_singular: "month",
       pricing_month_plural: "months",
       pricing_usage_singular: "usage",
@@ -117,22 +117,22 @@ const translations = {
       pricing_cta_label: "Ready to price your real workflow?",
       pricing_cta_title: "Book a free audit and we will map the exact cost.",
       pricing_cta_desc: "Bring one repetitive workflow. We will identify what to automate first and what your first agent should cost to launch and run.",
-      pricing_cta_button: "Book Free Workflow Audit",
+      pricing_cta_button: "Book Free Operations Audit",
 
       // Learn More Bridge
       bridge_label: "Next Step",
-      bridge_title: "Want the full picture before booking?",
-      bridge_desc: "Explore detailed solutions, industry examples, and a side-by-side comparison so the consultation can focus on your exact workflow.",
+      bridge_title: "Want to see where this fits in your operation?",
+      bridge_desc: "Explore real workflow examples, industry use cases, and comparison points before we map the highest-value starting point for your team.",
       bridge_card_1_title: "Core Solutions",
       bridge_card_1_desc: "See the concrete workflows Responin can run across reminders, inboxes, CRM, reporting, and support.",
       bridge_card_2_title: "Industry Playbooks",
       bridge_card_2_desc: "Review before/after scenarios for retail, finance, startup teams, and other operational contexts.",
       bridge_card_3_title: "Responin vs Generic AI",
-      bridge_card_3_desc: "Understand the difference between one-off chat tools and a persistent, action-taking personal agent.",
+      bridge_card_3_desc: "Understand the difference between one-off chat tools and an operations partner with memory, context, and safe action.",
       bridge_cta: "Explore the full Learn More page",
       lm_step_label: "Step 2 of 2",
       lm_step_title: "This page is your deeper dive after the main landing page.",
-      lm_step_desc: "Use this to evaluate fit. When you're ready, book a workflow audit and we'll map your highest-ROI automation path.",
+      lm_step_desc: "Use this to evaluate fit. When you're ready, book an operations audit and we'll map the workflow where Responin can create leverage fastest.",
       lm_back_overview: "Back to Overview",
       lm_back_prompt: "Prefer a quick recap first?",
       lm_back_landing: "Return to main landing page",
@@ -146,27 +146,27 @@ const translations = {
       settings_theme: "Theme",
 
       // Hero
-      hero_badge: "Your Personal AI Agent",
-      hero_title: 'Run Operations at <span>2x Speed</span>-Without Hiring More Coordinators',
-      hero_desc: "Responin is your personal AI operations agent. It executes repetitive workflows across your existing tools, remembers your business context, and asks approval on sensitive actions.",
-      hero_cta_primary: "Book My Free 30-Minute Workflow Audit",
-      hero_cta_secondary: "See Real Workflow Demos",
+      hero_badge: "AI operations partner for growing teams",
+      hero_title: 'Your thinking partner for business operations',
+      hero_desc: "Responin turns scattered operational knowledge into reliable execution: it remembers context, checks your systems, drafts next steps, and handles repetitive workflows while your team stays in control.",
+      hero_cta_primary: "Book a Free Operations Audit",
+      hero_cta_secondary: "See How It Works",
 
       // Stats
-      stat_1_label: "Avg. support time reduced",
-      stat_2_label: "Routine tasks automated",
+      stat_1_label: "Less manual follow-up",
+      stat_2_label: "Routine requests handled",
       stat_3_label: "Always-on operations",
-      stat_4_label: "From command to action",
-      stats_footnote: "Based on early deployment results across selected pilot teams",
+      stat_4_label: "From question to next step",
+      stats_footnote: "Pilot outcomes vary by workflow complexity, integration depth, and approval rules.",
 
       // Social Proof
       proof_badge: "🚀 Early Access",
-      proof_text: "Built by entrepreneurs, for entrepreneurs. Responin was born from firsthand frustration with operational bottlenecks, designed to eliminate them.",
-      proof_credit: "Built on OpenClaw open-source technology",
+      proof_text: "Built for founders and operators who are tired of being the routing layer for every update, approval, reminder, and follow-up.",
+      proof_credit: "Implemented as a guided service with privacy-first AI agent architecture",
 
       // VS Generic AI
       vs_label: "Why Not Just ChatGPT?",
-      vs_title: "A personal AI agent is not the same as a generic chatbot.",
+      vs_title: "A business operations partner is not the same as a generic chatbot.",
       vs_head_dim: "Dimension",
       vs_head_gen: "Generic AI",
       vs_head_resp: "Responin",
@@ -191,8 +191,8 @@ const translations = {
 
       // Chat Demo UI labels
       chat_label: "See It In Action",
-      chat_title: "Your personal AI agent, always one message away.",
-      chat_desc: "Ask anything in plain language. Your agent checks your systems, remembers context, and gives you the answer instantly.",
+      chat_title: "Ask once. Get the context, status, and next action.",
+      chat_desc: "Instead of searching dashboards or chasing teammates, ask in plain language. Responin checks the right sources, summarizes what matters, and prepares the next step.",
       chat_bot_name: "Responin Assistant",
       chat_bot_status: "● Online, remembers your business",
       chat_placeholder: "Ask anything about your business...",
@@ -204,8 +204,8 @@ const translations = {
 
       // Group Chat Demo UI labels
       gc_label: "Or... Add It to a Group Chat",
-      gc_title: 'Your AI agent works alongside your team, like a colleague who never sleeps.',
-      gc_desc: "Add Responin to your team channels. It monitors, summarizes, escalates, and acts, so your team spends less time coordinating and more time executing.",
+      gc_title: 'Put an operations brain inside the channels your team already uses.',
+      gc_desc: "Responin can watch team conversations, surface stalled work, summarize decisions, and prepare follow-ups so coordination does not depend on one overloaded person.",
       gc_ex_1: "📋 Project status update",
       gc_ex_2: "🚨 Order escalation",
       gc_ex_3: "📊 Weekly briefing",
@@ -215,30 +215,30 @@ const translations = {
 
       // Problem
       problem_label: "The Problem",
-      problem_title: "Your team isn't slow-your operating system is overloaded.",
-      problem_desc: "Every day, high-value people lose hours to status checks, inbox triage, dashboard monitoring, and manual follow-ups. As volume grows, execution slows, quality drifts, and scaling starts to mean more headcount for the same repetitive work.",
-      problem_card_1_title: "The Admin Black Hole",
-      problem_card_1_desc: "Average employees spend 2+ hours daily on admin tasks like data entry, status updates, meeting notes, and follow-ups. That's 25% of every workday that produces zero strategic value.",
-      problem_card_2_title: "Disconnected Systems",
-      problem_card_2_desc: "Your CRM doesn't talk to your email. Your calendar doesn't update your project board. Your finance tool doesn't flag your operations. Every gap is a dropped ball and a manual bridge someone has to build.",
-      problem_card_3_title: "Human Bottlenecks",
-      problem_card_3_desc: 'Every process that requires a person to "check and route" is a process that stops when that person is busy, asleep, or on leave. Your operations run at human speed, not business speed.',
-      problem_card_4_title: "Scale = More Headcount",
-      problem_card_4_desc: "Traditional scaling means hiring more people to do more of the same. More coordinators, more assistants, more overhead. The cost compounds, but the output per person doesn't.",
-      problem_card_5_title: "Decision Fatigue & Information Overload",
-      problem_card_5_desc: "Your managers drown in dashboards, reports, and notifications daily. Critical signals get buried in noise; important decisions delayed or made on gut instead of data.",
-      problem_card_6_title: "Inconsistent Execution",
-      problem_card_6_desc: "The same process gets done differently by different people. Steps get skipped, details slip, and quality depends on who's working that day, not on a reliable standard.",
+      problem_title: "Your business is not short on effort. It is short on operational leverage.",
+      problem_desc: "As the business grows, the same hidden work keeps multiplying: checking status, translating decisions into tasks, updating systems, chasing approvals, and remembering what changed. The result is slow execution, tired managers, and expensive headcount added just to keep work moving.",
+      problem_card_1_title: "Operators Become the Search Engine",
+      problem_card_1_desc: "Your best people answer the same questions, find the same records, and repeat the same updates because context lives across chats, tools, and memory.",
+      problem_card_2_title: "Decisions Do Not Become Action",
+      problem_card_2_desc: "Meetings produce decisions, but someone still has to draft the email, update the CRM, notify the team, create the task, and follow up later.",
+      problem_card_3_title: "Managers Become Approval Routers",
+      problem_card_3_desc: 'When every exception, follow-up, and status check waits for one person, your operating speed becomes limited by their calendar.',
+      problem_card_4_title: "Growth Adds Coordination Cost",
+      problem_card_4_desc: "More customers, orders, or projects usually means more admin layers. Revenue grows, but so does the manual work required to protect quality.",
+      problem_card_5_title: "Important Signals Get Buried",
+      problem_card_5_desc: "Dashboards and notifications create noise, not clarity. Teams need a partner that can identify what changed, why it matters, and what to do next.",
+      problem_card_6_title: "Execution Depends on Who Remembered",
+      problem_card_6_desc: "When process knowledge lives in people’s heads, handoffs break, edge cases drift, and customers feel the inconsistency.",
 
       // Why Responin
       why_label: "Why Responin",
-      why_title: "Built for operators who need control, not hype.",
-      why_p1_title: "Private by Design",
-      why_p1_desc: "Your data stays in your environment. Responin is built for operational execution without exposing sensitive business context.",
-      why_p2_title: "Human-in-the-Loop by Default",
-      why_p2_desc: "Low-risk tasks run autonomously. Sensitive, ambiguous, or high-impact actions are routed to you for approval.",
-      why_p3_title: "Fast Time-to-Value",
-      why_p3_desc: "Most teams feel measurable time savings in week one, then expand safely workflow by workflow.",
+      why_title: "A thinking partner that understands context and moves work forward.",
+      why_p1_title: "Understands Your Business Context",
+      why_p1_desc: "Responin learns your workflows, terminology, people, priorities, and approval rules so every answer is grounded in how your business actually runs.",
+      why_p2_title: "Turns Thinking Into Follow-Through",
+      why_p2_desc: "It does not stop at advice. Responin can draft, update, summarize, route, remind, and escalate across the tools your team already uses.",
+      why_p3_title: "Keeps Humans in Control",
+      why_p3_desc: "Routine actions can run automatically; sensitive or ambiguous decisions wait for approval. You get leverage without losing oversight.",
 
       // Solutions
       solutions_label: "Core Solutions",
@@ -274,16 +274,16 @@ const translations = {
 
       // How It Works
       how_label: "How It Works",
-      how_title: "From chat instructions to reliable execution.",
-      how_desc: "No rip-and-replace. We map your highest-friction workflows, deploy safely with approval gates, and keep improving based on live operations.",
-      step_1_title: "Map Your Highest-Friction Workflows",
-      step_1_desc: "We identify the repetitive workflows stealing the most time and prioritize the fastest path to measurable ROI.",
-      step_2_title: "Configure Your Personal AI Agent",
-      step_2_desc: "We set memory, integrations, triggers, and escalation rules to match your team, tools, and decision logic.",
-      step_3_title: "Launch with Approval Safeguards",
-      step_3_desc: "Responin starts executing immediately, while you stay in control of sensitive actions through human-in-the-loop gates.",
-      step_4_title: "Expand and Optimize",
-      step_4_desc: "Once early automations prove value, we scale into adjacent workflows and improve consistency week by week.",
+      how_title: "How Responin becomes your operations thinking layer.",
+      how_desc: "We do not drop in another dashboard. We identify the workflows where context, judgment, and follow-through break down, then configure an AI agent that supports them safely.",
+      step_1_title: "Audit the Work That Slows You Down",
+      step_1_desc: "We map where decisions stall, where information gets retyped, and which recurring tasks consume the most operator attention.",
+      step_2_title: "Teach Responin Your Operating Logic",
+      step_2_desc: "We configure memory, instructions, integrations, triggers, and escalation rules around your existing tools and decision standards.",
+      step_3_title: "Start With Safe, High-ROI Workflows",
+      step_3_desc: "Responin begins with low-risk workflows such as summaries, reminders, CRM updates, draft responses, and follow-up preparation.",
+      step_4_title: "Expand as Trust Builds",
+      step_4_desc: "As the agent proves reliability, we add deeper automations, tighter integrations, and more autonomous action where it makes business sense.",
 
       // Industries
       industries_label: "Industries",
@@ -365,9 +365,9 @@ const translations = {
       roi_note: "Based on early deployment data across healthcare, retail, and professional services.",
 
       // CTA
-      cta_title: "Your next operational hire can be an AI agent that works 24/7.",
-      cta_desc: "In 30 minutes, we'll identify your top 3 automation opportunities, estimate weekly time savings, and map a safe rollout using your current stack.",
-      cta_btn: "Book My Free Workflow Audit",
+      cta_title: "Stop being the operating system for your business.",
+      cta_desc: "Bring one messy workflow. In a free audit, we will identify where context gets lost, what can be automated safely, and how Responin can become your thinking partner for day-to-day operations.",
+      cta_btn: "Book My Free Operations Audit",
 
       // FAQ
       faq_label: "Frequently Asked Questions",
@@ -379,7 +379,7 @@ const translations = {
       faq_q3: "What if I already use [tool]?",
       faq_a3: "Great. Responin works with your existing tools, not against them. We integrate with your CRM, email, accounting software, project management, and more. Your agent plugs into what you're already using and makes it all work together seamlessly.",
       faq_q4: "How is this different from ChatGPT or other AI tools?",
-      faq_a4: "Generic AI tools forget everything after each session and give the same answers to everyone. Responin builds you a personal agent that learns your workflows, remembers your context, and actually takes action on your behalf. Not just advice, execution.",
+      faq_a4: "Generic AI tools forget context and mostly produce answers. Responin is configured around your workflows, memory, tools, and approval rules so it can help decide the next step and move work forward safely. Not just advice: controlled execution.",
       faq_q5: "What if something goes wrong? Can the AI make mistakes?",
       faq_a5: "Every Responin agent deploys with human-in-the-loop safeguards. High-confidence tasks run automatically; uncertain decisions get routed to you for approval. You stay in control: the agent handles the volume, you handle the nuance.",
       faq_q6: "Do I need a technical team to set this up?",
@@ -388,7 +388,7 @@ const translations = {
       faq_a7: "We offer flexible subscription models tailored to your business size and workflow complexity. The initial consultation and automation-readiness analysis are completely free. After that, you can choose the plan that fits-no long-term lock-in required.",
 
       // Footer
-      footer_desc: "AI-driven consultancy and automation agency. Transforming business operations through intelligent, autonomous workflows powered by OpenClaw.",
+      footer_desc: "AI operations consulting and agent deployment for teams that want faster execution, clearer context, and safer automation across their existing tools.",
       footer_solutions: "Solutions",
       foot_sol_1: "Reminders",
       foot_sol_2: "Data Entry",
@@ -408,7 +408,7 @@ const translations = {
       foot_legal_2: "Terms of Use",
 
       // Sticky CTA
-      sticky_cta_text: "Book My Free Workflow Audit",
+      sticky_cta_text: "Book Free Operations Audit",
 
       // Theme messages
       chat_theme_dark: "Dark mode activated, easy on the eyes 🌙",
@@ -573,7 +573,7 @@ const translations = {
       pricing_cta_label: "Siap menghitung harga workflow nyata Anda?",
       pricing_cta_title: "Book audit gratis dan kami akan petakan biaya pastinya.",
       pricing_cta_desc: "Bawa satu workflow repetitif. Kami akan menentukan bagian yang paling tepat untuk diautomasi dulu dan berapa biaya agent pertama Anda untuk launch dan berjalan.",
-      pricing_cta_button: "Book Audit Workflow Gratis",
+      pricing_cta_button: "Book Audit Operasi Gratis",
 
       // Learn More Bridge
       bridge_label: "Langkah Berikutnya",
@@ -588,7 +588,7 @@ const translations = {
       bridge_cta: "Lihat halaman Learn More lengkap",
       lm_step_label: "Langkah 2 dari 2",
       lm_step_title: "Halaman ini adalah pendalaman setelah landing page utama.",
-      lm_step_desc: "Gunakan halaman ini untuk evaluasi kecocokan. Saat siap, booking workflow audit dan kita petakan automasi dengan ROI tertinggi.",
+      lm_step_desc: "Gunakan halaman ini untuk evaluasi kecocokan. Saat siap, book audit operasi dan kita petakan workflow yang paling cepat memberi leverage.",
       lm_back_overview: "Kembali ke Ringkasan",
       lm_back_prompt: "Butuh ringkasan cepat dulu?",
       lm_back_landing: "Kembali ke landing page utama",
@@ -602,11 +602,11 @@ const translations = {
       settings_theme: "Tema",
 
       // Hero
-      hero_badge: "🚀 Akses Awal - Gratis untuk 100 Bisnis Pertama",
-      hero_title: 'Jalankan Operasional <span>2x Lebih Cepat</span>-Tanpa Tambah Koordinator',
-      hero_desc: "Responin adalah agen AI operasional pribadi. Ia mengeksekusi workflow repetitif lintas tools Anda, mengingat konteks bisnis, dan meminta approval untuk aksi sensitif.",
-      hero_cta_primary: "Jadwalkan Audit Workflow Gratis Saya",
-      hero_cta_secondary: "Lihat Demo Workflow Nyata",
+      hero_badge: "Partner operasi AI untuk tim yang bertumbuh",
+      hero_title: 'Your thinking partner for business operations',
+      hero_desc: "Responin mengubah pengetahuan operasional yang tersebar menjadi eksekusi yang rapi: mengingat konteks, mengecek sistem, menyiapkan langkah berikutnya, dan menjalankan workflow repetitif dengan kontrol manusia tetap aman.",
+      hero_cta_primary: "Book Audit Operasi Gratis",
+      hero_cta_secondary: "Lihat Cara Kerjanya",
 
       // Stats
       stat_1_label: "Respons dukungan 3× lebih cepat",
@@ -622,7 +622,7 @@ const translations = {
 
       // VS Generic AI
       vs_label: "Bukan ChatGPT Biasa",
-      vs_title: "Agen AI pribadi tidak sama dengan chatbot generik.",
+      vs_title: "Partner operasi bisnis tidak sama dengan chatbot generik.",
       vs_head_dim: "Dimensi",
       vs_head_gen: "AI Generik",
       vs_head_resp: "Responin",
@@ -671,8 +671,8 @@ const translations = {
 
       // Problem
       problem_label: "Masalahnya",
-      problem_title: "Tim Anda bukan lambat-sistem operasional Anda yang overload.",
-      problem_desc: "Setiap hari, orang terbaik Anda habis waktunya untuk cek status, triase inbox, pantau dashboard, dan follow-up manual. Saat volume naik, eksekusi melambat, kualitas turun, dan skala bisnis terasa sama dengan tambah headcount.",
+      problem_title: "Bisnis Anda bukan kekurangan usaha. Bisnis Anda kekurangan leverage operasional.",
+      problem_desc: "Saat bisnis bertumbuh, pekerjaan tersembunyi ikut berlipat: cek status, menerjemahkan keputusan jadi tugas, update sistem, mengejar approval, dan mengingat perubahan. Akibatnya eksekusi melambat, manajer lelah, dan headcount bertambah hanya untuk menjaga kerja tetap bergerak.",
       problem_card_1_title: "25% Waktu Kerja Hilang untuk Admin",
       problem_card_1_desc: "Rata-rata karyawan menghabiskan 2+ jam sehari untuk tugas admin: entri data, update status, notulensi, dan follow-up. Itu 25% dari setiap hari kerja yang tidak menghasilkan nilai strategis - dan tidak pernah terlihat di laporan akhir tahun.",
       problem_card_2_title: "Sistem Saling Tertutup",
@@ -688,13 +688,13 @@ const translations = {
 
       // Why Responin
       why_label: "Kenapa Responin",
-      why_title: "Dibangun untuk operator yang butuh kontrol, bukan hype.",
-      why_p1_title: "Privasi by Design",
-      why_p1_desc: "Data Anda tetap di environment Anda. Responin dirancang untuk eksekusi operasional tanpa mengekspos konteks bisnis sensitif.",
-      why_p2_title: "Human-in-the-Loop Secara Default",
-      why_p2_desc: "Tugas low-risk bisa jalan otomatis. Aksi yang sensitif, ambigu, atau berdampak tinggi akan diminta approval dari Anda.",
-      why_p3_title: "Time-to-Value Cepat",
-      why_p3_desc: "Mayoritas tim mulai merasakan penghematan waktu terukur sejak minggu pertama, lalu scale workflow demi workflow.",
+      why_title: "Partner berpikir yang memahami konteks dan mendorong kerja maju.",
+      why_p1_title: "Memahami Konteks Bisnis Anda",
+      why_p1_desc: "Responin mempelajari workflow, istilah, orang, prioritas, dan aturan approval Anda agar setiap jawaban sesuai cara bisnis Anda berjalan.",
+      why_p2_title: "Mengubah Pemikiran Jadi Tindak Lanjut",
+      why_p2_desc: "Bukan hanya memberi saran. Responin bisa menyusun draft, update data, merangkum, mengarahkan, mengingatkan, dan eskalasi lewat tools yang sudah dipakai tim Anda.",
+      why_p3_title: "Manusia Tetap Memegang Kontrol",
+      why_p3_desc: "Aksi rutin bisa berjalan otomatis; keputusan sensitif atau ambigu tetap menunggu approval. Anda mendapat leverage tanpa kehilangan kendali.",
 
       // Solutions
       solutions_label: "Solusi Utama",
@@ -730,8 +730,8 @@ const translations = {
 
       // How It Works
       how_label: "Cara Kerja",
-      how_title: "Dari instruksi chat ke eksekusi yang bisa diandalkan.",
-      how_desc: "Tanpa rip-and-replace. Kami petakan workflow paling menghambat, deploy aman dengan approval gate, lalu optimasi berkelanjutan dari operasi nyata.",
+      how_title: "Cara Responin menjadi lapisan berpikir operasional Anda.",
+      how_desc: "Kami tidak menambah dashboard baru. Kami mencari workflow tempat konteks, keputusan, dan follow-through sering terputus, lalu mengonfigurasi agen AI yang mendukungnya dengan aman.",
       step_1_title: "Petakan Workflow dengan Friksi Tertinggi",
       step_1_desc: "Kami identifikasi workflow repetitif yang paling menyita waktu dan prioritaskan jalur tercepat ke ROI terukur.",
       step_2_title: "Konfigurasi Agen AI Personal Anda",
@@ -821,9 +821,9 @@ const translations = {
       roi_note: "Berdasarkan data deployment awal di sektor kesehatan, ritel, dan layanan profesional Indonesia.",
 
       // CTA
-      cta_title: "Rekrutan operasional berikutnya Anda bisa agen AI yang kerja 24/7.",
-      cta_desc: "Dalam 30 menit, kami petakan 3 peluang otomasi utama Anda, estimasi penghematan waktu mingguan, dan rencana rollout aman dengan stack saat ini.",
-      cta_btn: "Jadwalkan Audit Workflow Gratis Saya",
+      cta_title: "Berhenti menjadi operating system untuk bisnis Anda sendiri.",
+      cta_desc: "Bawa satu workflow yang berantakan. Dalam audit gratis, kami petakan di mana konteks hilang, apa yang aman diautomasi, dan bagaimana Responin bisa menjadi partner berpikir untuk operasional harian Anda.",
+      cta_btn: "Book Audit Operasi Gratis",
 
       // FAQ
       faq_label: "Pertanyaan Umum",
